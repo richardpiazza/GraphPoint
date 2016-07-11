@@ -1,9 +1,11 @@
 Pod::Spec.new do |s|
   s.name = "GraphPoint"
   s.version = "1.0.0"
-  s.summary = "A library of Swift extensions for translating between CGRect coordinates and graph coordinates."
+  s.summary = "A library of Swift extensions for using a Cartesian Coordinate System with CGRect."
   s.description = <<-DESC
-  GraphPoint uses several mathematical laws to determine angles and points within a CGRect.
+  GraphPoint is a library of Swift extensions for using a Cartesian Coordinate System with CGRect.
+  The Cartesian Coordinate System defines the origin as the center point and
+  it uses several mathematical laws to determine angles and points within a CGRect.
                        DESC
   s.homepage = "https://github.com/richardpiazza/GraphPoint"
   s.license = 'MIT'
