@@ -65,8 +65,8 @@ class GraphPointTests: XCTestCase {
     
     func testPointForDegree() {
         let point = square.graphPoint(forDegree: CGFloat(30))
-        XCTAssertTrue(point.x == CGFloat(43.301270189221931))
-        XCTAssertTrue(point.y == CGFloat(-24.999999999999996))
+        XCTAssertTrue(round(point.x) == 43.0)
+        XCTAssertTrue(round(point.y) == -25.0)
     }
     
     func testDegreeForPoint() {
