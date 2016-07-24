@@ -13,7 +13,6 @@ Pod::Spec.new do |s|
   s.social_media_url = 'https://twitter.com/richardpiazza'
 
   s.source = { :git => "https://github.com/richardpiazza/GraphPoint.git", :tag => s.version.to_s }
-  s.source_files = 'Sources/*'
   s.platform = :ios, '9.1'
   s.frameworks = 'Foundation'
   s.requires_arc = true
