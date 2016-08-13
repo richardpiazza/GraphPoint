@@ -61,20 +61,20 @@ public extension CGRect {
         return point
     }
     
-    /// Translates a `GraphPoint` to an internatl coordinat `CGPoint`
+    /// Translates a `GraphPoint` to an internal coordinate `CGPoint`
     public func point(forGraphPoint graphPoint: GraphPoint) -> CGPoint {
         var point = CGPointZero
         
         if graphPoint.x >= 0 {
-            point.x = graphPoint.x + graphOrigin.x
+            point.x = graphOrigin.x + graphPoint.x
         } else {
             point.x = graphOrigin.x - abs(graphPoint.x)
         }
         
         if graphPoint.y <= 0 {
-            point.y = graphPoint.y + graphOrigin.y
+            point.y = graphOrigin.y + abs(graphPoint.y)
         } else {
-            point.y = graphOrigin.y - abs(graphPoint.y)
+            point.y = graphOrigin.y - graphPoint.y
         }
         
         return point

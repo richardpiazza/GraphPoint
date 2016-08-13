@@ -74,4 +74,31 @@ class GraphPointTests: XCTestCase {
         let degree = square.degree(forGraphPoint: graphPoint)
         XCTAssertTrue(round(degree) == CGFloat(30.0))
     }
+    
+    func testPointFromGraphPoint2() {
+        let rect = CGRect(x: 0.0, y: 0.0, width: 500.0, height: 500.0)
+        
+        let gp1 = GraphPoint(x: 47.7022488441362, y: -47.7022488441362)
+        let t1 = rect.point(forGraphPoint: gp1)
+        
+        XCTAssertTrue(t1.x == 297.70224884413619)
+        XCTAssertTrue(t1.y == 297.70224884413619)
+        
+        let gp2 = GraphPoint(x: -47.7022488441362, y: -47.7022488441362)
+        let t2 = rect.point(forGraphPoint: gp2)
+        XCTAssertTrue(t2.x == 202.29775115586381)
+        XCTAssertTrue(t2.y == 297.70224884413619)
+        
+        let gp3 = GraphPoint(x: -47.7022488441362, y: 47.7022488441362)
+        let t3 = rect.point(forGraphPoint: gp3)
+        
+        XCTAssertTrue(t3.x == 202.29775115586381)
+        XCTAssertTrue(t3.y == 202.29775115586381)
+        
+        let gp4 = GraphPoint(x: 47.7022488441362, y: 47.7022488441362)
+        let t4 = rect.point(forGraphPoint: gp4)
+        
+        XCTAssertTrue(t4.x == 297.70224884413619)
+        XCTAssertTrue(t4.y == 202.29775115586381)
+    }
 }
