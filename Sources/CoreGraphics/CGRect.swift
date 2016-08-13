@@ -273,4 +273,18 @@ public extension GraphFrame {
             return GraphOriginOffset(x: -(origin.x), y: origin.y)
         }
     }
+    
+    /// Uses a `GraphFrame` origin (i.e. offset from center) to translate any
+    /// `GraphPoint` into a `GraphFrame` bounds `CGPoint`
+    ///
+    /// ***For example:***
+    ///
+    /// Given: CGRect(0, 0, 500, 500) & GraphFrame(47.7022, 250.0, 197.7045, 202.2977),
+    /// The GraphPoint(47.7022, 47.7022) would be translated to CGPoint(0.0, 202.2977)
+    public func boundedPoint(forGraphPoint graphPoint: GraphPoint) -> CGPoint {
+        let x = abs(origin.x - graphPoint.x)
+        let y = abs(origin.y - graphPoint.y)
+        
+        return CGPoint(x: x, y: y)
+    }
 }
