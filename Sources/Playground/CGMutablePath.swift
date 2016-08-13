@@ -34,7 +34,7 @@ extension CGMutablePath {
         
         let path = CGPathCreateMutable()
         CGPathAddArc(path, nil, rect.graphOrigin.x, rect.graphOrigin.y, outerArc.radius, startingDegree.radians, endingDegree.radians, false)
-        CGPathAddLineToPoint(path, nil, rect.graphOrigin.x + innerArc.endingGraphPoint(inRect: rect).x, rect.graphOrigin.y - innerArc.endingGraphPoint(inRect: rect).y)
+        CGPathAddLineToPoint(path, nil, rect.graphOrigin.x + innerArc.endingGraphPoint.x, rect.graphOrigin.y - innerArc.endingGraphPoint.y)
         CGPathAddArc(path, nil, rect.graphOrigin.x, rect.graphOrigin.y, innerArc.radius, endingDegree.radians, startingDegree.radians, true)
         CGPathCloseSubpath(path)
         return path

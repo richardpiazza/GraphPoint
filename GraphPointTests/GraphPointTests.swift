@@ -64,14 +64,14 @@ class GraphPointTests: XCTestCase {
     }
     
     func testPointForDegree() {
-        let point = square.graphPoint(forDegree: CGFloat(30))
+        let point = GraphPoint.graphPoint(forDegree: CGFloat(30), radius: square.radius)
         XCTAssertTrue(round(point.x) == 43.0)
         XCTAssertTrue(round(point.y) == -25.0)
     }
     
     func testDegreeForPoint() {
         let graphPoint = GraphPoint(x: CGFloat(43.301270189222), y: CGFloat(-24.999999999999))
-        let degree = square.degree(forGraphPoint: graphPoint)
+        let degree = GraphPoint.degree(forGraphPoint: graphPoint)
         XCTAssertTrue(round(degree) == CGFloat(30.0))
     }
     

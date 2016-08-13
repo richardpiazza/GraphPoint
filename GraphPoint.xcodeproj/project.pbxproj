@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E105B78F1D5FA7D6004AE5D9 /* GraphFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E105B78E1D5FA7D6004AE5D9 /* GraphFrame.swift */; };
+		E105B7911D5FA853004AE5D9 /* GraphPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E105B7901D5FA853004AE5D9 /* GraphPoint.swift */; };
 		E14FCF6C1D42D5FA00BE7E5E /* CircularSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14FCF6B1D42D5FA00BE7E5E /* CircularSlider.swift */; };
 		E14FCF9F1D43F33100BE7E5E /* CircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14FCF9E1D43F33100BE7E5E /* CircularProgress.swift */; };
 		E185E3311D416EE400EBD40F /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E185E32D1D416EE400EBD40F /* CGFloat.swift */; };
@@ -32,6 +34,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E105B78E1D5FA7D6004AE5D9 /* GraphFrame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphFrame.swift; sourceTree = "<group>"; };
+		E105B7901D5FA853004AE5D9 /* GraphPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphPoint.swift; sourceTree = "<group>"; };
 		E14FCF6B1D42D5FA00BE7E5E /* CircularSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularSlider.swift; sourceTree = "<group>"; };
 		E14FCF9E1D43F33100BE7E5E /* CircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgress.swift; sourceTree = "<group>"; };
 		E185E32D1D416EE400EBD40F /* CGFloat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
@@ -76,6 +80,8 @@
 				E185E32D1D416EE400EBD40F /* CGFloat.swift */,
 				E185E32E1D416EE400EBD40F /* CGPoint.swift */,
 				E185E32F1D416EE400EBD40F /* CGRect.swift */,
+				E105B78E1D5FA7D6004AE5D9 /* GraphFrame.swift */,
+				E105B7901D5FA853004AE5D9 /* GraphPoint.swift */,
 			);
 			path = CoreGraphics;
 			sourceTree = "<group>";
@@ -251,7 +257,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E185E3321D416EE400EBD40F /* CGPoint.swift in Sources */,
+				E105B7911D5FA853004AE5D9 /* GraphPoint.swift in Sources */,
 				E185E3371D41723800EBD40F /* UIImage.swift in Sources */,
+				E105B78F1D5FA7D6004AE5D9 /* GraphFrame.swift in Sources */,
 				E185E3331D416EE400EBD40F /* CGRect.swift in Sources */,
 				E14FCF9F1D43F33100BE7E5E /* CircularProgress.swift in Sources */,
 				E185E3351D41706700EBD40F /* Arc.swift in Sources */,

@@ -130,8 +130,8 @@ import UIKit
             let degree = CGFloat(Float(i) * tickDegrees)
             let outerArc = Arc(startingDegree: degree, endingDegree: degree, radius: bounds.radius)
             let innerArc = Arc(startingDegree: degree, endingDegree: degree, radius: innerRadius)
-            let outerPoint = outerArc.endingGraphPoint(inRect: bounds)
-            let innerPoint = innerArc.endingGraphPoint(inRect: bounds)
+            let outerPoint = outerArc.endingGraphPoint
+            let innerPoint = innerArc.endingGraphPoint
             let origin = bounds.graphOrigin
             
             CGPathMoveToPoint(path, nil, origin.x + outerPoint.x, origin.y + outerPoint.y)

@@ -30,14 +30,6 @@ import CoreGraphics
 /// The center (0, 0) of a graph axis. Typically the center of a CGRect
 public typealias GraphOrigin = CGPoint
 
-/// A point within a CGRect having coordinates as an offset of the `GraphOrigin`
-///
-/// ***For example:***
-///
-/// In CGRect(0, 0, 100, 100), the CGPoint(75, 25) would be translated to
-/// GraphPoint(25, 25).
-public typealias GraphPoint = CGPoint
-
 /// The X,Y offset of any `GraphFrame` to the `GraphOrigin`
 ///
 /// ***For example:***

@@ -38,11 +38,11 @@ struct Arc {
         self.radius = radius
     }
     
-    func startingGraphPoint(inRect rect: CGRect) -> GraphPoint {
-        return rect.graphPoint(forDegree: startingDegree, radius: radius)
+    var startingGraphPoint: GraphPoint {
+        return GraphPoint.graphPoint(forDegree: startingDegree, radius: radius)
     }
     
-    func endingGraphPoint(inRect rect: CGRect) -> GraphPoint {
-        return rect.graphPoint(forDegree: endingDegree, radius: radius)
+    var endingGraphPoint: GraphPoint {
+        return GraphPoint.graphPoint(forDegree: endingDegree, radius: radius)
     }
 }
