@@ -28,15 +28,15 @@
 import CoreGraphics
 
 extension CGMutablePath {
-    static func arcPath(inRect rect: CGRect, startingDegree: CGFloat, endingDegree: CGFloat, innerRadius: CGFloat, outerRadius: CGFloat) -> CGMutablePathRef {
+    static func arcPath(inRect rect: CGRect, startingDegree: CGFloat, endingDegree: CGFloat, innerRadius: CGFloat, outerRadius: CGFloat) -> CGMutablePath {
         let innerArc = Arc(startingDegree: startingDegree, endingDegree: endingDegree, radius: innerRadius)
         let outerArc = Arc(startingDegree: startingDegree, endingDegree: endingDegree, radius: outerRadius)
         
-        let path = CGPathCreateMutable()
-        CGPathAddArc(path, nil, rect.graphOrigin.x, rect.graphOrigin.y, outerArc.radius, startingDegree.radians, endingDegree.radians, false)
-        CGPathAddLineToPoint(path, nil, rect.graphOrigin.x + innerArc.endingGraphPoint.x, rect.graphOrigin.y - innerArc.endingGraphPoint.y)
-        CGPathAddArc(path, nil, rect.graphOrigin.x, rect.graphOrigin.y, innerArc.radius, endingDegree.radians, startingDegree.radians, true)
-        CGPathCloseSubpath(path)
+        let path = CGMutablePath()
+        path.addArc(center: rect.graphOrigin, radius: outerArc.radius, startAngle: startingDegree.radians, endAngle: endingDegree.radians, clockwise: false)
+        path.addLine(to: CGPoint(x: rect.graphOrigin.x + innerArc.endingGraphPoint.x, y: rect.graphOrigin.y - innerArc.endingGraphPoint.y))
+        path.addArc(center: rect.graphOrigin, radius: innerArc.radius, startAngle: endingDegree.radians, endAngle: startingDegree.radians, clockwise: true)
+        path.closeSubpath()
         return path
     }
 }

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = "GraphPoint"
-  s.version = "1.2.0"
+  s.version = "2.0.0"
   s.summary = "A library of Swift extensions for using a Cartesian Coordinate System with CGRect."
   s.description = <<-DESC
   GraphPoint is a library of Swift extensions for using a Cartesian Coordinate System with CGRect.
@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.social_media_url = 'https://twitter.com/richardpiazza'
 
   s.source = { :git => "https://github.com/richardpiazza/GraphPoint.git", :tag => s.version.to_s }
-  s.platform = :ios, '9.1'
+  s.platform = :ios, '10.0'
   s.frameworks = 'Foundation'
   s.requires_arc = true
   s.default_subspec = 'CoreGraphics'

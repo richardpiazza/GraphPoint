@@ -39,12 +39,12 @@ public extension CGRect {
     
     /// Origin of a circle that fits within the bounds of the `CGRect`
     public var graphOrigin: GraphOrigin {
-        return CGPointMake(self.midX, self.midY)
+        return CGPoint(x: self.midX, y: self.midY)
     }
     
     /// Translates an internal coordinate `CGPoint` to a `GraphPoint`
     public func graphPoint(forPoint viewPoint: CGPoint) -> GraphPoint {
-        var point = CGPointZero
+        var point = CGPoint.zero
         
         if viewPoint.x < graphOrigin.x {
             point.x = -(graphOrigin.x - viewPoint.x)
@@ -63,7 +63,7 @@ public extension CGRect {
     
     /// Translates a `GraphPoint` to an internal coordinate `CGPoint`
     public func point(forGraphPoint graphPoint: GraphPoint) -> CGPoint {
-        var point = CGPointZero
+        var point = CGPoint.zero
         
         if graphPoint.x >= 0 {
             point.x = graphOrigin.x + graphPoint.x
@@ -91,12 +91,10 @@ public extension CGRect {
     /// Calculates the view frame for a `GraphFrame` contained with this frames bounds.
     /// An optional `GraphOriginOffset` allows for an offset value to change where center
     /// is calculated from.
-    public func frame(forGraphFrame graphFrame: GraphFrame, graphOriginOffset: GraphOriginOffset? = nil) -> CGRect {
-        let originOffset = graphOriginOffset ?? GraphOriginOffset(x: 0, y: 0)
-        
+    public func frame(forGraphFrame graphFrame: GraphFrame, graphOriginOffset: GraphOriginOffset = GraphOriginOffset(x: 0, y: 0)) -> CGRect {
         var graphCenter = self.graphOrigin
-        graphCenter.x = graphCenter.x + originOffset.x
-        graphCenter.y = graphCenter.y + originOffset.y
+        graphCenter.x = graphCenter.x + graphOriginOffset.x
+        graphCenter.y = graphCenter.y + graphOriginOffset.y
         
         return CGRect(x: graphCenter.x + graphFrame.origin.x, y: graphCenter.y - graphFrame.origin.y, width: graphFrame.width, height: graphFrame.height)
     }

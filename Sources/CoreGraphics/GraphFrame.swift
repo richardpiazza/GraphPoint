@@ -61,8 +61,8 @@ public extension GraphFrame {
     
     /// Determines that smallest `GraphFrame` that encompases all graph points.
     public static func graphFrame(forGraphPoints graphPoints: [GraphPoint]) -> GraphFrame {
-        var minXMaxY = CGPointZero
-        var maxXMinY = CGPointZero
+        var minXMaxY = CGPoint.zero
+        var maxXMinY = CGPoint.zero
         
         for point in graphPoints {
             if point.x < minXMaxY.x || minXMaxY.x == 0 {

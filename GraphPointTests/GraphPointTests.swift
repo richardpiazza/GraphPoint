@@ -103,8 +103,6 @@ class GraphPointTests: XCTestCase {
     }
     
     func testBoundedPoint() {
-//        let rect = CGRect(x: 0.0, y: 0.0, width: 500.0, height: 500.0)
-        
         let graphFrame = GraphFrame(x: 47.7022488441362, y: 250.0, width: 197.70454701777979, height: 202.29775115586381)
         let graphPoint = GraphPoint(x: 47.7022488441362, y: 47.7022488441362)
         

@@ -27,19 +27,19 @@
 
 import UIKit
 
-@IBDesignable public class CircularSlider: UIControl {
-    static private let startingDegree = CGFloat(270.0)
-    static private let endingDegree = CGFloat(630.0)
-    static private let degreesInCircle = Float(360.0)
-    static private let minimumTouchSize = Float(44.0)
-    static private let zeroDegreeOffset = Float(-90.0)
+@IBDesignable open class CircularSlider: UIControl {
+    static fileprivate let startingDegree = CGFloat(270.0)
+    static fileprivate let endingDegree = CGFloat(630.0)
+    static fileprivate let degreesInCircle = Float(360.0)
+    static fileprivate let minimumTouchSize = Float(44.0)
+    static fileprivate let zeroDegreeOffset = Float(-90.0)
     
     // MARK: - Value -
     
-    private var minimumValue = Float(0.0)
-    private var maximumValue = Float(1.0)
+    open var minimumValue = Float(0.0)
+    open var maximumValue = Float(1.0)
     /// The current value of the control.
-    @IBInspectable public var value: Float = 0.1 {
+    @IBInspectable open var value: Float = 0.1 {
         didSet {
             if value > maximumValue {
                 value = maximumValue
@@ -52,79 +52,79 @@ import UIKit
     
     // MARK: - Track -
     
-    private var track = UIImageView(frame: CGRectZero)
-    @IBInspectable var trackWidth: Float = 18.0
-    @IBInspectable var trackColor: UIColor = {
-        if let color = UIApplication.sharedApplication().keyWindow?.tintColor {
-            return color.colorWithAlphaComponent(0.5)
+    fileprivate var track = UIImageView(frame: CGRect.zero)
+    @IBInspectable open var trackWidth: Float = 18.0
+    @IBInspectable lazy open var trackColor: UIColor = {
+        if let color = UIApplication.shared.keyWindow?.tintColor {
+            return color.withAlphaComponent(0.5)
         }
         if let color = UIView.appearance().tintColor {
-            return color.colorWithAlphaComponent(0.5)
+            return color.withAlphaComponent(0.5)
         }
         
-        return UIColor.blueColor().colorWithAlphaComponent(0.5)
+        return UIColor.blue.withAlphaComponent(0.5)
     }()
     
     // MARK: - Fill -
     
-    private var fill = UIImageView(frame: CGRectZero)
-    @IBInspectable var fillColor: UIColor = {
-        if let color = UIApplication.sharedApplication().keyWindow?.tintColor {
+    fileprivate var fill = UIImageView(frame: CGRect.zero)
+    @IBInspectable lazy open var fillColor: UIColor = {
+        if let color = UIApplication.shared.keyWindow?.tintColor {
             return color
         }
         if let color = UIView.appearance().tintColor {
             return color
         }
         
-        return UIColor.blueColor()
+        return UIColor.blue
     }()
     
     // MARK: - Ticks -
     
-    private var ticks = UIImageView(frame: CGRectZero)
-    @IBInspectable var numberOfTicks: Int = 360
-    @IBInspectable var showsTicks: Bool = false
-    @IBInspectable var lockToTicks: Bool = true
-    @IBInspectable var tickWidth: Float = 0.5
-    @IBInspectable var tickColor: UIColor = UIColor.whiteColor()
+    fileprivate var ticks = UIImageView(frame: CGRect.zero)
+    @IBInspectable open var numberOfTicks: Int = 360
+    @IBInspectable open var showsTicks: Bool = false
+    @IBInspectable open var lockToTicks: Bool = true
+    @IBInspectable open var tickWidth: Float = 0.5
+    @IBInspectable open var tickColor: UIColor = UIColor.white
     
-    private var tickDegrees: Float {
-        return self.dynamicType.degreesInCircle / Float(numberOfTicks)
+    fileprivate var tickDegrees: Float {
+        return type(of: self).degreesInCircle / Float(numberOfTicks)
     }
     
-    private var tickPercent: Float {
-        return tickDegrees / self.dynamicType.degreesInCircle
+    fileprivate var tickPercent: Float {
+        return tickDegrees / type(of: self).degreesInCircle
     }
     
     // MARK: - Paths -
     
-    private var touchRadius: CGFloat {
-        return (trackWidth < Float(self.dynamicType.minimumTouchSize)) ? bounds.radius - CGFloat(self.dynamicType.minimumTouchSize) : bounds.radius - CGFloat(trackWidth)
+    fileprivate var touchRadius: CGFloat {
+        return (trackWidth < Float(type(of: self).minimumTouchSize)) ? bounds.radius - CGFloat(type(of: self).minimumTouchSize) : bounds.radius - CGFloat(trackWidth)
     }
     
-    private var innerRadius: CGFloat {
+    fileprivate var innerRadius: CGFloat {
         return bounds.radius - CGFloat(trackWidth)
     }
     
-    private var touchPath: CGMutablePathRef {
-        return CGMutablePath.arcPath(inRect: bounds, startingDegree: self.dynamicType.startingDegree, endingDegree: self.dynamicType.endingDegree, innerRadius: touchRadius, outerRadius: bounds.radius)
+    fileprivate var touchPath: CGMutablePath {
+        return CGMutablePath.arcPath(inRect: bounds, startingDegree: type(of: self).startingDegree, endingDegree: type(of: self).endingDegree, innerRadius: touchRadius, outerRadius: bounds.radius)
     }
     
-    private var trackPath: CGMutablePathRef {
-        return CGMutablePath.arcPath(inRect: bounds, startingDegree: self.dynamicType.startingDegree, endingDegree: self.dynamicType.endingDegree, innerRadius: innerRadius, outerRadius: bounds.radius)
+    fileprivate var trackPath: CGMutablePath {
+        return CGMutablePath.arcPath(inRect: bounds, startingDegree: type(of: self).startingDegree, endingDegree: type(of: self).endingDegree, innerRadius: innerRadius, outerRadius: bounds.radius)
     }
     
-    private var fillPath: CGMutablePathRef {
-        let endingDegree = CGFloat(Float(self.dynamicType.startingDegree) + (Float(self.dynamicType.degreesInCircle) * (value / maximumValue)))
-        return CGMutablePath.arcPath(inRect: bounds, startingDegree: self.dynamicType.startingDegree, endingDegree: endingDegree, innerRadius: innerRadius, outerRadius: bounds.radius)
+    fileprivate var fillPath: CGMutablePath {
+        let endingDegree = CGFloat(Float(type(of: self).startingDegree) + (Float(type(of: self).degreesInCircle) * (value / maximumValue)))
+        return CGMutablePath.arcPath(inRect: bounds, startingDegree: type(of: self).startingDegree, endingDegree: endingDegree, innerRadius: innerRadius, outerRadius: bounds.radius)
     }
     
-    private var tickPath: CGMutablePathRef? {
+    fileprivate var tickPath: CGMutablePath? {
         guard showsTicks else {
             return nil
         }
         
-        let path = CGPathCreateMutable()
+        let path = CGMutablePath()
         
         for i in 0...numberOfTicks {
             let degree = CGFloat(Float(i) * tickDegrees)
@@ -134,18 +134,18 @@ import UIKit
             let innerPoint = innerArc.endingGraphPoint
             let origin = bounds.graphOrigin
             
-            CGPathMoveToPoint(path, nil, origin.x + outerPoint.x, origin.y + outerPoint.y)
-            CGPathAddLineToPoint(path, nil, origin.x + innerPoint.x, origin.y + innerPoint.y)
-            CGPathCloseSubpath(path)
+            path.move(to: CGPoint(x: origin.x + outerPoint.x, y: origin.y + outerPoint.y))
+            path.addLine(to: CGPoint(x: origin.x + innerPoint.x, y: origin.y + innerPoint.y))
+            path.closeSubpath()
         }
         
         return path
     }
     
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
         
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.clear
         
         if !self.subviews.contains(track) {
             self.addSubview(track)
@@ -159,7 +159,7 @@ import UIKit
             self.addSubview(ticks)
         }
         
-        UIGraphicsBeginImageContextWithOptions(bounds.size, false, UIScreen.mainScreen().scale)
+        UIGraphicsBeginImageContextWithOptions(bounds.size, false, UIScreen.main.scale)
         let context = UIGraphicsGetCurrentContext()
         
         track.frame = bounds
@@ -170,29 +170,29 @@ import UIKit
         
         ticks.frame = bounds
         if let path = tickPath {
-            ticks.hidden = false
+            ticks.isHidden = false
             ticks.image = UIImage.strokedImage(withPath: path, color: tickColor, strokeWidth: CGFloat(tickWidth), context: context)
         } else {
-            ticks.hidden = true
+            ticks.isHidden = true
         }
         
         UIGraphicsEndImageContext()
     }
     
-    public override func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool {
-        return CGPathContainsPoint(touchPath, nil, point, false)
+    open override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        return touchPath.contains(point)
     }
     
-    public override func beginTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
-        let point = touch.locationInView(self)
+    open override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+        let point = touch.location(in: self)
         let degree = bounds.degree(forPoint: point)
         value = self.value(forDegree: degree)
         
-        return super.beginTrackingWithTouch(touch, withEvent: event)
+        return super.beginTracking(touch, with: event)
     }
     
-    public override func continueTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
-        let point = touch.locationInView(self)
+    open override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+        let point = touch.location(in: self)
         let degree = bounds.degree(forPoint: point)
         value = self.value(forDegree: degree)
         
@@ -204,18 +204,18 @@ import UIKit
             return false
         }
         
-        return super.continueTrackingWithTouch(touch, withEvent: event)
+        return super.continueTracking(touch, with: event)
     }
     
     /// Calculates the value (percent complete) for a specific degree.
-    private func value(forDegree degree: CGFloat) -> Float {
+    fileprivate func value(forDegree degree: CGFloat) -> Float {
         var percent: Float
-        if degree == self.dynamicType.startingDegree {
+        if degree == type(of: self).startingDegree {
             return minimumValue
-        } else if degree > self.dynamicType.startingDegree {
-            percent = Float((degree - self.dynamicType.startingDegree) / CGFloat(self.dynamicType.degreesInCircle))
+        } else if degree > type(of: self).startingDegree {
+            percent = Float((degree - type(of: self).startingDegree) / CGFloat(type(of: self).degreesInCircle))
         } else {
-            percent = Float((degree + CGFloat(abs(self.dynamicType.zeroDegreeOffset))) / CGFloat(self.dynamicType.degreesInCircle))
+            percent = Float((degree + CGFloat(abs(type(of: self).zeroDegreeOffset))) / CGFloat(type(of: self).degreesInCircle))
         }
         
         if !lockToTicks {

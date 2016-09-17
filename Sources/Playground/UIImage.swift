@@ -27,35 +27,35 @@
 
 import UIKit
 
-extension UIImage {
-    static func filledImage(withPath path: CGMutablePathRef, color: UIColor, context: CGContextRef?) -> UIImage? {
+public extension UIImage {
+    static func filledImage(withPath path: CGMutablePath, color: UIColor, context: CGContext?) -> UIImage? {
         guard let context = context else {
             return nil
         }
         
         var image: UIImage? = nil
         
-        CGContextSetLineWidth(context, 0)
-        CGContextSetFillColorWithColor(context, color.CGColor)
-        CGContextAddPath(context, path)
-        CGContextFillPath(context)
+        context.setLineWidth(0)
+        context.setFillColor(color.cgColor)
+        context.addPath(path)
+        context.fillPath()
         
         image = UIGraphicsGetImageFromCurrentImageContext()
         
         return image
     }
     
-    static func strokedImage(withPath path: CGMutablePathRef, color: UIColor, strokeWidth: CGFloat, context: CGContextRef?) -> UIImage? {
+    static func strokedImage(withPath path: CGMutablePath, color: UIColor, strokeWidth: CGFloat, context: CGContext?) -> UIImage? {
         guard let context = context else {
             return nil
         }
         
         var image: UIImage? = nil
         
-        CGContextSetLineWidth(context, strokeWidth)
-        CGContextSetStrokeColorWithColor(context, color.CGColor)
-        CGContextAddPath(context, path)
-        CGContextStrokePath(context)
+        context.setLineWidth(strokeWidth)
+        context.setStrokeColor(color.cgColor)
+        context.addPath(path)
+        context.strokePath()
         
         image = UIGraphicsGetImageFromCurrentImageContext()
         

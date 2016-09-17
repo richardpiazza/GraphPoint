@@ -45,7 +45,7 @@ public extension GraphPoint {
     ///
     /// - note: Degree 0 (zero) is the positive X axis and increments clockwise.
     public static func graphPoint(forDegree degree: CGFloat, radius: CGFloat) -> GraphPoint {
-        var point = CGPointZero
+        var point = CGPoint.zero
         
         let angleRight = CGFloat(90)
         var angleRise = CGFloat(0)
@@ -101,7 +101,7 @@ public extension GraphPoint {
     /// - note: Degree 0 (zero) is the positive X axis and increments clockwise.
     public static func degree(forGraphPoint graphPoint: GraphPoint) -> CGFloat {
         var degree = CGFloat(0)
-        guard !CGPointEqualToPoint(graphPoint, CGPointZero) else {
+        guard !graphPoint.equalTo(CGPoint.zero) else {
             return degree
         }
         

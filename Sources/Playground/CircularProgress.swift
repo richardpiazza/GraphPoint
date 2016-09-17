@@ -30,19 +30,19 @@ import UIKit
 /// An iOS Style circular progress indicator.
 /// Includes a `timerDate` variable which can be used to show progress over a
 /// timed period.
-@IBDesignable public class CircularProgress: UIView {
-    static private let startingDegree = CGFloat(270.0)
-    static private let endingDegree = CGFloat(630.0)
-    static private let degreesInCircle = Float(360.0)
+@IBDesignable open class CircularProgress: UIView {
+    static fileprivate let startingDegree = CGFloat(270.0)
+    static fileprivate let endingDegree = CGFloat(630.0)
+    static fileprivate let degreesInCircle = Float(360.0)
     
     // MARK: - Value -
     
     /// The minimum value this control can have.
-    private var minimumValue = Float(0.0)
+    open var minimumValue = Float(0.0)
     /// The maximum value this control can have.
-    private var maximumValue = Float(1.0)
+    open var maximumValue = Float(1.0)
     /// The current value of the control (i.e. progress percentage).
-    @IBInspectable public var value: Float = 0.0 {
+    @IBInspectable open var value: Float = 0.0 {
         didSet {
             if value > maximumValue {
                 value = maximumValue
@@ -56,25 +56,25 @@ import UIKit
     // MARK: - Timer -
     
     /// Determines the fill direction
-    @IBInspectable public var clockwise: Bool = true {
+    @IBInspectable open var clockwise: Bool = true {
         didSet {
-            value = clockwise ? 0.0 : 1.0
+            value = clockwise ? minimumValue : maximumValue
         }
     }
     /// The rate at which the progress is updated when using the `timerDate`.
-    @IBInspectable public var refreshInterval: Float = 0.05
-    private var initialDate: NSDate = NSDate()
+    @IBInspectable open var refreshInterval: Float = 0.05
+    fileprivate var initialDate: Date = Date()
     /// A date in the future which will be used to calculate the `value`.
-    public var timerDate: NSDate? {
+    public var timerDate: Date? {
         didSet {
             guard let date = self.timerDate else {
                 return
             }
             
-            initialDate = NSDate()
+            initialDate = Date()
             
             let order = date.compare(initialDate)
-            if order == .OrderedSame || order == .OrderedAscending {
+            if order == .orderedSame || order == .orderedAscending {
                 value = maximumValue
                 return
             }
@@ -85,57 +85,57 @@ import UIKit
     
     // MARK: - Track -
     
-    private var track = UIImageView(frame: CGRectZero)
+    fileprivate var track = UIImageView(frame: CGRect.zero)
     /// The width of the outlining track.
-    @IBInspectable public var trackWidth: Float = 1.0
+    @IBInspectable open var trackWidth: Float = 1.0
     /// The color of the outlining track.
-    @IBInspectable lazy public var trackColor: UIColor = {
-        if let color = UIApplication.sharedApplication().keyWindow?.tintColor {
-            return color.colorWithAlphaComponent(0.5)
+    @IBInspectable lazy open var trackColor: UIColor = {
+        if let color = UIApplication.shared.keyWindow?.tintColor {
+            return color.withAlphaComponent(0.5)
         }
         if let color = UIView.appearance().tintColor {
-            return color.colorWithAlphaComponent(0.5)
+            return color.withAlphaComponent(0.5)
         }
         
-        return UIColor.blueColor().colorWithAlphaComponent(0.5)
+        return UIColor.blue.withAlphaComponent(0.5)
     }()
     
-    private var trackInnerRadius: CGFloat {
+    fileprivate var trackInnerRadius: CGFloat {
         return bounds.radius - CGFloat(trackWidth)
     }
     
-    private var trackPath: CGMutablePathRef {
-        return CGMutablePath.arcPath(inRect: bounds, startingDegree: self.dynamicType.startingDegree, endingDegree: self.dynamicType.endingDegree, innerRadius: trackInnerRadius, outerRadius: bounds.radius)
+    fileprivate var trackPath: CGMutablePath {
+        return CGMutablePath.arcPath(inRect: bounds, startingDegree: type(of: self).startingDegree, endingDegree: type(of: self).endingDegree, innerRadius: trackInnerRadius, outerRadius: bounds.radius)
     }
     
     // MARK: - Fill -
-    private var fill = UIImageView(frame: CGRectZero)
+    fileprivate var fill = UIImageView(frame: CGRect.zero)
     /// The width of the progress track.
-    @IBInspectable public var fillWidth: Float = 3.0
+    @IBInspectable open var fillWidth: Float = 3.0
     /// The color of the progress track.
-    @IBInspectable lazy public var fillColor: UIColor = {
-        if let color = UIApplication.sharedApplication().keyWindow?.tintColor {
+    @IBInspectable lazy open var fillColor: UIColor = {
+        if let color = UIApplication.shared.keyWindow?.tintColor {
             return color
         }
         if let color = UIView.appearance().tintColor {
             return color
         }
-        return UIColor.blueColor()
+        return UIColor.blue
     }()
     
-    private var fillInnerRadius: CGFloat {
+    fileprivate var fillInnerRadius: CGFloat {
         return bounds.radius - CGFloat(fillWidth)
     }
     
-    private var fillPath: CGMutablePathRef {
-        let endingDegree = CGFloat(Float(self.dynamicType.startingDegree) + (Float(self.dynamicType.degreesInCircle) * (value / maximumValue)))
-        return CGMutablePath.arcPath(inRect: bounds, startingDegree: self.dynamicType.startingDegree, endingDegree: endingDegree, innerRadius: fillInnerRadius, outerRadius: bounds.radius)
+    fileprivate var fillPath: CGMutablePath {
+        let endingDegree = CGFloat(Float(type(of: self).startingDegree) + (Float(type(of: self).degreesInCircle) * (value / maximumValue)))
+        return CGMutablePath.arcPath(inRect: bounds, startingDegree: type(of: self).startingDegree, endingDegree: endingDegree, innerRadius: fillInnerRadius, outerRadius: bounds.radius)
     }
     
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
         
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.clear
         
         if !self.subviews.contains(track) {
             self.addSubview(track)
@@ -145,7 +145,7 @@ import UIKit
             self.addSubview(fill)
         }
         
-        UIGraphicsBeginImageContextWithOptions(bounds.size, false, UIScreen.mainScreen().scale)
+        UIGraphicsBeginImageContextWithOptions(bounds.size, false, UIScreen.main.scale)
         let context = UIGraphicsGetCurrentContext()
         
         track.frame = bounds
@@ -159,18 +159,18 @@ import UIKit
     
     /// Calculates the difference between the `initialDate` and the `timerDate`,
     /// then sets the `value` based on percent complete.
-    private func progress() {
+    public func progress() {
         guard let timerDate = self.timerDate else {
             return
         }
         
-        let span = timerDate.timeIntervalSinceDate(initialDate)
-        let interval = NSDate().timeIntervalSinceDate(initialDate)
+        let span = timerDate.timeIntervalSince(initialDate)
+        let interval = Date().timeIntervalSince(initialDate)
         var percent = Float(interval / span)
         
         if clockwise {
             guard percent < maximumValue else {
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     self.value = self.maximumValue
                 })
                 return
@@ -178,7 +178,7 @@ import UIKit
         } else {
             percent = maximumValue - percent
             guard percent > minimumValue else {
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     self.value = self.minimumValue
                 })
                 return
@@ -186,7 +186,7 @@ import UIKit
         }
         
         value = percent
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(refreshInterval * Float(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(refreshInterval * Float(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
             self.progress()
         }
     }
