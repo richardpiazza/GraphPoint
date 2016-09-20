@@ -86,20 +86,20 @@ class GraphPointTests: XCTestCase {
         
         let gp2 = GraphPoint(x: -47.7022488441362, y: -47.7022488441362)
         let t2 = rect.point(forGraphPoint: gp2)
-        XCTAssertTrue(t2.x == 202.29775115586381)
+        XCTAssertTrue((t2.x - 202.2977) < 0.0001)
         XCTAssertTrue(t2.y == 297.70224884413619)
         
         let gp3 = GraphPoint(x: -47.7022488441362, y: 47.7022488441362)
         let t3 = rect.point(forGraphPoint: gp3)
         
-        XCTAssertTrue(t3.x == 202.29775115586381)
-        XCTAssertTrue(t3.y == 202.29775115586381)
+        XCTAssertTrue((t3.x - 202.2977) < 0.0001)
+        XCTAssertTrue((t3.y - 202.2977) < 0.0001)
         
         let gp4 = GraphPoint(x: 47.7022488441362, y: 47.7022488441362)
         let t4 = rect.point(forGraphPoint: gp4)
         
         XCTAssertTrue(t4.x == 297.70224884413619)
-        XCTAssertTrue(t4.y == 202.29775115586381)
+        XCTAssertTrue((t4.y - 202.2977) < 0.0001)
     }
     
     func testBoundedPoint() {
@@ -109,6 +109,6 @@ class GraphPointTests: XCTestCase {
         let point = graphFrame.boundedPoint(forGraphPoint: graphPoint)
         
         XCTAssertTrue(point.x == 0.0)
-        XCTAssertTrue(point.y == 202.29775115586381)
+        XCTAssertTrue((point.y - 202.2977) < 0.0001)
     }
 }
