@@ -28,7 +28,7 @@
 import UIKit
 
 public extension UIImage {
-    static func filledImage(withPath path: CGMutablePath, color: UIColor, context: CGContext?) -> UIImage? {
+    public static func filledImage(withPath path: CGMutablePath, color: UIColor, context: CGContext?) -> UIImage? {
         guard let context = context else {
             return nil
         }
@@ -45,7 +45,7 @@ public extension UIImage {
         return image
     }
     
-    static func strokedImage(withPath path: CGMutablePath, color: UIColor, strokeWidth: CGFloat, context: CGContext?) -> UIImage? {
+    public static func strokedImage(withPath path: CGMutablePath, color: UIColor, strokeWidth: CGFloat, context: CGContext?) -> UIImage? {
         guard let context = context else {
             return nil
         }

@@ -28,27 +28,27 @@
 import CoreGraphics
 
 /// Arc of a circle (a continuous length around the circumference)
-struct Arc {
-    var startingDegree: CGFloat = 0.0
-    var endingDegree: CGFloat = 0.0
-    var radius: CGFloat = 0.0
+public struct Arc {
+    public var startingDegree: CGFloat = 0.0
+    public var endingDegree: CGFloat = 0.0
+    public var radius: CGFloat = 0.0
     
-    init(startingDegree: CGFloat, endingDegree: CGFloat, radius: CGFloat) {
+    public init(startingDegree: CGFloat, endingDegree: CGFloat, radius: CGFloat) {
         self.startingDegree = startingDegree
         self.endingDegree = endingDegree
         self.radius = radius
     }
     
-    var startingGraphPoint: GraphPoint {
+    public var startingGraphPoint: GraphPoint {
         return GraphPoint.graphPoint(forDegree: startingDegree, radius: radius)
     }
     
-    var endingGraphPoint: GraphPoint {
+    public var endingGraphPoint: GraphPoint {
         return GraphPoint.graphPoint(forDegree: endingDegree, radius: radius)
     }
     
     /// Calculates the point of the right angle that joins the start and end points.
-    var pivot: GraphPoint {
+    public var pivot: GraphPoint {
         var pivot = GraphPoint(x: 0, y: 0)
         
         if startingDegree < 90 {
