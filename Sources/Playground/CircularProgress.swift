@@ -35,6 +35,8 @@ import UIKit
     static fileprivate let endingDegree = CGFloat(630.0)
     static fileprivate let degreesInCircle = Float(360.0)
     
+    public typealias ExpiredCompletion = () -> Void
+    
     // MARK: - Value -
     
     /// The minimum value this control can have.
@@ -63,24 +65,28 @@ import UIKit
     }
     /// The rate at which the progress is updated when using the `timerDate`.
     @IBInspectable open var refreshInterval: Float = 0.05
-    fileprivate var initialDate: Date = Date()
-    /// A date in the future which will be used to calculate the `value`.
-    public var timerDate: Date? {
+    /// An interval of time, once specified, will be used to calculate the `value`.
+    public var timeInterval: TimeInterval? {
         didSet {
-            guard let date = self.timerDate else {
+            guard let interval = self.timeInterval else {
                 return
             }
             
-            initialDate = Date()
-            
-            let order = date.compare(initialDate)
-            if order == .orderedSame || order == .orderedAscending {
+            guard interval > 0 else {
                 value = maximumValue
                 return
             }
             
-            self.progress()
+            completedIntervals = 0
+            resume()
         }
+    }
+    fileprivate var completedIntervals: TimeInterval = 0.0
+    fileprivate var referenceDate: Date?
+    fileprivate var expiredCompletion: ExpiredCompletion?
+    /// Reports the status of the automatic refresh.
+    public var isActive: Bool {
+        return referenceDate != nil
     }
     
     // MARK: - Track -
@@ -157,21 +163,25 @@ import UIKit
         UIGraphicsEndImageContext()
     }
     
-    /// Calculates the difference between the `initialDate` and the `timerDate`,
-    /// then sets the `value` based on percent complete.
-    public func progress() {
-        guard let timerDate = self.timerDate else {
+    /// Calculates the number of completed intervals and sets the `value`
+    /// based on the percent complete.
+    private func updateProgress() {
+        guard let timeInterval = self.timeInterval else {
             return
         }
         
-        let span = timerDate.timeIntervalSince(initialDate)
-        let interval = Date().timeIntervalSince(initialDate)
-        var percent = Float(interval / span)
+        guard let referenceDate = self.referenceDate else {
+            return
+        }
+        
+        completedIntervals = Date().timeIntervalSince(referenceDate)
+        var percent = Float(completedIntervals / timeInterval)
         
         if clockwise {
             guard percent < maximumValue else {
                 DispatchQueue.main.async(execute: {
                     self.value = self.maximumValue
+                    self.expire()
                 })
                 return
             }
@@ -180,14 +190,44 @@ import UIKit
             guard percent > minimumValue else {
                 DispatchQueue.main.async(execute: {
                     self.value = self.minimumValue
+                    self.expire()
                 })
                 return
             }
         }
         
-        value = percent
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(refreshInterval * Float(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
-            self.progress()
+        DispatchQueue.main.async {
+            self.value = percent
         }
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(refreshInterval * Float(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
+            self.updateProgress()
+        }
+    }
+    
+    private func expire() {
+        referenceDate = nil
+        if let completion = expiredCompletion {
+            completion()
+        }
+    }
+    
+    /// Indefinitly delays the completion of the automatic refreshing when
+    /// a `timeInterval` has been specified.
+    public func pause() {
+        referenceDate = nil
+    }
+    
+    /// Resumes the automatic refreshing of the indicator after a `pause`
+    /// has been initiated or `timeInterval` has been set.
+    public func resume() {
+        referenceDate = Date(timeIntervalSinceNow: -completedIntervals)
+        updateProgress()
+    }
+    
+    /// Begins a new automatic refresh cycle
+    public func reset(timeInterval: TimeInterval, completion: ExpiredCompletion? = nil) {
+        expiredCompletion = completion
+        self.timeInterval = timeInterval
     }
 }

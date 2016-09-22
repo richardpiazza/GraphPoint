@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = "GraphPoint"
-  s.version = "2.0.1"
+  s.version = "2.1.0"
   s.summary = "A library of Swift extensions for using a Cartesian Coordinate System with CGRect."
   s.description = <<-DESC
   GraphPoint is a library of Swift extensions for using a Cartesian Coordinate System with CGRect.
