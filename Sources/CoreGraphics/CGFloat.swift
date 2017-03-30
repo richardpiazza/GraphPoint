@@ -30,11 +30,11 @@ import CoreGraphics
 public extension CGFloat {
     /// Converts an angular degree to radians
     public var radians: CGFloat {
-        return CGFloat(Double(self) * (M_PI / 180))
+        return CGFloat(Double(self) * (Double.pi / 180))
     }
     
     /// Converts a radian value to angular degree
     public var degrees: CGFloat {
-        return CGFloat(Double(self) * (180 / M_PI))
+        return CGFloat(Double(self) * (180 / Double.pi))
     }
 }
