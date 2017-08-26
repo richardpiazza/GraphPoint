@@ -44,34 +44,34 @@ class GraphPointTests: XCTestCase {
     }
     
     func testPointFromViewPoint() {
-        var graphPoint = square.graphPoint(forPoint: CGPoint(x: 20, y: 25))
+        var graphPoint = square.graphPoint(viewPoint: CGPoint(x: 20, y: 25))
         XCTAssertTrue(graphPoint.x == CGFloat(-30))
         XCTAssertTrue(graphPoint.y == CGFloat(25))
         
-        graphPoint = rect.graphPoint(forPoint: CGPoint(x: 20, y: 25))
+        graphPoint = rect.graphPoint(viewPoint: CGPoint(x: 20, y: 25))
         XCTAssertTrue(graphPoint.x == CGFloat(-40))
         XCTAssertTrue(graphPoint.y == CGFloat(15))
     }
     
     func testPointFromGraphPoint() {
-        var point = square.point(forGraphPoint: GraphPoint(x: -30, y: 25))
+        var point = square.point(graphPoint: GraphPoint(x: -30, y: 25))
         XCTAssertTrue(point.x == CGFloat(20))
         XCTAssertTrue(point.y == CGFloat(25))
         
-        point = rect.point(forGraphPoint: GraphPoint(x: -30, y: 25))
+        point = rect.point(graphPoint: GraphPoint(x: -30, y: 25))
         XCTAssertTrue(point.x == CGFloat(30))
         XCTAssertTrue(point.y == CGFloat(15))
     }
     
     func testPointForDegree() {
-        let point = GraphPoint.graphPoint(forDegree: CGFloat(30), radius: square.radius)
+        let point = GraphPoint.graphPoint(degree: CGFloat(30), radius: square.radius)
         XCTAssertTrue(round(point.x) == 43.0)
         XCTAssertTrue(round(point.y) == -25.0)
     }
     
     func testDegreeForPoint() {
         let graphPoint = GraphPoint(x: CGFloat(43.301270189222), y: CGFloat(-24.999999999999))
-        let degree = GraphPoint.degree(forGraphPoint: graphPoint)
+        let degree = GraphPoint.degree(graphPoint: graphPoint)
         XCTAssertTrue(round(degree) == CGFloat(30.0))
     }
     
@@ -79,24 +79,24 @@ class GraphPointTests: XCTestCase {
         let rect = CGRect(x: 0.0, y: 0.0, width: 500.0, height: 500.0)
         
         let gp1 = GraphPoint(x: 47.7022488441362, y: -47.7022488441362)
-        let t1 = rect.point(forGraphPoint: gp1)
+        let t1 = rect.point(graphPoint: gp1)
         
         XCTAssertTrue(t1.x == 297.70224884413619)
         XCTAssertTrue(t1.y == 297.70224884413619)
         
         let gp2 = GraphPoint(x: -47.7022488441362, y: -47.7022488441362)
-        let t2 = rect.point(forGraphPoint: gp2)
+        let t2 = rect.point(graphPoint: gp2)
         XCTAssertTrue((t2.x - 202.2977) < 0.0001)
         XCTAssertTrue(t2.y == 297.70224884413619)
         
         let gp3 = GraphPoint(x: -47.7022488441362, y: 47.7022488441362)
-        let t3 = rect.point(forGraphPoint: gp3)
+        let t3 = rect.point(graphPoint: gp3)
         
         XCTAssertTrue((t3.x - 202.2977) < 0.0001)
         XCTAssertTrue((t3.y - 202.2977) < 0.0001)
         
         let gp4 = GraphPoint(x: 47.7022488441362, y: 47.7022488441362)
-        let t4 = rect.point(forGraphPoint: gp4)
+        let t4 = rect.point(graphPoint: gp4)
         
         XCTAssertTrue(t4.x == 297.70224884413619)
         XCTAssertTrue((t4.y - 202.2977) < 0.0001)
@@ -106,7 +106,7 @@ class GraphPointTests: XCTestCase {
         let graphFrame = GraphFrame(x: 47.7022488441362, y: 250.0, width: 197.70454701777979, height: 202.29775115586381)
         let graphPoint = GraphPoint(x: 47.7022488441362, y: 47.7022488441362)
         
-        let point = graphFrame.boundedPoint(forGraphPoint: graphPoint)
+        let point = graphFrame.boundedPoint(graphPoint: graphPoint)
         
         XCTAssertTrue(point.x == 0.0)
         XCTAssertTrue((point.y - 202.2977) < 0.0001)

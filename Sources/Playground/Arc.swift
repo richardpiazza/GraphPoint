@@ -40,11 +40,11 @@ public struct Arc {
     }
     
     public var startingGraphPoint: GraphPoint {
-        return GraphPoint.graphPoint(forDegree: startingDegree, radius: radius)
+        return GraphPoint.graphPoint(degree: startingDegree, radius: radius)
     }
     
     public var endingGraphPoint: GraphPoint {
-        return GraphPoint.graphPoint(forDegree: endingDegree, radius: radius)
+        return GraphPoint.graphPoint(degree: endingDegree, radius: radius)
     }
     
     /// Calculates the point of the right angle that joins the start and end points.

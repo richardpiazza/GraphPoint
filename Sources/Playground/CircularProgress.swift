@@ -64,7 +64,7 @@ import UIKit
         }
     }
     /// The rate at which the progress is updated when using the `timerDate`.
-    @IBInspectable open var refreshInterval: Float = 0.05
+    @IBInspectable open var refreshInterval: Float = 0.0333
     /// An interval of time, once specified, will be used to calculate the `value`.
     public var timeInterval: TimeInterval? {
         didSet {

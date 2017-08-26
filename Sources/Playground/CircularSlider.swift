@@ -27,6 +27,7 @@
 
 import UIKit
 
+/// An iOS Style circular slider
 @IBDesignable open class CircularSlider: UIControl {
     static fileprivate let startingDegree = CGFloat(270.0)
     static fileprivate let endingDegree = CGFloat(630.0)
@@ -185,7 +186,7 @@ import UIKit
     
     open override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         let point = touch.location(in: self)
-        let degree = bounds.degree(forPoint: point)
+        let degree = bounds.degree(viewPoint: point)
         value = self.value(forDegree: degree)
         
         return super.beginTracking(touch, with: event)
@@ -193,7 +194,7 @@ import UIKit
     
     open override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         let point = touch.location(in: self)
-        let degree = bounds.degree(forPoint: point)
+        let degree = bounds.degree(viewPoint: point)
         value = self.value(forDegree: degree)
         
         if value >= (maximumValue - tickPercent) {

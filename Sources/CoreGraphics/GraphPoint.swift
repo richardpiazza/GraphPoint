@@ -44,7 +44,7 @@ public extension GraphPoint {
     /// Uses the mathematical 'Law of Sines' to determine a `GraphPoint` for the supplied degree and radius
     ///
     /// - note: Degree 0 (zero) is the positive X axis and increments clockwise.
-    public static func graphPoint(forDegree degree: CGFloat, radius: CGFloat) -> GraphPoint {
+    public static func graphPoint(degree: CGFloat, radius: CGFloat) -> GraphPoint {
         var point = CGPoint.zero
         
         let angleRight = CGFloat(90)
@@ -99,35 +99,35 @@ public extension GraphPoint {
     /// Uses the mathematical 'Law of Cotangents' to determine the degree for a `GraphPoint`
     ///
     /// - note: Degree 0 (zero) is the positive X axis and increments clockwise.
-    public static func degree(forGraphPoint graphPoint: GraphPoint) -> CGFloat {
+    public static func degree(graphPoint: GraphPoint) -> CGFloat {
         var degree = CGFloat(0)
         guard !graphPoint.equalTo(CGPoint.zero) else {
             return degree
         }
         
         if graphPoint.x >= 0 && graphPoint.y >= 0 {
-            let midPoint = self.graphPoint(forDegree: CGFloat(315), radius: graphPoint.minimumRadius)
+            let midPoint = self.graphPoint(degree: CGFloat(315), radius: graphPoint.minimumRadius)
             if graphPoint.x <= midPoint.x {
                 degree = CGFloat(270) + atan(graphPoint.x / graphPoint.y).degrees
             } else {
                 degree = CGFloat(360) - atan(graphPoint.y / graphPoint.x).degrees
             }
         } else if graphPoint.x >= 0 && graphPoint.y <= 0 {
-            let midPoint = self.graphPoint(forDegree: CGFloat(45), radius: graphPoint.minimumRadius)
+            let midPoint = self.graphPoint(degree: CGFloat(45), radius: graphPoint.minimumRadius)
             if graphPoint.x <= midPoint.x {
                 degree = atan(abs(graphPoint.y) / graphPoint.x).degrees
             } else {
                 degree = CGFloat(90) - atan(graphPoint.x / abs(graphPoint.y)).degrees
             }
         } else if graphPoint.x <= 0 && graphPoint.y <= 0 {
-            let midPoint = self.graphPoint(forDegree: CGFloat(135), radius: graphPoint.minimumRadius)
+            let midPoint = self.graphPoint(degree: CGFloat(135), radius: graphPoint.minimumRadius)
             if graphPoint.x <= midPoint.x {
                 degree = CGFloat(180) - atan(abs(graphPoint.y) / abs(graphPoint.x)).degrees
             } else {
                 degree = CGFloat(90) + atan(abs(graphPoint.x) / abs(graphPoint.y)).degrees
             }
         } else if graphPoint.x <= 0 && graphPoint.y >= 0 {
-            let midPoint = self.graphPoint(forDegree: CGFloat(225), radius: graphPoint.minimumRadius)
+            let midPoint = self.graphPoint(degree: CGFloat(225), radius: graphPoint.minimumRadius)
             if graphPoint.x <= midPoint.x {
                 degree = CGFloat(180) + atan(graphPoint.y / abs(graphPoint.x)).degrees
             } else {

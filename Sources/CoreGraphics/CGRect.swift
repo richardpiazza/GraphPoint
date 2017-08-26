@@ -43,7 +43,7 @@ public extension CGRect {
     }
     
     /// Translates an internal coordinate `CGPoint` to a `GraphPoint`
-    public func graphPoint(forPoint viewPoint: CGPoint) -> GraphPoint {
+    public func graphPoint(viewPoint: CGPoint) -> GraphPoint {
         var point = CGPoint.zero
         
         if viewPoint.x < graphOrigin.x {
@@ -62,7 +62,7 @@ public extension CGRect {
     }
     
     /// Translates a `GraphPoint` to an internal coordinate `CGPoint`
-    public func point(forGraphPoint graphPoint: GraphPoint) -> CGPoint {
+    public func point(graphPoint: GraphPoint) -> CGPoint {
         var point = CGPoint.zero
         
         if graphPoint.x >= 0 {
@@ -83,18 +83,18 @@ public extension CGRect {
     /// Convenience method that translates an internal coordinate point before passing to `degree(forGraphPoint:)`
     ///
     /// - note: Degree 0 (zero) is the positive X axis and increments clockwise.
-    public func degree(forPoint viewPoint: CGPoint) -> CGFloat {
-        let graphPoint = self.graphPoint(forPoint: viewPoint)
-        return GraphPoint.degree(forGraphPoint: graphPoint)
+    public func degree(viewPoint: CGPoint) -> CGFloat {
+        let graphPoint = self.graphPoint(viewPoint: viewPoint)
+        return GraphPoint.degree(graphPoint: graphPoint)
     }
     
     /// Calculates the view frame for a `GraphFrame` contained with this frames bounds.
     /// An optional `GraphOriginOffset` allows for an offset value to change where center
     /// is calculated from.
-    public func frame(forGraphFrame graphFrame: GraphFrame, graphOriginOffset: GraphOriginOffset = GraphOriginOffset(x: 0, y: 0)) -> CGRect {
+    public func frame(graphFrame: GraphFrame, offset: GraphOriginOffset = GraphOriginOffset(x: 0, y: 0)) -> CGRect {
         var graphCenter = self.graphOrigin
-        graphCenter.x = graphCenter.x + graphOriginOffset.x
-        graphCenter.y = graphCenter.y + graphOriginOffset.y
+        graphCenter.x = graphCenter.x + offset.x
+        graphCenter.y = graphCenter.y + offset.y
         
         return CGRect(x: graphCenter.x + graphFrame.origin.x, y: graphCenter.y - graphFrame.origin.y, width: graphFrame.width, height: graphFrame.height)
     }

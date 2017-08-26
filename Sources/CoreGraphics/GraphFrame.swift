@@ -52,7 +52,7 @@ public extension GraphFrame {
     ///
     /// Given: CGRect(0, 0, 500, 500) & GraphFrame(47.7022, 250.0, 197.7045, 202.2977),
     /// The GraphPoint(47.7022, 47.7022) would be translated to CGPoint(0.0, 202.2977)
-    public func boundedPoint(forGraphPoint graphPoint: GraphPoint) -> CGPoint {
+    public func boundedPoint(graphPoint: GraphPoint) -> CGPoint {
         let x = abs(origin.x - graphPoint.x)
         let y = abs(origin.y - graphPoint.y)
         
@@ -60,7 +60,7 @@ public extension GraphFrame {
     }
     
     /// Determines that smallest `GraphFrame` that encompases all graph points.
-    public static func graphFrame(forGraphPoints graphPoints: [GraphPoint]) -> GraphFrame {
+    public static func graphFrame(graphPoints: [GraphPoint]) -> GraphFrame {
         var minXMaxY = CGPoint.zero
         var maxXMinY = CGPoint.zero
         
@@ -84,8 +84,8 @@ public extension GraphFrame {
     
     /// Determines the smallest `GraphFrame` that encompases all points, with
     /// expansion for crossing an axis.
-    public static func graphFrame(forGraphPoints graphPoints: [GraphPoint], radius: CGFloat, startDegree: CGFloat, endDegree: CGFloat) -> GraphFrame {
-        var graphFrame = self.graphFrame(forGraphPoints: graphPoints)
+    public static func graphFrame(graphPoints: [GraphPoint], radius: CGFloat, startDegree: CGFloat, endDegree: CGFloat) -> GraphFrame {
+        var graphFrame = self.graphFrame(graphPoints: graphPoints)
         
         if startDegree >= 270 && endDegree <= 90 {
             let expand = abs(graphFrame.origin.x + graphFrame.width)
