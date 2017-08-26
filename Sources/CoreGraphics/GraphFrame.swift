@@ -94,14 +94,14 @@ public extension GraphFrame {
                 graphFrame.size.width = graphFrame.size.width + expansion
             }
         } else if (startDegree >= 180 && startDegree <= 270) && (endDegree >= 270 && endDegree <= 360) {
-            let exterior = graphFrame.origin.y + graphFrame.height
+            let exterior = graphFrame.origin.y
             if exterior < radius {
                 let expansion = radius - exterior
                 graphFrame.origin.y = graphFrame.origin.y + expansion
                 graphFrame.size.height = graphFrame.size.height + expansion
             }
         } else if (startDegree >= 90 && startDegree <= 180) && (endDegree >= 180 && endDegree <= 270) {
-            let exterior = abs(graphFrame.origin.x) + graphFrame.size.width
+            let exterior = abs(graphFrame.origin.x)
             if exterior < radius {
                 let expansion = radius - exterior
                 graphFrame.origin.x = graphFrame.origin.x - expansion
