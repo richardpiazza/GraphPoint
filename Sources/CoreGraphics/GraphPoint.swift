@@ -96,6 +96,42 @@ public extension GraphPoint {
         return point
     }
     
+    /// Uses the Pythagorean Theorem to solve for the x or y intercept given the
+    /// supplied `GraphPoint` `sideA`.
+    ///
+    /// - note Degree 0 (zero) is the positive x axis and increments clockwise.
+    public static func graphPoint(degree: CGFloat, radius: CGFloat, boundedBy sideA: GraphPoint) -> GraphPoint {
+        var point = CGPoint.zero
+        
+        if (degree >= 315) {
+            point.x = CGFloat(sqrtf(powf(Float(radius), 2) - powf(Float(sideA.y), 2)))
+            point.y = sideA.y
+        } else if (degree >= 270) {
+            point.x = sideA.x
+            point.y = CGFloat(sqrtf(powf(Float(radius), 2) - powf(Float(sideA.x), 2)))
+        } else if (degree >= 225) {
+            point.x = sideA.x
+            point.y = CGFloat(sqrtf(powf(Float(radius), 2) - powf(Float(sideA.x), 2)))
+        } else if (degree >= 180) {
+            point.x = -CGFloat(sqrtf(powf(Float(radius), 2) - powf(Float(sideA.y), 2)))
+            point.y = sideA.y
+        } else if (degree >= 135) {
+            point.x = -CGFloat(sqrtf(powf(Float(radius), 2) - powf(Float(sideA.y), 2)))
+            point.y = sideA.y
+        } else if (degree >= 90) {
+            point.x = sideA.x
+            point.y = -CGFloat(sqrtf(powf(Float(radius), 2) - powf(Float(sideA.x), 2)))
+        } else if (degree >= 45) {
+            point.x = sideA.x
+            point.y = -CGFloat(sqrtf(powf(Float(radius), 2) - powf(Float(sideA.x), 2)))
+        } else if (degree >= 0) {
+            point.x = CGFloat(sqrtf(powf(Float(radius), 2) - powf(Float(sideA.y), 2)))
+            point.y = sideA.y
+        }
+        
+        return point
+    }
+    
     /// Uses the mathematical 'Law of Cotangents' to determine the degree for a `GraphPoint`
     ///
     /// - note: Degree 0 (zero) is the positive X axis and increments clockwise.
