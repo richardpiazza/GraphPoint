@@ -7,19 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E105B78F1D5FA7D6004AE5D9 /* GraphFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E105B78E1D5FA7D6004AE5D9 /* GraphFrame.swift */; };
-		E105B7911D5FA853004AE5D9 /* GraphPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E105B7901D5FA853004AE5D9 /* GraphPoint.swift */; };
-		E14FCF6C1D42D5FA00BE7E5E /* CircularSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14FCF6B1D42D5FA00BE7E5E /* CircularSlider.swift */; };
-		E14FCF9F1D43F33100BE7E5E /* CircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14FCF9E1D43F33100BE7E5E /* CircularProgress.swift */; };
-		E185E3311D416EE400EBD40F /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E185E32D1D416EE400EBD40F /* CGFloat.swift */; };
-		E185E3321D416EE400EBD40F /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E185E32E1D416EE400EBD40F /* CGPoint.swift */; };
-		E185E3331D416EE400EBD40F /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = E185E32F1D416EE400EBD40F /* CGRect.swift */; };
-		E185E3351D41706700EBD40F /* Arc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E185E3341D41706700EBD40F /* Arc.swift */; };
-		E185E3371D41723800EBD40F /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E185E3361D41723800EBD40F /* UIImage.swift */; };
-		E185E3391D4172F700EBD40F /* CGMutablePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = E185E3381D4172F700EBD40F /* CGMutablePath.swift */; };
 		E1B424E71D3185320055915F /* GraphPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = E1B424E61D3185320055915F /* GraphPoint.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E1B424EE1D3185320055915F /* GraphPoint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1B424E31D3185320055915F /* GraphPoint.framework */; };
-		E1B424F31D3185320055915F /* GraphPointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B424F21D3185320055915F /* GraphPointTests.swift */; };
+		E1CA6BAE1FFECF200002EF25 /* CGPoint+GraphPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CA6BA31FFECF1F0002EF25 /* CGPoint+GraphPoint.swift */; };
+		E1CA6BAF1FFECF200002EF25 /* GraphFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CA6BA41FFECF1F0002EF25 /* GraphFrame.swift */; };
+		E1CA6BB01FFECF200002EF25 /* CGFloat+GraphPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CA6BA51FFECF1F0002EF25 /* CGFloat+GraphPoint.swift */; };
+		E1CA6BB11FFECF200002EF25 /* GraphPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CA6BA61FFECF1F0002EF25 /* GraphPoint.swift */; };
+		E1CA6BB21FFECF200002EF25 /* CGRect+GraphPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CA6BA71FFECF1F0002EF25 /* CGRect+GraphPoint.swift */; };
+		E1CA6BB31FFECF200002EF25 /* Arc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CA6BA91FFECF1F0002EF25 /* Arc.swift */; };
+		E1CA6BB41FFECF200002EF25 /* CircularSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CA6BAA1FFECF1F0002EF25 /* CircularSlider.swift */; };
+		E1CA6BB51FFECF200002EF25 /* CGMutablePath+GraphPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CA6BAB1FFECF1F0002EF25 /* CGMutablePath+GraphPoint.swift */; };
+		E1CA6BB61FFECF200002EF25 /* CircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CA6BAC1FFECF1F0002EF25 /* CircularProgress.swift */; };
+		E1CA6BB71FFECF200002EF25 /* UIImage+GraphPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CA6BAD1FFECF1F0002EF25 /* UIImage+GraphPoint.swift */; };
+		E1CA6BBD1FFECF350002EF25 /* GraphPointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CA6BBA1FFECF290002EF25 /* GraphPointTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,25 +33,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E105B78E1D5FA7D6004AE5D9 /* GraphFrame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphFrame.swift; sourceTree = "<group>"; };
-		E105B7901D5FA853004AE5D9 /* GraphPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphPoint.swift; sourceTree = "<group>"; };
-		E14FCF6B1D42D5FA00BE7E5E /* CircularSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularSlider.swift; sourceTree = "<group>"; };
-		E14FCF9E1D43F33100BE7E5E /* CircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgress.swift; sourceTree = "<group>"; };
-		E185E32D1D416EE400EBD40F /* CGFloat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
-		E185E32E1D416EE400EBD40F /* CGPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
-		E185E32F1D416EE400EBD40F /* CGRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
-		E185E3341D41706700EBD40F /* Arc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arc.swift; sourceTree = "<group>"; };
-		E185E3361D41723800EBD40F /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
-		E185E3381D4172F700EBD40F /* CGMutablePath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGMutablePath.swift; sourceTree = "<group>"; };
 		E1B424E31D3185320055915F /* GraphPoint.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GraphPoint.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1B424E61D3185320055915F /* GraphPoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GraphPoint.h; sourceTree = "<group>"; };
 		E1B424E81D3185320055915F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E1B424ED1D3185320055915F /* GraphPointTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GraphPointTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E1B424F21D3185320055915F /* GraphPointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphPointTests.swift; sourceTree = "<group>"; };
 		E1B424F41D3185320055915F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E1B424FE1D31878A0055915F /* GraphPoint.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GraphPoint.podspec; sourceTree = "<group>"; };
-		E1B424FF1D31878A0055915F /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
-		E1B425001D31878A0055915F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		E1CA6BA31FFECF1F0002EF25 /* CGPoint+GraphPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+GraphPoint.swift"; sourceTree = "<group>"; };
+		E1CA6BA41FFECF1F0002EF25 /* GraphFrame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphFrame.swift; sourceTree = "<group>"; };
+		E1CA6BA51FFECF1F0002EF25 /* CGFloat+GraphPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+GraphPoint.swift"; sourceTree = "<group>"; };
+		E1CA6BA61FFECF1F0002EF25 /* GraphPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphPoint.swift; sourceTree = "<group>"; };
+		E1CA6BA71FFECF1F0002EF25 /* CGRect+GraphPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+GraphPoint.swift"; sourceTree = "<group>"; };
+		E1CA6BA91FFECF1F0002EF25 /* Arc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arc.swift; sourceTree = "<group>"; };
+		E1CA6BAA1FFECF1F0002EF25 /* CircularSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularSlider.swift; sourceTree = "<group>"; };
+		E1CA6BAB1FFECF1F0002EF25 /* CGMutablePath+GraphPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGMutablePath+GraphPoint.swift"; sourceTree = "<group>"; };
+		E1CA6BAC1FFECF1F0002EF25 /* CircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgress.swift; sourceTree = "<group>"; };
+		E1CA6BAD1FFECF1F0002EF25 /* UIImage+GraphPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+GraphPoint.swift"; sourceTree = "<group>"; };
+		E1CA6BBA1FFECF290002EF25 /* GraphPointTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphPointTests.swift; sourceTree = "<group>"; };
+		E1CA6BBE1FFECF770002EF25 /* GraphPoint.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GraphPoint.podspec; path = ../GraphPoint.podspec; sourceTree = "<group>"; };
+		E1CA6BBF1FFECF780002EF25 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		E1CA6BC01FFECF780002EF25 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		E1CA6BC11FFECF780002EF25 /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Package.swift; path = ../Package.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,37 +74,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E185E32C1D416EE400EBD40F /* CoreGraphics */ = {
-			isa = PBXGroup;
-			children = (
-				E185E32D1D416EE400EBD40F /* CGFloat.swift */,
-				E185E32E1D416EE400EBD40F /* CGPoint.swift */,
-				E185E32F1D416EE400EBD40F /* CGRect.swift */,
-				E105B78E1D5FA7D6004AE5D9 /* GraphFrame.swift */,
-				E105B7901D5FA853004AE5D9 /* GraphPoint.swift */,
-			);
-			path = CoreGraphics;
-			sourceTree = "<group>";
-		};
-		E185E3301D416EE400EBD40F /* Playground */ = {
-			isa = PBXGroup;
-			children = (
-				E185E3341D41706700EBD40F /* Arc.swift */,
-				E14FCF9E1D43F33100BE7E5E /* CircularProgress.swift */,
-				E14FCF6B1D42D5FA00BE7E5E /* CircularSlider.swift */,
-				E185E3381D4172F700EBD40F /* CGMutablePath.swift */,
-				E185E3361D41723800EBD40F /* UIImage.swift */,
-			);
-			path = Playground;
-			sourceTree = "<group>";
-		};
 		E1B424D91D3185320055915F = {
 			isa = PBXGroup;
 			children = (
-				E1B424FE1D31878A0055915F /* GraphPoint.podspec */,
-				E1B424FF1D31878A0055915F /* Package.swift */,
-				E1B425001D31878A0055915F /* README.md */,
-				E1B424FD1D3187820055915F /* Sources */,
+				E1CA6BBE1FFECF770002EF25 /* GraphPoint.podspec */,
+				E1CA6BBF1FFECF780002EF25 /* LICENSE */,
+				E1CA6BC11FFECF780002EF25 /* Package.swift */,
+				E1CA6BC01FFECF780002EF25 /* README.md */,
+				E1CA6BA11FFECF1F0002EF25 /* Sources */,
+				E1CA6BB81FFECF290002EF25 /* Tests */,
 				E1B424E51D3185320055915F /* GraphPoint */,
 				E1B424F11D3185320055915F /* GraphPointTests */,
 				E1B424E41D3185320055915F /* Products */,
@@ -131,19 +110,52 @@
 		E1B424F11D3185320055915F /* GraphPointTests */ = {
 			isa = PBXGroup;
 			children = (
-				E1B424F21D3185320055915F /* GraphPointTests.swift */,
 				E1B424F41D3185320055915F /* Info.plist */,
 			);
 			path = GraphPointTests;
 			sourceTree = "<group>";
 		};
-		E1B424FD1D3187820055915F /* Sources */ = {
+		E1CA6BA11FFECF1F0002EF25 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				E185E32C1D416EE400EBD40F /* CoreGraphics */,
-				E185E3301D416EE400EBD40F /* Playground */,
+				E1CA6BA21FFECF1F0002EF25 /* GraphPoint */,
 			);
-			path = Sources;
+			name = Sources;
+			path = ../Sources;
+			sourceTree = "<group>";
+		};
+		E1CA6BA21FFECF1F0002EF25 /* GraphPoint */ = {
+			isa = PBXGroup;
+			children = (
+				E1CA6BA91FFECF1F0002EF25 /* Arc.swift */,
+				E1CA6BAC1FFECF1F0002EF25 /* CircularProgress.swift */,
+				E1CA6BAA1FFECF1F0002EF25 /* CircularSlider.swift */,
+				E1CA6BA51FFECF1F0002EF25 /* CGFloat+GraphPoint.swift */,
+				E1CA6BAB1FFECF1F0002EF25 /* CGMutablePath+GraphPoint.swift */,
+				E1CA6BA31FFECF1F0002EF25 /* CGPoint+GraphPoint.swift */,
+				E1CA6BA71FFECF1F0002EF25 /* CGRect+GraphPoint.swift */,
+				E1CA6BA41FFECF1F0002EF25 /* GraphFrame.swift */,
+				E1CA6BA61FFECF1F0002EF25 /* GraphPoint.swift */,
+				E1CA6BAD1FFECF1F0002EF25 /* UIImage+GraphPoint.swift */,
+			);
+			path = GraphPoint;
+			sourceTree = "<group>";
+		};
+		E1CA6BB81FFECF290002EF25 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				E1CA6BB91FFECF290002EF25 /* GraphPointTests */,
+			);
+			name = Tests;
+			path = ../Tests;
+			sourceTree = "<group>";
+		};
+		E1CA6BB91FFECF290002EF25 /* GraphPointTests */ = {
+			isa = PBXGroup;
+			children = (
+				E1CA6BBA1FFECF290002EF25 /* GraphPointTests.swift */,
+			);
+			path = GraphPointTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,16 +268,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E185E3321D416EE400EBD40F /* CGPoint.swift in Sources */,
-				E105B7911D5FA853004AE5D9 /* GraphPoint.swift in Sources */,
-				E185E3371D41723800EBD40F /* UIImage.swift in Sources */,
-				E105B78F1D5FA7D6004AE5D9 /* GraphFrame.swift in Sources */,
-				E185E3331D416EE400EBD40F /* CGRect.swift in Sources */,
-				E14FCF9F1D43F33100BE7E5E /* CircularProgress.swift in Sources */,
-				E185E3351D41706700EBD40F /* Arc.swift in Sources */,
-				E185E3311D416EE400EBD40F /* CGFloat.swift in Sources */,
-				E14FCF6C1D42D5FA00BE7E5E /* CircularSlider.swift in Sources */,
-				E185E3391D4172F700EBD40F /* CGMutablePath.swift in Sources */,
+				E1CA6BB01FFECF200002EF25 /* CGFloat+GraphPoint.swift in Sources */,
+				E1CA6BB71FFECF200002EF25 /* UIImage+GraphPoint.swift in Sources */,
+				E1CA6BAF1FFECF200002EF25 /* GraphFrame.swift in Sources */,
+				E1CA6BB31FFECF200002EF25 /* Arc.swift in Sources */,
+				E1CA6BB21FFECF200002EF25 /* CGRect+GraphPoint.swift in Sources */,
+				E1CA6BAE1FFECF200002EF25 /* CGPoint+GraphPoint.swift in Sources */,
+				E1CA6BB41FFECF200002EF25 /* CircularSlider.swift in Sources */,
+				E1CA6BB11FFECF200002EF25 /* GraphPoint.swift in Sources */,
+				E1CA6BB61FFECF200002EF25 /* CircularProgress.swift in Sources */,
+				E1CA6BB51FFECF200002EF25 /* CGMutablePath+GraphPoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,7 +285,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1B424F31D3185320055915F /* GraphPointTests.swift in Sources */,
+				E1CA6BBD1FFECF350002EF25 /* GraphPointTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,6 +452,7 @@
 		E1B424FB1D3185320055915F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = GraphPointTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.richardpiazza.GraphPointTests;
@@ -451,6 +464,7 @@
 		E1B424FC1D3185320055915F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = GraphPointTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.richardpiazza.GraphPointTests;
