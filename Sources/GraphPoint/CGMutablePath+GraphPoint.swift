@@ -3,7 +3,7 @@
 import CoreGraphics
 
 public extension CGMutablePath {
-    public static func arcPath(inRect rect: CGRect, startingDegree: CGFloat, endingDegree: CGFloat, innerRadius: CGFloat, outerRadius: CGFloat) -> CGMutablePath {
+    static func arcPath(inRect rect: CGRect, startingDegree: CGFloat, endingDegree: CGFloat, innerRadius: CGFloat, outerRadius: CGFloat) -> CGMutablePath {
         let innerArc = Arc(startingDegree: startingDegree, endingDegree: endingDegree, radius: innerRadius)
         let outerArc = Arc(startingDegree: startingDegree, endingDegree: endingDegree, radius: outerRadius)
         

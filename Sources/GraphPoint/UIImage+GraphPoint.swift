@@ -3,7 +3,7 @@
 import UIKit
 
 public extension UIImage {
-    public static func filledImage(withPath path: CGMutablePath, color: UIColor, context: CGContext?) -> UIImage? {
+    static func filledImage(withPath path: CGMutablePath, color: UIColor, context: CGContext?) -> UIImage? {
         guard let context = context else {
             return nil
         }
@@ -20,7 +20,7 @@ public extension UIImage {
         return image
     }
     
-    public static func strokedImage(withPath path: CGMutablePath, color: UIColor, strokeWidth: CGFloat, context: CGContext?) -> UIImage? {
+    static func strokedImage(withPath path: CGMutablePath, color: UIColor, strokeWidth: CGFloat, context: CGContext?) -> UIImage? {
         guard let context = context else {
             return nil
         }

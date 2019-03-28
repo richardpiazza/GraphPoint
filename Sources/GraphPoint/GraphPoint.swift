@@ -19,7 +19,7 @@ public extension GraphPoint {
     /// Uses the mathematical 'Law of Sines' to determine a `GraphPoint` for the supplied degree and radius
     ///
     /// - note: Degree 0 (zero) is the positive X axis and increments clockwise.
-    public static func graphPoint(degree: CGFloat, radius: CGFloat) -> GraphPoint {
+    static func graphPoint(degree: CGFloat, radius: CGFloat) -> GraphPoint {
         var point = CGPoint.zero
         
         let angleRight = CGFloat(90)
@@ -75,7 +75,7 @@ public extension GraphPoint {
     /// supplied `GraphPoint` `sideA`.
     ///
     /// - note Degree 0 (zero) is the positive x axis and increments clockwise.
-    public static func graphPoint(degree: CGFloat, radius: CGFloat, boundedBy sideA: GraphPoint) -> GraphPoint {
+    static func graphPoint(degree: CGFloat, radius: CGFloat, boundedBy sideA: GraphPoint) -> GraphPoint {
         var point = CGPoint.zero
         
         if (degree >= 315) {
@@ -110,7 +110,7 @@ public extension GraphPoint {
     /// Uses the mathematical 'Law of Cotangents' to determine the degree for a `GraphPoint`
     ///
     /// - note: Degree 0 (zero) is the positive X axis and increments clockwise.
-    public static func degree(graphPoint: GraphPoint) -> CGFloat {
+    static func degree(graphPoint: GraphPoint) -> CGFloat {
         var degree = CGFloat(0)
         guard !graphPoint.equalTo(CGPoint.zero) else {
             return degree

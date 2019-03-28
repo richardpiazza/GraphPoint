@@ -12,7 +12,7 @@ public typealias GraphFrame = CGRect
 
 public extension GraphFrame {
     /// The offset to the `GraphOrigin`
-    public var graphOriginOffset: GraphOriginOffset {
+    var graphOriginOffset: GraphOriginOffset {
         if origin.x <= 0 {
             return GraphOriginOffset(x: abs(origin.x), y: origin.y)
         } else {
@@ -27,7 +27,7 @@ public extension GraphFrame {
     ///
     /// Given: CGRect(0, 0, 500, 500) & GraphFrame(47.7022, 250.0, 197.7045, 202.2977),
     /// The GraphPoint(47.7022, 47.7022) would be translated to CGPoint(0.0, 202.2977)
-    public func boundedPoint(graphPoint: GraphPoint) -> CGPoint {
+    func boundedPoint(graphPoint: GraphPoint) -> CGPoint {
         let x = abs(origin.x - graphPoint.x)
         let y = abs(origin.y - graphPoint.y)
         
@@ -35,7 +35,7 @@ public extension GraphFrame {
     }
     
     /// Determines that smallest `GraphFrame` that encompases all graph points.
-    public static func graphFrame(graphPoints: [GraphPoint]) -> GraphFrame {
+    static func graphFrame(graphPoints: [GraphPoint]) -> GraphFrame {
         var minXMaxY = CGPoint.zero
         var maxXMinY = CGPoint.zero
         
@@ -59,7 +59,7 @@ public extension GraphFrame {
     
     /// Determines the smallest `GraphFrame` that encompases all points, with
     /// expansion for crossing an axis.
-    public static func graphFrame(graphPoints: [GraphPoint], radius: CGFloat, startDegree: CGFloat, endDegree: CGFloat) -> GraphFrame {
+    static func graphFrame(graphPoints: [GraphPoint], radius: CGFloat, startDegree: CGFloat, endDegree: CGFloat) -> GraphFrame {
         var graphFrame = self.graphFrame(graphPoints: graphPoints)
         
         if (startDegree >= 270 && startDegree <= 360) && (endDegree >= 0 && endDegree <= 90) {
