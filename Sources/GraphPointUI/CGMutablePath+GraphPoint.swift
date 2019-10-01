@@ -1,5 +1,5 @@
-#if (os(macOS) || os(iOS) || os(tvOS) || os(watchOS))
-
+import GraphPoint
+#if canImport(CoreGraphics)
 import CoreGraphics
 
 public extension CGMutablePath {

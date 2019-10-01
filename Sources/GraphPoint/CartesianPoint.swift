@@ -1,5 +1,4 @@
-#if (os(macOS) || os(iOS) || os(tvOS) || os(watchOS))
-
+#if canImport(CoreGraphics)
 import CoreGraphics
 
 /// A point within a CGRect having coordinates as an offset of the `GraphOrigin`
@@ -8,9 +7,12 @@ import CoreGraphics
 ///
 /// In CGRect(0, 0, 100, 100), the CGPoint(75, 25) would be translated to
 /// GraphPoint(25, 25).
-public typealias GraphPoint = CGPoint
+public typealias CartesianPoint = CGPoint
 
-public extension GraphPoint {
+@available(*, deprecated, renamed: "CartesianPoint")
+public typealias GraphPoint = CartesianPoint
+
+public extension CartesianPoint {
     /// The minimum radius of a circle that would contain this `GraphPoint`
     var minimumRadius: CGFloat {
         return max(x, y)
@@ -21,6 +23,14 @@ public extension GraphPoint {
     /// - note: Degree 0 (zero) is the positive X axis and increments clockwise.
     static func graphPoint(degree: CGFloat, radius: CGFloat) -> GraphPoint {
         var point = CGPoint.zero
+        
+        guard degree >= 0.0 && degree <= 360.0 else {
+            return point
+        }
+        
+        guard radius > 0.0 else {
+            return point
+        }
         
         let angleRight = CGFloat(90)
         var angleRise = CGFloat(0)
@@ -78,6 +88,14 @@ public extension GraphPoint {
     static func graphPoint(degree: CGFloat, radius: CGFloat, boundedBy sideA: GraphPoint) -> GraphPoint {
         var point = CGPoint.zero
         
+        guard degree >= 0.0 && degree <= 360.0 else {
+            return point
+        }
+        
+        guard radius > 0.0 else {
+            return point
+        }
+        
         if (degree >= 315) {
             point.x = CGFloat(sqrtf(powf(Float(radius), 2) - powf(Float(sideA.y), 2)))
             point.y = sideA.y
@@ -112,7 +130,8 @@ public extension GraphPoint {
     /// - note: Degree 0 (zero) is the positive X axis and increments clockwise.
     static func degree(graphPoint: GraphPoint) -> CGFloat {
         var degree = CGFloat(0)
-        guard !graphPoint.equalTo(CGPoint.zero) else {
+        
+        guard graphPoint != .zero else {
             return degree
         }
         

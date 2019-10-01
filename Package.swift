@@ -4,14 +4,29 @@ import PackageDescription
 
 let package = Package(
     name: "GraphPoint",
-    products: [
-        .library(name: "GraphPoint", targets: ["GraphPoint"]),
-        ],
-    dependencies: [
-        ],
-    targets: [
-        .target(name: "GraphPoint", dependencies: [], path: "Sources/GraphPoint"),
-        .testTarget(name: "GraphPointTests", dependencies: ["GraphPoint"], path: "Tests/GraphPointTests"),
+    platforms: [
+        .macOS(.v10_13),
+        .iOS(.v11),
+        .tvOS(.v11),
+        .watchOS(.v4),
     ],
-    swiftLanguageVersions: [.v4_2, .v5]
+    products: [
+        .library(
+            name: "GraphPoint",
+            targets: ["GraphPoint"]),
+    ],
+    dependencies: [
+    ],
+    targets: [
+        .target(
+            name: "GraphPoint",
+            dependencies: []),
+        .target(
+            name: "GraphPointUI",
+            dependencies: []),
+        .testTarget(
+            name: "GraphPointTests",
+            dependencies: ["GraphPoint"]),
+    ],
+    swiftLanguageVersions: [.v5]
 )

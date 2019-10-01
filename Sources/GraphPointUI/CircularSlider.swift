@@ -1,5 +1,5 @@
+import GraphPoint
 #if (os(iOS) || os(tvOS))
-
 import UIKit
 
 /// An iOS Style circular slider

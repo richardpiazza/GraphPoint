@@ -1,5 +1,4 @@
-#if (os(macOS) || os(iOS) || os(tvOS) || os(watchOS))
-
+#if canImport(CoreGraphics)
 import CoreGraphics
 
 /// A frame within a `CGRect` that has an `Origin` relative to the `GraphOrigin`.
@@ -8,9 +7,12 @@ import CoreGraphics
 ///
 /// In CGRect(0, 0, 100, 100) with GraphOrigin(50, 50), a CGRect(10, 10, 10, 10)
 /// would have a GraphFrame(-40, 40, 10, 10)
-public typealias GraphFrame = CGRect
+public typealias CartesianFrame = CGRect
 
-public extension GraphFrame {
+@available(*, deprecated, renamed: "CartesianFrame")
+public typealias GraphFrame = CartesianFrame
+
+public extension CartesianFrame {
     /// The offset to the `GraphOrigin`
     var graphOriginOffset: GraphOriginOffset {
         if origin.x <= 0 {
