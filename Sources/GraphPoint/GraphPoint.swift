@@ -1,18 +1,18 @@
 #if canImport(CoreGraphics)
 import CoreGraphics
 
-/// A point within a CGRect having coordinates as an offset of the `GraphOrigin`
+/// A point within a CGRect having cartesian coordinates as an offset of
+/// the `GraphOrigin`
 ///
-/// ***For example:***
+/// For example:
 ///
-/// In CGRect(0, 0, 100, 100), the CGPoint(75, 25) would be translated to
-/// GraphPoint(25, 25).
-public typealias CartesianPoint = CGPoint
+/// * Given: **CGRect(0, 0, 100, 100)**
+/// *   the: **CGPoint(75, 25)**
+/// *   has: **GraphPoint(25, 25)**
+public typealias GraphPoint = CGPoint
+public typealias CartesianPoint = GraphPoint
 
-@available(*, deprecated, renamed: "CartesianPoint")
-public typealias GraphPoint = CartesianPoint
-
-public extension CartesianPoint {
+public extension GraphPoint {
     /// The minimum radius of a circle that would contain this `GraphPoint`
     var minimumRadius: CGFloat {
         return max(x, y)

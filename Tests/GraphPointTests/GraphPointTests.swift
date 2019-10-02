@@ -46,21 +46,21 @@ class GraphPointTests: XCTestCase {
     }
     
     func testPointFromViewPoint() {
-        var graphPoint = square.graphPoint(viewPoint: CGPoint(x: 20, y: 25))
-        XCTAssertTrue(graphPoint.x == CGFloat(-30))
-        XCTAssertTrue(graphPoint.y == CGFloat(25))
+        var graphPoint = square.graphPoint(for: CGPoint(x: 20, y: 25))
+        XCTAssertEqual(graphPoint.x, CGFloat(-30))
+        XCTAssertEqual(graphPoint.y, CGFloat(25))
         
-        graphPoint = rect.graphPoint(viewPoint: CGPoint(x: 20, y: 25))
-        XCTAssertTrue(graphPoint.x == CGFloat(-40))
-        XCTAssertTrue(graphPoint.y == CGFloat(15))
+        graphPoint = rect.graphPoint(for: CGPoint(x: 20, y: 25))
+        XCTAssertEqual(graphPoint.x, CGFloat(-40))
+        XCTAssertEqual(graphPoint.y, CGFloat(15))
     }
     
     func testPointFromGraphPoint() {
-        var point = square.point(graphPoint: GraphPoint(x: -30, y: 25))
+        var point = square.point(for: GraphPoint(x: -30, y: 25))
         XCTAssertTrue(point.x == CGFloat(20))
         XCTAssertTrue(point.y == CGFloat(25))
         
-        point = rect.point(graphPoint: GraphPoint(x: -30, y: 25))
+        point = rect.point(for: GraphPoint(x: -30, y: 25))
         XCTAssertTrue(point.x == CGFloat(30))
         XCTAssertTrue(point.y == CGFloat(15))
     }
@@ -81,24 +81,24 @@ class GraphPointTests: XCTestCase {
         let rect = CGRect(x: 0.0, y: 0.0, width: 500.0, height: 500.0)
         
         let gp1 = GraphPoint(x: 47.7022488441362, y: -47.7022488441362)
-        let t1 = rect.point(graphPoint: gp1)
+        let t1 = rect.point(for: gp1)
         
         XCTAssertTrue(t1.x == 297.70224884413619)
         XCTAssertTrue(t1.y == 297.70224884413619)
         
         let gp2 = GraphPoint(x: -47.7022488441362, y: -47.7022488441362)
-        let t2 = rect.point(graphPoint: gp2)
+        let t2 = rect.point(for: gp2)
         XCTAssertTrue((t2.x - 202.2977) < 0.0001)
         XCTAssertTrue(t2.y == 297.70224884413619)
         
         let gp3 = GraphPoint(x: -47.7022488441362, y: 47.7022488441362)
-        let t3 = rect.point(graphPoint: gp3)
+        let t3 = rect.point(for: gp3)
         
         XCTAssertTrue((t3.x - 202.2977) < 0.0001)
         XCTAssertTrue((t3.y - 202.2977) < 0.0001)
         
         let gp4 = GraphPoint(x: 47.7022488441362, y: 47.7022488441362)
-        let t4 = rect.point(graphPoint: gp4)
+        let t4 = rect.point(for: gp4)
         
         XCTAssertTrue(t4.x == 297.70224884413619)
         XCTAssertTrue((t4.y - 202.2977) < 0.0001)

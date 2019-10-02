@@ -1,18 +1,19 @@
 #if canImport(CoreGraphics)
 import CoreGraphics
 
-/// A frame within a `CGRect` that has an `Origin` relative to the `GraphOrigin`.
+/// A area within a `CGRect` that has an `Origin` relative to the `GraphOrigin`.
+/// The area will have an origin based on the cartesian coordinate system.
 ///
-/// ***For example:***
+/// For example:
 ///
-/// In CGRect(0, 0, 100, 100) with GraphOrigin(50, 50), a CGRect(10, 10, 10, 10)
-/// would have a GraphFrame(-40, 40, 10, 10)
-public typealias CartesianFrame = CGRect
+/// * Given: **CGRect(0, 0, 100, 100)**
+/// *  with: **GraphOrigin(50, 50)**
+/// *   the: **CGRect(10, 10, 10, 10)**
+/// *   has: **GraphFrame(-40, 40, 10, 10)**
+public typealias GraphFrame = CGRect
+public typealias CartesianFrame = GraphFrame
 
-@available(*, deprecated, renamed: "CartesianFrame")
-public typealias GraphFrame = CartesianFrame
-
-public extension CartesianFrame {
+public extension GraphFrame {
     /// The offset to the `GraphOrigin`
     var graphOriginOffset: GraphOriginOffset {
         if origin.x <= 0 {
