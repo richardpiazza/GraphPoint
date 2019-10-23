@@ -13,7 +13,7 @@ let package = Package(
     products: [
         .library(
             name: "GraphPoint",
-            targets: ["GraphPoint"]),
+            targets: ["GraphPoint", "GraphPointUI"]),
     ],
     dependencies: [
     ],
@@ -23,7 +23,7 @@ let package = Package(
             dependencies: []),
         .target(
             name: "GraphPointUI",
-            dependencies: []),
+            dependencies: ["GraphPoint"]),
         .testTarget(
             name: "GraphPointTests",
             dependencies: ["GraphPoint"]),
