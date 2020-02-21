@@ -3,23 +3,26 @@ import GraphPoint
 import UIKit
 
 /// An iOS Style circular progress indicator.
-/// Includes a `timerDate` variable which can be used to show progress over a
-/// timed period.
-@IBDesignable open class CircularProgress: UIView {
+///
+/// Includes a `timerDate` variable which can be used to show progress over a timed period.
+@IBDesignable
+open class CircularProgress: UIView {
     static fileprivate let startingDegree = CGFloat(270.0)
     static fileprivate let endingDegree = CGFloat(630.0)
     static fileprivate let degreesInCircle = Float(360.0)
     
     public typealias ExpiredCompletion = () -> Void
     
-    // MARK: - Value -
+    // MARK: Values
     
     /// The minimum value this control can have.
     open var minimumValue = Float(0.0)
     /// The maximum value this control can have.
     open var maximumValue = Float(1.0)
+    
     /// The current value of the control (i.e. progress percentage).
-    @IBInspectable open var value: Float = 0.0 {
+    @IBInspectable
+    open var value: Float = 0.0 {
         didSet {
             if value > maximumValue {
                 value = maximumValue
@@ -30,16 +33,19 @@ import UIKit
         }
     }
     
-    // MARK: - Timer -
+    // MARK: Timing
     
     /// Determines the fill direction
-    @IBInspectable open var clockwise: Bool = true {
+    @IBInspectable
+    open var clockwise: Bool = true {
         didSet {
             value = clockwise ? minimumValue : maximumValue
         }
     }
     /// The rate at which the progress is updated when using the `timerDate`.
-    @IBInspectable open var refreshInterval: Float = 0.0333
+    @IBInspectable
+    open var refreshInterval: Float = 0.0333
+    
     /// An interval of time, once specified, will be used to calculate the `value`.
     public var timeInterval: TimeInterval? {
         didSet {
@@ -56,21 +62,27 @@ import UIKit
             resume()
         }
     }
+    
     fileprivate var completedIntervals: TimeInterval = 0.0
     fileprivate var referenceDate: Date?
     fileprivate var expiredCompletion: ExpiredCompletion?
+    
     /// Reports the status of the automatic refresh.
     public var isActive: Bool {
         return referenceDate != nil
     }
     
-    // MARK: - Track -
+    // MARK: Track
     
     fileprivate var track = UIImageView(frame: CGRect.zero)
+    
     /// The width of the outlining track.
-    @IBInspectable open var trackWidth: Float = 1.0
+    @IBInspectable
+    open var trackWidth: Float = 1.0
+    
     /// The color of the outlining track.
-    @IBInspectable lazy open var trackColor: UIColor = {
+    @IBInspectable
+    open lazy var trackColor: UIColor = {
         if let color = UIApplication.shared.keyWindow?.tintColor {
             return color.withAlphaComponent(0.5)
         }
@@ -89,12 +101,17 @@ import UIKit
         return CGMutablePath.arcPath(inRect: bounds, startingDegree: type(of: self).startingDegree, endingDegree: type(of: self).endingDegree, innerRadius: trackInnerRadius, outerRadius: bounds.radius)
     }
     
-    // MARK: - Fill -
+    // MARK: Fill
+    
     fileprivate var fill = UIImageView(frame: CGRect.zero)
+    
     /// The width of the progress track.
-    @IBInspectable open var fillWidth: Float = 3.0
+    @IBInspectable
+    open var fillWidth: Float = 3.0
+    
     /// The color of the progress track.
-    @IBInspectable lazy open var fillColor: UIColor = {
+    @IBInspectable
+    open lazy var fillColor: UIColor = {
         if let color = UIApplication.shared.keyWindow?.tintColor {
             return color
         }
@@ -112,6 +129,8 @@ import UIKit
         let endingDegree = CGFloat(Float(type(of: self).startingDegree) + (Float(type(of: self).degreesInCircle) * (value / maximumValue)))
         return CGMutablePath.arcPath(inRect: bounds, startingDegree: type(of: self).startingDegree, endingDegree: endingDegree, innerRadius: fillInnerRadius, outerRadius: bounds.radius)
     }
+    
+    // MARK: -
     
     open override func layoutSubviews() {
         super.layoutSubviews()
