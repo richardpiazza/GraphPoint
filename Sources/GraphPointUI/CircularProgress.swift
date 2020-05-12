@@ -1,5 +1,5 @@
 import GraphPoint
-#if (os(iOS) || os(tvOS))
+#if canImport(UIKit)
 import UIKit
 
 /// An iOS Style circular progress indicator.
@@ -83,7 +83,7 @@ open class CircularProgress: UIView {
     /// The color of the outlining track.
     @IBInspectable
     open lazy var trackColor: UIColor = {
-        if let color = UIApplication.shared.keyWindow?.tintColor {
+        if let color = UIApplication.shared.windows.first?.tintColor {
             return color.withAlphaComponent(0.5)
         }
         if let color = UIView.appearance().tintColor {
@@ -112,7 +112,7 @@ open class CircularProgress: UIView {
     /// The color of the progress track.
     @IBInspectable
     open lazy var fillColor: UIColor = {
-        if let color = UIApplication.shared.keyWindow?.tintColor {
+        if let color = UIApplication.shared.windows.first?.tintColor {
             return color
         }
         if let color = UIView.appearance().tintColor {

@@ -1,5 +1,5 @@
 import GraphPoint
-#if (os(iOS) || os(tvOS))
+#if canImport(UIKit)
 import UIKit
 
 /// An iOS Style circular slider
@@ -31,7 +31,7 @@ import UIKit
     fileprivate var track = UIImageView(frame: CGRect.zero)
     @IBInspectable open var trackWidth: Float = 18.0
     @IBInspectable lazy open var trackColor: UIColor = {
-        if let color = UIApplication.shared.keyWindow?.tintColor {
+        if let color = UIApplication.shared.windows.first?.tintColor {
             return color.withAlphaComponent(0.5)
         }
         if let color = UIView.appearance().tintColor {
@@ -45,7 +45,7 @@ import UIKit
     
     fileprivate var fill = UIImageView(frame: CGRect.zero)
     @IBInspectable lazy open var fillColor: UIColor = {
-        if let color = UIApplication.shared.keyWindow?.tintColor {
+        if let color = UIApplication.shared.windows.first?.tintColor {
             return color
         }
         if let color = UIView.appearance().tintColor {
@@ -161,7 +161,7 @@ import UIKit
     
     open override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         let point = touch.location(in: self)
-        let degree = bounds.degree(viewPoint: point)
+        let degree = bounds.degree(for: point)
         value = self.value(forDegree: degree)
         
         return super.beginTracking(touch, with: event)
@@ -169,7 +169,7 @@ import UIKit
     
     open override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         let point = touch.location(in: self)
-        let degree = bounds.degree(viewPoint: point)
+        let degree = bounds.degree(for: point)
         value = self.value(forDegree: degree)
         
         if value >= (maximumValue - tickPercent) {

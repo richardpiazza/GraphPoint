@@ -3,8 +3,6 @@ import XCTest
 
 class GraphPointTests: XCTestCase {
     
-    #if (os(macOS) || os(iOS) || os(tvOS) || os(watchOS))
-    
     let rect = CGRect(x: 0, y: 0, width: 120, height: 80)
     let square = CGRect(x: 0, y: 0, width: 100, height: 100)
     
@@ -113,6 +111,4 @@ class GraphPointTests: XCTestCase {
         XCTAssertTrue(point.x == 0.0)
         XCTAssertTrue((point.y - 202.2977) < 0.0001)
     }
-    
-    #endif
 }

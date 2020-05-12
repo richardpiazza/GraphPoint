@@ -1,5 +1,5 @@
 import GraphPoint
-#if (os(iOS) || os(tvOS))
+#if canImport(UIKit)
 import UIKit
 
 public extension UIImage {
