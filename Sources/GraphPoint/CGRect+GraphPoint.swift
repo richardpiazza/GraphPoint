@@ -15,7 +15,7 @@ public extension CGRect {
     /// Translates an _internal_ coordinate `CGPoint` to the cartesian based `GraphPoint`.
     ///
     /// - parameter point: A point within the instance `CGRect`
-    /// - returns: Catesian coordinates for the supplied point.
+    /// - returns: Cartesian coordinates for the supplied point.
     func graphPoint(for point: CGPoint) -> GraphPoint {
         var graphPoint = CGPoint.zero
         
@@ -59,7 +59,7 @@ public extension CGRect {
     /// Calculates the circular angle for an _internal_ coordinate `CGPoint`.
     ///
     /// First translates the internal coordinate to the cartesian-based `GraphPoint`,
-    /// than returns the result from `GraphPoint.degree(for:)`.
+    /// then returns the result from `GraphPoint.degree(for:)`.
     ///
     /// - note: Degree 0 (zero) is the positive X axis and increments clockwise.
     ///

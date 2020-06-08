@@ -37,7 +37,7 @@ public extension GraphFrame {
         return CGPoint(x: x, y: y)
     }
     
-    /// Determines that smallest `GraphFrame` that encompases all graph points.
+    /// Determines that smallest `GraphFrame` that encompasses all graph points.
     static func graphFrame(graphPoints: [GraphPoint]) -> GraphFrame {
         var minXMaxY = CGPoint.zero
         var maxXMinY = CGPoint.zero
@@ -60,7 +60,7 @@ public extension GraphFrame {
         return GraphFrame(x: minXMaxY.x, y: minXMaxY.y, width: abs(maxXMinY.x - minXMaxY.x), height: abs(maxXMinY.y - minXMaxY.y))
     }
     
-    /// Determines the smallest `GraphFrame` that encompases all points, with
+    /// Determines the smallest `GraphFrame` that encompasses all points, with
     /// expansion for crossing an axis.
     static func graphFrame(graphPoints: [GraphPoint], radius: CGFloat, startDegree: CGFloat, endDegree: CGFloat) -> GraphFrame {
         var graphFrame = self.graphFrame(graphPoints: graphPoints)
