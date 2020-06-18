@@ -1,13 +1,13 @@
 <p align="center">
-    <img src="GraphPoint.png" width="1000" max-width="90%" alt="GraphPoint" />
+    <img src="Resources/GraphPoint.png" width="1000" max-width="90%" alt="GraphPoint" />
 </p>
 
 <p align="center">
-    <img src="https://img.shields.io/badge/Swift-5.1-orange.svg" />
+    <img src="https://github.com/richardpiazza/GraphPoint/workflows/Swift/badge.svg?branch=master" />
+    <img src="https://img.shields.io/badge/Swift-5.2-orange.svg" />
     <a href="https://swift.org/package-manager">
         <img src="https://img.shields.io/badge/swiftpm-compatible-brightgreen.svg?style=flat" alt="Swift Package Manager" />
     </a>
-     <img src="https://img.shields.io/badge/platform-macOS%20%7C%20iOS%20%7C%20tvOS-brightgreen.svg?style=flat" alt="macOS iOS tvOS" />
     <a href="https://twitter.com/richardpiazza">
         <img src="https://img.shields.io/badge/twitter-@richardpiazza-blue.svg?style=flat" alt="Twitter: @richardpiazza" />
     </a>
@@ -36,7 +36,6 @@ import GraphPoint
 ```
 
 ## Usage
-
 
 GraphPoint is a library of Swift extensions for using a [Cartesian Coordinate System](https://en.wikipedia.org/wiki/Cartesian_coordinate_system) with CGRect.
 The Cartesian Coordinate System defines the origin as the center point and
