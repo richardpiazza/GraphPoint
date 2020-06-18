@@ -1,6 +1,7 @@
 #if canImport(CoreGraphics)
 import CoreGraphics
 
+@available(*, deprecated)
 public extension CGFloat {
     /// Converts an angular degree to radians
     var radians: CGFloat {

@@ -11,7 +11,6 @@ import CoreGraphics
 /// *   the: **CGRect(10, 10, 10, 10)**
 /// *   has: **GraphFrame(-40, 40, 10, 10)**
 public typealias GraphFrame = CGRect
-public typealias CartesianFrame = GraphFrame
 
 public extension GraphFrame {
     /// The offset to the `GraphOrigin`

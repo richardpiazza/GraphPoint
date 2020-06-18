@@ -10,7 +10,6 @@ import CoreGraphics
 /// *   the: **CGPoint(75, 25)**
 /// *   has: **GraphPoint(25, 25)**
 public typealias GraphPoint = CGPoint
-public typealias CartesianPoint = GraphPoint
 
 public extension GraphPoint {
     /// The minimum radius of a circle that would contain this `GraphPoint`
