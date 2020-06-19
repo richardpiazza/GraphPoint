@@ -21,63 +21,12 @@ public extension GraphPoint {
     ///
     /// - note: Degree 0 (zero) is the positive X axis and increments clockwise.
     static func graphPoint(degree: CGFloat, radius: CGFloat) -> GraphPoint {
-        var point = CGPoint.zero
-        
-        guard degree >= 0.0 && degree <= 360.0 else {
-            return point
+        do {
+            let cartesianPoint = try CartesianPoint.point(for: Degree(degree), radius: Radius(radius)).cgPoint
+            return cartesianPoint
+        } catch {
+            return .zero
         }
-        
-        guard radius > 0.0 else {
-            return point
-        }
-        
-        let angleRight = CGFloat(90)
-        var angleRise = CGFloat(0)
-        var angleRun = CGFloat(0)
-        
-        if (degree > 315) {
-            angleRise = CGFloat(360) - degree
-            angleRun = CGFloat(180) - angleRight - angleRise
-            point.y = (radius / sin(angleRight.radians)) * sin(angleRise.radians)
-            point.x = (radius / sin(angleRight.radians)) * sin(angleRun.radians)
-        } else if (degree > 270) {
-            angleRun = degree - CGFloat(270)
-            angleRise = CGFloat(180) - angleRight - angleRun
-            point.y = (radius / sin(angleRight.radians)) * sin(angleRise.radians)
-            point.x = (radius / sin(angleRight.radians)) * sin(angleRun.radians)
-        } else if (degree > 225) {
-            angleRun = CGFloat(270) - degree
-            angleRise = CGFloat(180) - angleRight - angleRun
-            point.y = (radius / sin(angleRight.radians)) * sin(angleRise.radians)
-            point.x = -1.0 * (radius / sin(angleRight.radians)) * sin(angleRun.radians)
-        } else if (degree > 180) {
-            angleRise = degree - CGFloat(180)
-            angleRun = CGFloat(180) - angleRight - angleRise
-            point.y = (radius / sin(angleRight.radians)) * sin(angleRise.radians)
-            point.x = -1.0 * (radius / sin(angleRight.radians)) * sin(angleRun.radians)
-        } else if (degree > 135) {
-            angleRise = CGFloat(180) - degree
-            angleRun = CGFloat(180) - angleRight - angleRise
-            point.y = -1.0 * (radius / sin(angleRight.radians)) * sin(angleRise.radians)
-            point.x = -1.0 * (radius / sin(angleRight.radians)) * sin(angleRun.radians)
-        } else if (degree > 90) {
-            angleRun = degree - CGFloat(90)
-            angleRise = CGFloat(180) - angleRight - angleRun
-            point.y = -1.0 * (radius / sin(angleRight.radians)) * sin(angleRise.radians)
-            point.x = -1.0 * (radius / sin(angleRight.radians)) * sin(angleRun.radians)
-        } else if (degree > 45) {
-            angleRun = CGFloat(90) - degree
-            angleRise = CGFloat(180) - angleRight - angleRun
-            point.y = -1.0 * (radius / sin(angleRight.radians)) * sin(angleRise.radians)
-            point.x = (radius / sin(angleRight.radians)) * sin(angleRun.radians)
-        } else if (degree >= 0) {
-            angleRise = degree
-            angleRun = CGFloat(180) - angleRight - angleRise
-            point.y = -1.0 * (radius / sin(angleRight.radians)) * sin(angleRise.radians)
-            point.x = (radius / sin(angleRight.radians)) * sin(angleRun.radians)
-        }
-        
-        return point
     }
     
     /// Uses the Pythagorean Theorem to solve for the x or y intercept given the
@@ -128,43 +77,11 @@ public extension GraphPoint {
     ///
     /// - note: Degree 0 (zero) is the positive X axis and increments clockwise.
     static func degree(graphPoint: GraphPoint) -> CGFloat {
-        var degree = CGFloat(0)
-        
-        guard graphPoint != .zero else {
-            return degree
+        do {
+            return CGFloat(try CartesianPoint.degree(for: graphPoint.point))
+        } catch {
+            return 0.0
         }
-        
-        if graphPoint.x >= 0 && graphPoint.y >= 0 {
-            let midPoint = self.graphPoint(degree: CGFloat(315), radius: graphPoint.minimumRadius)
-            if graphPoint.x <= midPoint.x {
-                degree = CGFloat(270) + atan(graphPoint.x / graphPoint.y).degrees
-            } else {
-                degree = CGFloat(360) - atan(graphPoint.y / graphPoint.x).degrees
-            }
-        } else if graphPoint.x >= 0 && graphPoint.y <= 0 {
-            let midPoint = self.graphPoint(degree: CGFloat(45), radius: graphPoint.minimumRadius)
-            if graphPoint.x <= midPoint.x {
-                degree = atan(abs(graphPoint.y) / graphPoint.x).degrees
-            } else {
-                degree = CGFloat(90) - atan(graphPoint.x / abs(graphPoint.y)).degrees
-            }
-        } else if graphPoint.x <= 0 && graphPoint.y <= 0 {
-            let midPoint = self.graphPoint(degree: CGFloat(135), radius: graphPoint.minimumRadius)
-            if graphPoint.x <= midPoint.x {
-                degree = CGFloat(180) - atan(abs(graphPoint.y) / abs(graphPoint.x)).degrees
-            } else {
-                degree = CGFloat(90) + atan(abs(graphPoint.x) / abs(graphPoint.y)).degrees
-            }
-        } else if graphPoint.x <= 0 && graphPoint.y >= 0 {
-            let midPoint = self.graphPoint(degree: CGFloat(225), radius: graphPoint.minimumRadius)
-            if graphPoint.x <= midPoint.x {
-                degree = CGFloat(180) + atan(graphPoint.y / abs(graphPoint.x)).degrees
-            } else {
-                degree = CGFloat(270) - atan(abs(graphPoint.x) / graphPoint.y).degrees
-            }
-        }
-        
-        return degree
     }
 }
 

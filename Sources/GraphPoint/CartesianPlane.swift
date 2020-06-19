@@ -24,6 +24,15 @@ public extension CartesianPlane {
 }
 
 public extension CartesianPlane {
+    enum Quadrant: Int {
+        case I = 1
+        case II = 2
+        case III = 3
+        case IV = 4
+    }
+}
+
+public extension CartesianPlane {
     /// The `Point` that represents the {0, 0} origin of the plane.
     var cartesianOrigin: Point {
         return center

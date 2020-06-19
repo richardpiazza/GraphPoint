@@ -77,7 +77,7 @@ public extension CGRect {
     ///
     /// - parameter graphFrame: Cartesian coordinated frame within this instance
     /// - parameter offset: The offset used for the provided `GraphFrame`. Typically this is (0, 0).
-    func frame(for graphFrame: GraphFrame, offset: GraphOriginOffset = GraphOriginOffset(x: 0, y: 0)) -> CGRect {
+    func frame(for graphFrame: GraphFrame, offset: GraphPoint = GraphPoint(x: 0, y: 0)) -> CGRect {
         var graphCenter = self.graphOrigin
         graphCenter.x = graphCenter.x + offset.x
         graphCenter.y = graphCenter.y + offset.y

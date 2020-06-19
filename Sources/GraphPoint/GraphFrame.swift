@@ -14,11 +14,11 @@ public typealias GraphFrame = CGRect
 
 public extension GraphFrame {
     /// The offset to the `GraphOrigin`
-    var graphOriginOffset: GraphOriginOffset {
+    var graphOriginOffset: GraphPoint {
         if origin.x <= 0 {
-            return GraphOriginOffset(x: abs(origin.x), y: origin.y)
+            return GraphPoint(x: abs(origin.x), y: origin.y)
         } else {
-            return GraphOriginOffset(x: -(origin.x), y: origin.y)
+            return GraphPoint(x: -(origin.x), y: origin.y)
         }
     }
     

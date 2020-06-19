@@ -10,6 +10,7 @@ public typealias GraphOrigin = CGPoint
 ///
 /// * In **CGRect(0, 0, 100, 100)**, using **GraphFrame(60, -50, 20, 20)**,
 /// the GraphOriginOffset is (10, 0)
+@available(*, deprecated, renamed: "GraphPoint")
 public typealias GraphOriginOffset = CGPoint
 
 #endif
