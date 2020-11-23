@@ -3,11 +3,13 @@ import CoreGraphics
 
 public extension CGRect {
     /// The radius of the largest circle that fits within the bounds of the `CGRect`
+    @available(*, deprecated, renamed: "CartesianPlane.minimumAxis")
     var radius: CGFloat {
         return min(midX, midY)
     }
     
     /// Origin of the largest circle that fits within the bounds of the `CGRect`
+    @available(*, deprecated, renamed: "CartesianPlane.cartesianOrigin")
     var graphOrigin: GraphOrigin {
         return CGPoint(x: midX, y: midY)
     }
@@ -16,6 +18,7 @@ public extension CGRect {
     ///
     /// - parameter point: A point within the instance `CGRect`
     /// - returns: Cartesian coordinates for the supplied point.
+    @available(*, deprecated, renamed: "CartesianPlane.cartesianPoint(for:)")
     func graphPoint(for point: CGPoint) -> GraphPoint {
         var graphPoint = CGPoint.zero
         

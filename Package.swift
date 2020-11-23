@@ -1,4 +1,4 @@
-// swift-tools-version:5.2
+// swift-tools-version:5.0
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -17,7 +17,7 @@ let package = Package(
             targets: ["GraphPoint", "GraphPointUI"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/richardpiazza/Swift2D", .upToNextMinor(from: "0.2.0")),
+        .package(url: "https://github.com/richardpiazza/Swift2D", .upToNextMinor(from: "1.0.0")),
     ],
     targets: [
         .target(

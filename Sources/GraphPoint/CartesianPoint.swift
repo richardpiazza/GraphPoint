@@ -3,7 +3,10 @@ import Swift2D
 
 /// A point within a `CartesianPlane`
 ///
-/// The x & y coordinates of a `CartesianPoint` represent the offset from the planes 'origin' {0, 0}. For example:
+/// The x & y coordinates of a `CartesianPoint` represent the offset from the planes 'origin' {0, 0}.
+///
+/// ## Example
+///
 /// ```swift
 /// let plane = CartesianPlane(size: Size(width: 100, height: 100))
 /// // plane.cartesianOrigin == Point(x: 50, y: 50)
@@ -22,7 +25,7 @@ public extension CartesianPoint {
         return max(abs(x), abs(y))
     }
     
-    var quadrant: CartesianPlane.Quadrant {
+    var quadrant: Quadrant {
         if x >= 0.0 {
             if y >= 0.0 {
                 return .I

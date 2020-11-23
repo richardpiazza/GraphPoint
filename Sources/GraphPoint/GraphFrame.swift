@@ -10,6 +10,7 @@ import CoreGraphics
 /// *  with: **GraphOrigin(50, 50)**
 /// *   the: **CGRect(10, 10, 10, 10)**
 /// *   has: **GraphFrame(-40, 40, 10, 10)**
+@available(*, deprecated, renamed: "CartesianFrame")
 public typealias GraphFrame = CGRect
 
 public extension GraphFrame {
@@ -37,6 +38,7 @@ public extension GraphFrame {
     }
     
     /// Determines that smallest `GraphFrame` that encompasses all graph points.
+    @available(*, deprecated, renamed: "CartesianFrame.make(for:)")
     static func graphFrame(graphPoints: [GraphPoint]) -> GraphFrame {
         var minXMaxY = CGPoint.zero
         var maxXMinY = CGPoint.zero
@@ -61,6 +63,7 @@ public extension GraphFrame {
     
     /// Determines the smallest `GraphFrame` that encompasses all points, with
     /// expansion for crossing an axis.
+    @available(*, deprecated, renamed: "CartesianFrame.make(for:radius:startDegree:endDegree:clockwise:)")
     static func graphFrame(graphPoints: [GraphPoint], radius: CGFloat, startDegree: CGFloat, endDegree: CGFloat) -> GraphFrame {
         var graphFrame = self.graphFrame(graphPoints: graphPoints)
         
