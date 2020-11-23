@@ -25,15 +25,35 @@ public extension CartesianPoint {
         return max(abs(x), abs(y))
     }
     
+    /// The `Quadrant` that contains the point.
+    ///
+    /// Special conditions are used when a point rests on an axis:
+    /// * {0, 0}: .I
+    /// * {>=0, 0}: .I
+    /// * {0, >=0}: .II
+    /// * {<0, 0}: .III
+    /// * {0, <0}: .IV
     var quadrant: Quadrant {
-        if x >= 0.0 {
-            if y >= 0.0 {
+        if x == 0.0 {
+            if y == 0.0 {
+                return .I
+            } else if y >= 0.0 {
+                return .II
+            } else {
+                return .IV
+            }
+        } else if x > 0.0 {
+            if y == 0.0 {
+                return .I
+            } else if y > 0.0 {
                 return .I
             } else {
                 return .IV
             }
         } else {
-            if y >= 0.0 {
+            if y == 0.0 {
+                return .III
+            } else if y > 0.0 {
                 return .II
             } else {
                 return .III
@@ -47,10 +67,10 @@ public extension CartesianPoint {
     ///
     /// Uses the mathematical **Law of Sines**.
     ///
-    /// - parameter degree: The angular degree (0-360), clockwise from the x-axis.
     /// - parameter radius: The straight line distance from the _origin_.
+    /// - parameter degree: The angular degree (0-360), clockwise from the x-axis.
     /// - returns:A `CartesianPoint` with offsets from the _origin_.
-    static func make(for degree: Degree, radius: Radius, clockwise: Bool = true) throws -> CartesianPoint {
+    static func make(for radius: Radius, degree: Degree, clockwise: Bool = true) throws -> CartesianPoint {
         guard degree >= 0.0, degree <= 360.0 else {
             throw GraphPointError.invalidDegree(degree)
         }
@@ -125,7 +145,11 @@ public extension CartesianPoint {
     /// Uses the **Pythagorean Theorem** to solve for the intercept:
     /// * **c**: calculated based on `degree` and `radius`.
     /// * **a**: supplied via the `point` (x/y based on closest axis)
-    static func make(for degree: Degree, radius: Radius, limitedBy limiter: CartesianPoint, clockwise: Bool = true) throws -> CartesianPoint {
+    ///
+    /// - parameter radius: The straight line distance from the _origin_.
+    /// - parameter degree: The angular degree (0-360), clockwise from the x-axis.
+    /// - parameter modifier: The point used to clip or expand the result. The nearest axis value is used.
+    static func make(for radius: Radius, degree: Degree, modifier: CartesianPoint, clockwise: Bool = true) throws -> CartesianPoint {
         guard degree >= 0.0, degree <= 360.0 else {
             throw GraphPointError.invalidDegree(degree)
         }
@@ -143,29 +167,29 @@ public extension CartesianPoint {
         switch clockwise {
         case true:
             if (degree >= 315) {
-                point.x = sqrtf(powf(radius, 2) - powf(limiter.y, 2))
-                point.y = limiter.y
+                point.x = sqrtf(powf(radius, 2) - powf(modifier.y, 2))
+                point.y = modifier.y
             } else if (degree >= 270) {
-                point.x = limiter.x
-                point.y = sqrtf(powf(radius, 2) - powf(limiter.x, 2))
+                point.x = modifier.x
+                point.y = sqrtf(powf(radius, 2) - powf(modifier.x, 2))
             } else if (degree >= 225) {
-                point.x = limiter.x
-                point.y = sqrtf(powf(radius, 2) - powf(limiter.x, 2))
+                point.x = modifier.x
+                point.y = sqrtf(powf(radius, 2) - powf(modifier.x, 2))
             } else if (degree >= 180) {
-                point.x = -(sqrtf(powf(radius, 2) - powf(limiter.y, 2)))
-                point.y = limiter.y
+                point.x = -(sqrtf(powf(radius, 2) - powf(modifier.y, 2)))
+                point.y = modifier.y
             } else if (degree >= 135) {
-                point.x = -(sqrtf(powf(radius, 2) - powf(limiter.y, 2)))
-                point.y = limiter.y
+                point.x = -(sqrtf(powf(radius, 2) - powf(modifier.y, 2)))
+                point.y = modifier.y
             } else if (degree >= 90) {
-                point.x = limiter.x
-                point.y = -(sqrtf(powf(radius, 2) - powf(limiter.x, 2)))
+                point.x = modifier.x
+                point.y = -(sqrtf(powf(radius, 2) - powf(modifier.x, 2)))
             } else if (degree >= 45) {
-                point.x = limiter.x
-                point.y = -(sqrtf(powf(radius, 2) - powf(limiter.x, 2)))
+                point.x = modifier.x
+                point.y = -(sqrtf(powf(radius, 2) - powf(modifier.x, 2)))
             } else if (degree >= 0) {
-                point.x = sqrtf(powf(radius, 2) - powf(limiter.y, 2))
-                point.y = limiter.y
+                point.x = sqrtf(powf(radius, 2) - powf(modifier.y, 2))
+                point.y = modifier.y
             }
         case false:
             //TODO: Determine if calculations should be modified.

@@ -26,7 +26,7 @@ public extension GraphPoint {
     @available(*, deprecated, renamed: "CartesianPoint.make(for:radius:clockwise:)")
     static func graphPoint(degree: CGFloat, radius: CGFloat) -> GraphPoint {
         do {
-            return try CartesianPoint.make(for: Degree(degree), radius: Radius(radius)).cgPoint
+            return try CartesianPoint.make(for: Radius(radius), degree: Degree(degree)).cgPoint
         } catch {
             return .zero
         }
@@ -36,11 +36,11 @@ public extension GraphPoint {
     /// supplied `GraphPoint` `sideA`.
     ///
     /// - note Degree 0 (zero) is the positive x axis and increments clockwise.
-    @available(*, deprecated, renamed: "CartesianPoint.make(for:radius:limitedBy:clockwise:)")
+    @available(*, deprecated, renamed: "CartesianPoint.make(for:degree:modifiedBy:clockwise:)")
     static func graphPoint(degree: CGFloat, radius: CGFloat, boundedBy sideA: GraphPoint) -> GraphPoint {
-        let limit = CartesianPoint(x: Float(sideA.x), y: Float(sideA.y))
+        let modifier = CartesianPoint(x: Float(sideA.x), y: Float(sideA.y))
         do {
-            let point = try CartesianPoint.make(for: Degree(degree), radius: Radius(radius), limitedBy: limit)
+            let point = try CartesianPoint.make(for: Radius(radius), degree: Degree(degree), modifier: modifier)
             return GraphPoint(x: CGFloat(point.x), y: CGFloat(point.y))
         } catch {
             return .zero

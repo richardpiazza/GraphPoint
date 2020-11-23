@@ -16,23 +16,6 @@ class GraphPointTests: XCTestCase {
         super.tearDown()
     }
     
-    
-    func testToRadians() {
-        let degree1 = CGFloat(36)
-        XCTAssertTrue(degree1.radians == CGFloat(0.62831853071795862))
-        
-        let degree2 = CGFloat(174.5)
-        XCTAssertTrue(degree2.radians == CGFloat(3.0455995447301052))
-    }
-    
-    func testToDegrees() {
-        let radians1 = CGFloat(0.62831853071795862)
-        XCTAssertTrue(radians1.degrees == CGFloat(36))
-        
-        let radians2 = CGFloat(3.0455995447301052)
-        XCTAssertTrue(radians2.degrees == CGFloat(174.5))
-    }
-    
     func testRadius() {
         XCTAssertTrue(rect.radius == CGFloat(40))
     }
