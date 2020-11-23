@@ -43,12 +43,6 @@ public extension CartesianPoint {
 }
 
 public extension CartesianPoint {
-    enum Error: Swift.Error {
-        case invalidDegree
-        case invalidRadius
-        case invalidPoint
-    }
-    
     /// Calculates the `CartesianPoint` for a given degree and radius from the _origin_.
     ///
     /// Uses the mathematical **Law of Sines**.
@@ -56,13 +50,13 @@ public extension CartesianPoint {
     /// - parameter degree: The angular degree (0-360), clockwise from the x-axis.
     /// - parameter radius: The straight line distance from the _origin_.
     /// - returns:A `CartesianPoint` with offsets from the _origin_.
-    static func point(for degree: Degree, radius: Radius) throws -> CartesianPoint {
+    static func make(for degree: Degree, radius: Radius, clockwise: Bool = true) throws -> CartesianPoint {
         guard degree >= 0.0, degree <= 360.0 else {
-            throw Error.invalidDegree
+            throw GraphPointError.invalidDegree(degree)
         }
         
         guard radius >= 0.0 else {
-            throw Error.invalidRadius
+            throw GraphPointError.invalidRadius(radius)
         }
         
         guard radius > 0.0 else {
@@ -75,95 +69,109 @@ public extension CartesianPoint {
         var run: Float = 0.0
         var point: CartesianPoint = .zero
         
-        if degree > 315 {
-            rise = 360.0 - degree
-            run = 180.0 - rightAngle - rise
-            point.x = (radius / sinRight) * sin(run.radians)
-            point.y = (radius / sinRight) * sin(rise.radians)
-        } else if degree > 270 {
-            run = degree - 270.0
-            rise = 180.0 - rightAngle - run
-            point.x = (radius / sinRight) * sin(run.radians)
-            point.y = (radius / sinRight) * sin(rise.radians)
-        } else if degree > 225 {
-            run = 270.0 - degree
-            rise = 180.0 - rightAngle - run
-            point.x = -1.0 * (radius / sinRight) * sin(run.radians)
-            point.y = (radius / sinRight) * sin(rise.radians)
-        } else if degree > 180 {
-            rise = degree - 180.0
-            run = 180.0 - rightAngle - rise
-            point.x = -1.0 * (radius / sinRight) * sin(run.radians)
-            point.y = (radius / sinRight) * sin(rise.radians)
-        } else if degree > 135 {
-            rise = 180.0 - degree
-            run = 180.0 - rightAngle - rise
-            point.x = -1.0 * (radius / sinRight) * sin(run.radians)
-            point.y = -1.0 * (radius / sinRight) * sin(rise.radians)
-        } else if degree > 90 {
-            run = degree - 90.0
-            rise = 180.0 - rightAngle - run
-            point.x = -1.0 * (radius / sinRight) * sin(run.radians)
-            point.y = -1.0 * (radius / sinRight) * sin(rise.radians)
-        } else if degree > 45 {
-            run = 90.0 - degree
-            rise = 180.0 - rightAngle - run
-            point.x = (radius / sinRight) * sin(run.radians)
-            point.y = -1.0 * (radius / sinRight) * sin(rise.radians)
-        } else if degree >= 0 {
-            rise = degree
-            run = 180.0 - rightAngle - rise
-            point.x = (radius / sinRight) * sin(run.radians)
-            point.y = -1.0 * (radius / sinRight) * sin(rise.radians)
+        switch clockwise {
+        case true:
+            if degree > 315 {
+                rise = 360.0 - degree
+                run = 180.0 - rightAngle - rise
+                point.x = (radius / sinRight) * sin(run.radians)
+                point.y = (radius / sinRight) * sin(rise.radians)
+            } else if degree > 270 {
+                run = degree - 270.0
+                rise = 180.0 - rightAngle - run
+                point.x = (radius / sinRight) * sin(run.radians)
+                point.y = (radius / sinRight) * sin(rise.radians)
+            } else if degree > 225 {
+                run = 270.0 - degree
+                rise = 180.0 - rightAngle - run
+                point.x = -1.0 * (radius / sinRight) * sin(run.radians)
+                point.y = (radius / sinRight) * sin(rise.radians)
+            } else if degree > 180 {
+                rise = degree - 180.0
+                run = 180.0 - rightAngle - rise
+                point.x = -1.0 * (radius / sinRight) * sin(run.radians)
+                point.y = (radius / sinRight) * sin(rise.radians)
+            } else if degree > 135 {
+                rise = 180.0 - degree
+                run = 180.0 - rightAngle - rise
+                point.x = -1.0 * (radius / sinRight) * sin(run.radians)
+                point.y = -1.0 * (radius / sinRight) * sin(rise.radians)
+            } else if degree > 90 {
+                run = degree - 90.0
+                rise = 180.0 - rightAngle - run
+                point.x = -1.0 * (radius / sinRight) * sin(run.radians)
+                point.y = -1.0 * (radius / sinRight) * sin(rise.radians)
+            } else if degree > 45 {
+                run = 90.0 - degree
+                rise = 180.0 - rightAngle - run
+                point.x = (radius / sinRight) * sin(run.radians)
+                point.y = -1.0 * (radius / sinRight) * sin(rise.radians)
+            } else if degree >= 0 {
+                rise = degree
+                run = 180.0 - rightAngle - rise
+                point.x = (radius / sinRight) * sin(run.radians)
+                point.y = -1.0 * (radius / sinRight) * sin(rise.radians)
+            }
+        case false:
+            // TODO: Handled anti-clockwise
+            break
         }
         
         return point
     }
     
-    /// Calculates the angular degree for a given point.
+    /// Calculates the `CartesianPoint` for a given degree and radius from the _origin_ limited by another point.
     ///
-    /// Uses the mathematical **Law of Cotangents**.
-    ///
-    /// - parameter point: A `CartesianPoint` with offsets from the _origin_.
-    /// - returns:The angular degree (0-360), clockwise from the x-axis.
-    static func degree(for point: CartesianPoint) throws -> Degree {
-        guard point != .nan else {
-            throw Error.invalidPoint
+    /// Uses the **Pythagorean Theorem** to solve for the intercept:
+    /// * **c**: calculated based on `degree` and `radius`.
+    /// * **a**: supplied via the `point` (x/y based on closest axis)
+    static func make(for degree: Degree, radius: Radius, limitedBy limiter: CartesianPoint, clockwise: Bool = true) throws -> CartesianPoint {
+        guard degree >= 0.0, degree <= 360.0 else {
+            throw GraphPointError.invalidDegree(degree)
         }
         
-        guard point != .zero else {
-            throw Error.invalidPoint
+        guard radius >= 0.0 else {
+            throw GraphPointError.invalidRadius(radius)
         }
         
-        switch point.quadrant {
-        case .I:
-            let midPoint = try Self.point(for: 315.0, radius: point.minimumAxis)
-            if point.x <= midPoint.x {
-                return 270.0 + atan(point.x / point.y).degrees
-            } else {
-                return 360.0 - atan(point.y / point.x).degrees
-            }
-        case .II:
-            let midPoint = try Self.point(for: 225.0, radius: point.minimumAxis)
-            if point.x <= midPoint.x {
-                return 180.0 + atan(point.y / abs(point.x)).degrees
-            } else {
-                return 270.0 - atan(abs(point.x) / point.y).degrees
-            }
-        case .III:
-            let midPoint = try Self.point(for: 135.0, radius: point.minimumAxis)
-            if point.x <= midPoint.x {
-                return 180.0 - atan(abs(point.y) / abs(point.x)).degrees
-            } else {
-                return 90.0 + atan(abs(point.x) / abs(point.y)).degrees
-            }
-        case .IV:
-            let midPoint = try Self.point(for: 45.0, radius: point.minimumAxis)
-            if point.x <= midPoint.x {
-                return atan(abs(point.y) / point.x).degrees
-            } else {
-                return 90.0 - atan(point.x / abs(point.y)).degrees
-            }
+        guard radius > 0.0 else {
+            return .zero
         }
+        
+        var point = CartesianPoint()
+        
+        switch clockwise {
+        case true:
+            if (degree >= 315) {
+                point.x = sqrtf(powf(radius, 2) - powf(limiter.y, 2))
+                point.y = limiter.y
+            } else if (degree >= 270) {
+                point.x = limiter.x
+                point.y = sqrtf(powf(radius, 2) - powf(limiter.x, 2))
+            } else if (degree >= 225) {
+                point.x = limiter.x
+                point.y = sqrtf(powf(radius, 2) - powf(limiter.x, 2))
+            } else if (degree >= 180) {
+                point.x = -(sqrtf(powf(radius, 2) - powf(limiter.y, 2)))
+                point.y = limiter.y
+            } else if (degree >= 135) {
+                point.x = -(sqrtf(powf(radius, 2) - powf(limiter.y, 2)))
+                point.y = limiter.y
+            } else if (degree >= 90) {
+                point.x = limiter.x
+                point.y = -(sqrtf(powf(radius, 2) - powf(limiter.x, 2)))
+            } else if (degree >= 45) {
+                point.x = limiter.x
+                point.y = -(sqrtf(powf(radius, 2) - powf(limiter.x, 2)))
+            } else if (degree >= 0) {
+                point.x = sqrtf(powf(radius, 2) - powf(limiter.y, 2))
+                point.y = limiter.y
+            }
+        case false:
+            //TODO: Determine if calculations should be modified.
+            break
+        }
+        
+        return point
     }
 }

@@ -9,10 +9,13 @@ import CoreGraphics
 /// * Given: **CGRect(0, 0, 100, 100)**
 /// *   the: **CGPoint(75, 25)**
 /// *   has: **GraphPoint(25, 25)**
+@available(*, deprecated, renamed: "CartesianPoint")
 public typealias GraphPoint = CGPoint
 
+@available(*, deprecated, renamed: "CartesianPoint")
 public extension GraphPoint {
     /// The minimum radius of a circle that would contain this `GraphPoint`
+    @available(*, deprecated, renamed: "CartesianPoint.minimumAxis")
     var minimumRadius: CGFloat {
         return max(x, y)
     }
@@ -20,10 +23,10 @@ public extension GraphPoint {
     /// Uses the mathematical 'Law of Sines' to determine a `GraphPoint` for the supplied degree and radius
     ///
     /// - note: Degree 0 (zero) is the positive X axis and increments clockwise.
+    @available(*, deprecated, renamed: "CartesianPoint.make(for:radius:clockwise:)")
     static func graphPoint(degree: CGFloat, radius: CGFloat) -> GraphPoint {
         do {
-            let cartesianPoint = try CartesianPoint.point(for: Degree(degree), radius: Radius(radius)).cgPoint
-            return cartesianPoint
+            return try CartesianPoint.make(for: Degree(degree), radius: Radius(radius)).cgPoint
         } catch {
             return .zero
         }
@@ -33,54 +36,26 @@ public extension GraphPoint {
     /// supplied `GraphPoint` `sideA`.
     ///
     /// - note Degree 0 (zero) is the positive x axis and increments clockwise.
+    @available(*, deprecated, renamed: "CartesianPoint.make(for:radius:limitedBy:clockwise:)")
     static func graphPoint(degree: CGFloat, radius: CGFloat, boundedBy sideA: GraphPoint) -> GraphPoint {
-        var point = CGPoint.zero
-        
-        guard degree >= 0.0 && degree <= 360.0 else {
-            return point
+        let limit = CartesianPoint(x: Float(sideA.x), y: Float(sideA.y))
+        do {
+            let point = try CartesianPoint.make(for: Degree(degree), radius: Radius(radius), limitedBy: limit)
+            return GraphPoint(x: CGFloat(point.x), y: CGFloat(point.y))
+        } catch {
+            return .zero
         }
-        
-        guard radius > 0.0 else {
-            return point
-        }
-        
-        if (degree >= 315) {
-            point.x = CGFloat(sqrtf(powf(Float(radius), 2) - powf(Float(sideA.y), 2)))
-            point.y = sideA.y
-        } else if (degree >= 270) {
-            point.x = sideA.x
-            point.y = CGFloat(sqrtf(powf(Float(radius), 2) - powf(Float(sideA.x), 2)))
-        } else if (degree >= 225) {
-            point.x = sideA.x
-            point.y = CGFloat(sqrtf(powf(Float(radius), 2) - powf(Float(sideA.x), 2)))
-        } else if (degree >= 180) {
-            point.x = -CGFloat(sqrtf(powf(Float(radius), 2) - powf(Float(sideA.y), 2)))
-            point.y = sideA.y
-        } else if (degree >= 135) {
-            point.x = -CGFloat(sqrtf(powf(Float(radius), 2) - powf(Float(sideA.y), 2)))
-            point.y = sideA.y
-        } else if (degree >= 90) {
-            point.x = sideA.x
-            point.y = -CGFloat(sqrtf(powf(Float(radius), 2) - powf(Float(sideA.x), 2)))
-        } else if (degree >= 45) {
-            point.x = sideA.x
-            point.y = -CGFloat(sqrtf(powf(Float(radius), 2) - powf(Float(sideA.x), 2)))
-        } else if (degree >= 0) {
-            point.x = CGFloat(sqrtf(powf(Float(radius), 2) - powf(Float(sideA.y), 2)))
-            point.y = sideA.y
-        }
-        
-        return point
     }
     
     /// Uses the mathematical 'Law of Cotangents' to determine the degree for a `GraphPoint`
     ///
     /// - note: Degree 0 (zero) is the positive X axis and increments clockwise.
+    @available(*, deprecated, renamed: "Degree.make(for:)")
     static func degree(graphPoint: GraphPoint) -> CGFloat {
         do {
-            return CGFloat(try CartesianPoint.degree(for: graphPoint.point))
+            return CGFloat(try Degree.make(for: graphPoint.point))
         } catch {
-            return 0.0
+            return .zero
         }
     }
 }
