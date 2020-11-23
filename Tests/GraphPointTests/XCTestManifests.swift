@@ -4,7 +4,6 @@ import XCTest
 public func allTests() -> [XCTestCaseEntry] {
     return [
         testCase(CartesianFrameTests.allTests),
-        testCase(CartesianOriginTests.allTests),
         testCase(CartesianPlaneTests.allTests),
         testCase(CartesianPointTests.allTests),
         testCase(DegreeTests.allTests),

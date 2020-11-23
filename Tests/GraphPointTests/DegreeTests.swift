@@ -5,6 +5,7 @@ class DegreeTests: XCTestCase {
     
     static var allTests = [
         ("testDegreeToRadian", testDegreeToRadian),
+        ("testMakeForPointClockwise", testMakeForPointClockwise),
     ]
     
     func testDegreeToRadian() {
@@ -13,5 +14,9 @@ class DegreeTests: XCTestCase {
         
         radian = Radian(3.0455995447301052)
         XCTAssertEqual(radian.degrees, Degree(174.5), accuracy: 0.01)
+    }
+    
+    func testMakeForPointClockwise() {
+        XCTFail("Not Implemented")
     }
 }

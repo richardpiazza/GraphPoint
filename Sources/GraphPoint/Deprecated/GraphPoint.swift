@@ -50,7 +50,7 @@ public extension GraphPoint {
     /// Uses the mathematical 'Law of Cotangents' to determine the degree for a `GraphPoint`
     ///
     /// - note: Degree 0 (zero) is the positive X axis and increments clockwise.
-    @available(*, deprecated, renamed: "Degree.make(for:)")
+    @available(*, deprecated, renamed: "Degree.make(for:clockwise:)")
     static func degree(graphPoint: GraphPoint) -> CGFloat {
         do {
             return CGFloat(try Degree.make(for: graphPoint.point))

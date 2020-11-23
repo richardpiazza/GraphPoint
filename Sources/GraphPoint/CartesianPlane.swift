@@ -28,8 +28,13 @@ public extension CartesianPlane {
 }
 
 public extension CartesianPlane {
-    /// The point that represents the {0, 0} origin of the plane.
-    var cartesianOrigin: CartesianOrigin {
+    /// The point where the axes of the `CartesianPlane` intersect.
+    ///
+    /// The origin divides each of these axes into two halves, a positive and a negative semi-axis. Points can then be
+    /// located with reference to the origin by giving their numerical coordinates—that is, the positions of their
+    /// projections along each axis, either in the positive or negative direction. The coordinates of the origin are always
+    /// all zero. For example: {0,0}.
+    var cartesianOrigin: Point {
         return center
     }
     
@@ -76,5 +81,30 @@ public extension CartesianPlane {
         }
         
         return cartesianPoint
+    }
+    
+    /// Converts a `CartesianPoint` to a non-cartesian `Point`.
+    func point(for cartesianPoint: CartesianPoint) -> Point {
+        var point: Point = .zero
+        
+        if cartesianPoint.x >= 0.0 {
+            point.x = cartesianOrigin.x + cartesianPoint.x
+        } else {
+            point.x = cartesianOrigin.x - abs(cartesianPoint.x)
+        }
+        
+        if cartesianPoint.y <= 0.0 {
+            point.y = cartesianOrigin.y + abs(cartesianPoint.y)
+        } else {
+            point.y = cartesianOrigin.y - cartesianPoint.y
+        }
+        
+        return point
+    }
+    
+    /// Converts a `CartesianFrame` to a non-cartesian `Rect`.
+    func rect(for cartesianFrame: CartesianFrame) -> Rect {
+        let origin = cartesianOrigin
+        return Rect(origin: Point(x: origin.x + cartesianFrame.origin.x, y: origin.y - cartesianFrame.origin.y), size: cartesianFrame.size)
     }
 }

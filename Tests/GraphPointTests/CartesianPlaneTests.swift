@@ -4,9 +4,35 @@ import XCTest
 class CartesianPlaneTests: XCTestCase {
     
     static var allTests = [
-        ("testExample", testExample),
+        ("testCartesianOrigin", testCartesianOrigin),
+        ("testMinimumAxis", testMinimumAxis),
+        ("testMaximumAxis", testMaximumAxis),
+        ("testCartesianPointForPoint", testCartesianPointForPoint),
+        ("testPointForCartesianPoint", testPointForCartesianPoint),
+        ("testRectForCartesianFrame", testRectForCartesianFrame),
     ]
     
-    func testExample() {
+    func testCartesianOrigin() {
+        XCTFail("Not Implemented")
+    }
+    
+    func testMinimumAxis() {
+        XCTFail("Not Implemented")
+    }
+    
+    func testMaximumAxis() {
+        XCTFail("Not Implemented")
+    }
+    
+    func testCartesianPointForPoint() {
+        XCTFail("Not Implemented")
+    }
+    
+    func testPointForCartesianPoint() {
+        XCTFail("Not Implemented")
+    }
+    
+    func testRectForCartesianFrame() {
+        XCTFail("Not Implemented")
     }
 }

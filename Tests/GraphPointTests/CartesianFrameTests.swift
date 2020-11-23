@@ -4,9 +4,15 @@ import XCTest
 class CartesianFrameTests: XCTestCase {
     
     static var allTests = [
-        ("testExample", testExample),
+        ("testMakeForPoints", testMakeForPoints),
+        ("testMakeForPointsRadiusStartEndClockwise", testMakeForPointsRadiusStartEndClockwise),
     ]
     
-    func testExample() {
+    func testMakeForPoints() {
+        XCTFail("Not Implemented")
+    }
+    
+    func testMakeForPointsRadiusStartEndClockwise() {
+        XCTFail("Not Implemented")
     }
 }

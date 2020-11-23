@@ -41,6 +41,7 @@ public extension CGRect {
     ///
     /// - parameter graphPoint: The cartesian coordinates to translate
     /// - returns: Translated point within the instance `CGRect`
+    @available(*, deprecated, renamed: "CartesianPlane.point(for:)")
     func point(for graphPoint: GraphPoint) -> CGPoint {
         var point = CGPoint.zero
         
@@ -68,6 +69,7 @@ public extension CGRect {
     ///
     /// - parameter point: A point within the instance `CGRect`
     /// - returns: Angle between 0° and 360°
+    @available(*, deprecated, renamed: "Degree.make(for:clockwise:)")
     func degree(for point: CGPoint) -> CGFloat {
         let graphPoint = self.graphPoint(for: point)
         return GraphPoint.degree(graphPoint: graphPoint)
@@ -80,6 +82,7 @@ public extension CGRect {
     ///
     /// - parameter graphFrame: Cartesian coordinated frame within this instance
     /// - parameter offset: The offset used for the provided `GraphFrame`. Typically this is (0, 0).
+    @available(*, deprecated, renamed: "CartesianPlane.rect(for:)")
     func frame(for graphFrame: GraphFrame, offset: GraphPoint = GraphPoint(x: 0, y: 0)) -> CGRect {
         var graphCenter = self.graphOrigin
         graphCenter.x = graphCenter.x + offset.x
