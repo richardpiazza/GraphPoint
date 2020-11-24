@@ -1,4 +1,5 @@
 import Foundation
+import Swift2D
 
 /// A degree is a measurement of a plane angle, defined so that a full rotation is 360 degrees.
 ///
@@ -18,46 +19,46 @@ public extension Degree {
     ///
     /// - parameter point: A `CartesianPoint` with offsets from the _origin_.
     /// - returns:The angular degree (0-360), clockwise from the x-axis.
-    static func make(for point: CartesianPoint, clockwise: Bool = true) throws -> Degree {
-        guard point != .nan else {
-            throw GraphPointError.invalidPoint(point)
+    static func make(for cartesianPoint: CartesianPoint, clockwise: Bool = true) throws -> Degree {
+        guard cartesianPoint != .nan else {
+            throw GraphPointError.invalidPoint(cartesianPoint)
         }
         
-        guard point != .zero else {
-            throw GraphPointError.invalidPoint(point)
+        guard cartesianPoint != .zero else {
+            throw GraphPointError.invalidPoint(cartesianPoint)
         }
         
         let degree: Degree
-        let quadrant = Quadrant(cartesianPoint: point)
+        let quadrant = Quadrant(cartesianPoint: cartesianPoint)
         
         switch quadrant {
         case .I:
-            let midPoint = try CartesianPoint.make(for: point.minimumAxis, degree: 315.0)
-            if point.x <= midPoint.x {
-                degree = 270.0 + atan(point.x / point.y).degrees
+            let midPoint = try CartesianPoint.make(for: cartesianPoint.minimumAxis, degree: 315.0)
+            if cartesianPoint.x <= midPoint.x {
+                degree = 270.0 + atan(cartesianPoint.x / cartesianPoint.y).degrees
             } else {
-                degree = 360.0 - atan(point.y / point.x).degrees
+                degree = 360.0 - atan(cartesianPoint.y / cartesianPoint.x).degrees
             }
         case .II:
-            let midPoint = try CartesianPoint.make(for: point.minimumAxis, degree: 225.0)
-            if point.x <= midPoint.x {
-                degree = 180.0 + atan(point.y / abs(point.x)).degrees
+            let midPoint = try CartesianPoint.make(for: cartesianPoint.minimumAxis, degree: 225.0)
+            if cartesianPoint.x <= midPoint.x {
+                degree = 180.0 + atan(cartesianPoint.y / abs(cartesianPoint.x)).degrees
             } else {
-                degree = 270.0 - atan(abs(point.x) / point.y).degrees
+                degree = 270.0 - atan(abs(cartesianPoint.x) / cartesianPoint.y).degrees
             }
         case .III:
-            let midPoint = try CartesianPoint.make(for: point.minimumAxis, degree: 135.0)
-            if point.x <= midPoint.x {
-                degree = 180.0 - atan(abs(point.y) / abs(point.x)).degrees
+            let midPoint = try CartesianPoint.make(for: cartesianPoint.minimumAxis, degree: 135.0)
+            if cartesianPoint.x <= midPoint.x {
+                degree = 180.0 - atan(abs(cartesianPoint.y) / abs(cartesianPoint.x)).degrees
             } else {
-                degree = 90.0 + atan(abs(point.x) / abs(point.y)).degrees
+                degree = 90.0 + atan(abs(cartesianPoint.x) / abs(cartesianPoint.y)).degrees
             }
         case .IV:
-            let midPoint = try CartesianPoint.make(for: point.minimumAxis, degree: 45.0)
-            if point.x <= midPoint.x {
-                degree = atan(abs(point.y) / point.x).degrees
+            let midPoint = try CartesianPoint.make(for: cartesianPoint.minimumAxis, degree: 45.0)
+            if cartesianPoint.x <= midPoint.x {
+                degree = atan(abs(cartesianPoint.y) / cartesianPoint.x).degrees
             } else {
-                degree = 90.0 - atan(point.x / abs(point.y)).degrees
+                degree = 90.0 - atan(cartesianPoint.x / abs(cartesianPoint.y)).degrees
             }
         }
         

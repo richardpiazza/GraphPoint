@@ -69,7 +69,7 @@ public extension CGRect {
     ///
     /// - parameter point: A point within the instance `CGRect`
     /// - returns: Angle between 0° and 360°
-    @available(*, deprecated, renamed: "Degree.make(for:clockwise:)")
+    @available(*, deprecated, renamed: "Degree.make(forPoint:clockwise:)")
     func degree(for point: CGPoint) -> CGFloat {
         let graphPoint = self.graphPoint(for: point)
         return GraphPoint.degree(graphPoint: graphPoint)

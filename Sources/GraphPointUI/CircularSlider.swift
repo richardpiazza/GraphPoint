@@ -1,4 +1,5 @@
 import GraphPoint
+import Swift2D
 #if canImport(UIKit)
 import UIKit
 
@@ -65,34 +66,47 @@ import UIKit
     @IBInspectable open var tickColor: UIColor = UIColor.white
     
     fileprivate var tickDegrees: Float {
-        return type(of: self).degreesInCircle / Float(numberOfTicks)
+        return Self.degreesInCircle / Float(numberOfTicks)
     }
     
     fileprivate var tickPercent: Float {
-        return tickDegrees / type(of: self).degreesInCircle
+        return tickDegrees / Self.degreesInCircle
+    }
+    
+    private var plane: CartesianPlane {
+        return Rect(origin: .zero, size: Size(width: Float(bounds.width), height: Float(bounds.height)))
+    }
+    
+    private var radius: CGFloat {
+        return CGFloat(plane.minimumAxis)
+    }
+    
+    private var origin: CGPoint {
+        let origin = plane.cartesianOrigin
+        return CGPoint(x: CGFloat(origin.x), y: CGFloat(origin.y))
     }
     
     // MARK: - Paths -
     
     fileprivate var touchRadius: CGFloat {
-        return (trackWidth < Float(type(of: self).minimumTouchSize)) ? bounds.radius - CGFloat(type(of: self).minimumTouchSize) : bounds.radius - CGFloat(trackWidth)
+        return (trackWidth < Float(Self.minimumTouchSize)) ? radius - CGFloat(Self.minimumTouchSize) : radius - CGFloat(trackWidth)
     }
     
     fileprivate var innerRadius: CGFloat {
-        return bounds.radius - CGFloat(trackWidth)
+        return radius - CGFloat(trackWidth)
     }
     
     fileprivate var touchPath: CGMutablePath {
-        return CGMutablePath.arcPath(inRect: bounds, startingDegree: type(of: self).startingDegree, endingDegree: type(of: self).endingDegree, innerRadius: touchRadius, outerRadius: bounds.radius)
+        return CGMutablePath.arcPath(inRect: bounds, startingDegree: Self.startingDegree, endingDegree: Self.endingDegree, innerRadius: touchRadius, outerRadius: radius)
     }
     
     fileprivate var trackPath: CGMutablePath {
-        return CGMutablePath.arcPath(inRect: bounds, startingDegree: type(of: self).startingDegree, endingDegree: type(of: self).endingDegree, innerRadius: innerRadius, outerRadius: bounds.radius)
+        return CGMutablePath.arcPath(inRect: bounds, startingDegree: Self.startingDegree, endingDegree: Self.endingDegree, innerRadius: innerRadius, outerRadius: radius)
     }
     
     fileprivate var fillPath: CGMutablePath {
-        let endingDegree = CGFloat(Float(type(of: self).startingDegree) + (Float(type(of: self).degreesInCircle) * (value / maximumValue)))
-        return CGMutablePath.arcPath(inRect: bounds, startingDegree: type(of: self).startingDegree, endingDegree: endingDegree, innerRadius: innerRadius, outerRadius: bounds.radius)
+        let endingDegree = CGFloat(Float(Self.startingDegree) + (Float(Self.degreesInCircle) * (value / maximumValue)))
+        return CGMutablePath.arcPath(inRect: bounds, startingDegree: Self.startingDegree, endingDegree: endingDegree, innerRadius: innerRadius, outerRadius: radius)
     }
     
     fileprivate var tickPath: CGMutablePath? {
@@ -104,14 +118,14 @@ import UIKit
         
         for i in 0...numberOfTicks {
             let degree = CGFloat(Float(i) * tickDegrees)
-            let outerArc = Arc(startingDegree: degree, endingDegree: degree, radius: bounds.radius)
+            let outerArc = Arc(startingDegree: degree, endingDegree: degree, radius: radius)
             let innerArc = Arc(startingDegree: degree, endingDegree: degree, radius: innerRadius)
-            let outerPoint = outerArc.endingGraphPoint
-            let innerPoint = innerArc.endingGraphPoint
-            let origin = bounds.graphOrigin
+            let outerPoint = outerArc.endingPoint
+            let innerPoint = innerArc.endingPoint
+            let origin = self.origin
             
-            path.move(to: CGPoint(x: origin.x + outerPoint.x, y: origin.y + outerPoint.y))
-            path.addLine(to: CGPoint(x: origin.x + innerPoint.x, y: origin.y + innerPoint.y))
+            path.move(to: CGPoint(x: origin.x + CGFloat(outerPoint.x), y: origin.y + CGFloat(outerPoint.y)))
+            path.addLine(to: CGPoint(x: origin.x + CGFloat(innerPoint.x), y: origin.y + CGFloat(innerPoint.y)))
             path.closeSubpath()
         }
         
@@ -161,16 +175,18 @@ import UIKit
     
     open override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         let point = touch.location(in: self)
-        let degree = bounds.degree(for: point)
-        value = self.value(forDegree: degree)
+        let cartesianPoint = plane.cartesianPoint(for: Point(x: Float(point.x), y: Float(point.y)))
+        let degree: Degree = (try? Degree.make(for: cartesianPoint)) ?? 0.0
+        value = self.value(forDegree: CGFloat(degree))
         
         return super.beginTracking(touch, with: event)
     }
     
     open override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         let point = touch.location(in: self)
-        let degree = bounds.degree(for: point)
-        value = self.value(forDegree: degree)
+        let cartesianPoint = plane.cartesianPoint(for: Point(x: Float(point.x), y: Float(point.y)))
+        let degree: Degree = (try? Degree.make(for: cartesianPoint)) ?? 0.0
+        value = self.value(forDegree: CGFloat(degree))
         
         if value >= (maximumValue - tickPercent) {
             value = maximumValue
@@ -186,12 +202,12 @@ import UIKit
     /// Calculates the value (percent complete) for a specific degree.
     fileprivate func value(forDegree degree: CGFloat) -> Float {
         var percent: Float
-        if degree == type(of: self).startingDegree {
+        if degree == Self.startingDegree {
             return minimumValue
-        } else if degree > type(of: self).startingDegree {
-            percent = Float((degree - type(of: self).startingDegree) / CGFloat(type(of: self).degreesInCircle))
+        } else if degree > Self.startingDegree {
+            percent = Float((degree - Self.startingDegree) / CGFloat(Self.degreesInCircle))
         } else {
-            percent = Float((degree + CGFloat(abs(type(of: self).zeroDegreeOffset))) / CGFloat(type(of: self).degreesInCircle))
+            percent = Float((degree + CGFloat(abs(Self.zeroDegreeOffset))) / CGFloat(Self.degreesInCircle))
         }
         
         if !lockToTicks {

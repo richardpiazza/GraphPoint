@@ -1,4 +1,5 @@
 import GraphPoint
+import Swift2D
 #if canImport(UIKit)
 import UIKit
 
@@ -93,12 +94,16 @@ open class CircularProgress: UIView {
         return UIColor.blue.withAlphaComponent(0.5)
     }()
     
+    private var radius: CGFloat {
+        return CGFloat(Rect(origin: .zero, size: Size(width: Float(bounds.width), height: Float(bounds.height))).minimumAxis)
+    }
+    
     fileprivate var trackInnerRadius: CGFloat {
-        return bounds.radius - CGFloat(trackWidth)
+        return radius - CGFloat(trackWidth)
     }
     
     fileprivate var trackPath: CGMutablePath {
-        return CGMutablePath.arcPath(inRect: bounds, startingDegree: type(of: self).startingDegree, endingDegree: type(of: self).endingDegree, innerRadius: trackInnerRadius, outerRadius: bounds.radius)
+        return CGMutablePath.arcPath(inRect: bounds, startingDegree: Self.startingDegree, endingDegree: Self.endingDegree, innerRadius: trackInnerRadius, outerRadius: radius)
     }
     
     // MARK: Fill
@@ -122,12 +127,12 @@ open class CircularProgress: UIView {
     }()
     
     fileprivate var fillInnerRadius: CGFloat {
-        return bounds.radius - CGFloat(fillWidth)
+        return radius - CGFloat(fillWidth)
     }
     
     fileprivate var fillPath: CGMutablePath {
-        let endingDegree = CGFloat(Float(type(of: self).startingDegree) + (Float(type(of: self).degreesInCircle) * (value / maximumValue)))
-        return CGMutablePath.arcPath(inRect: bounds, startingDegree: type(of: self).startingDegree, endingDegree: endingDegree, innerRadius: fillInnerRadius, outerRadius: bounds.radius)
+        let endingDegree = CGFloat(Float(Self.startingDegree) + (Float(Self.degreesInCircle) * (value / maximumValue)))
+        return CGMutablePath.arcPath(inRect: bounds, startingDegree: Self.startingDegree, endingDegree: endingDegree, innerRadius: fillInnerRadius, outerRadius: radius)
     }
     
     // MARK: -
