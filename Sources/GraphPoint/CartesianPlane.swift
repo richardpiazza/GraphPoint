@@ -14,16 +14,16 @@ public extension CartesianPlane {
         self.size = size
     }
     
-    init(radius: Int) {
+    init(axis: Int) {
         self.init()
         origin = .zero
-        size = Size(width: radius, height: radius)
+        size = Size(width: axis * 2, height: axis * 2)
     }
     
-    init(radius: Float) {
+    init(radius: Radius) {
         self.init()
         origin = .zero
-        size = Size(width: radius, height: radius)
+        size = Size(width: radius * 2, height: radius * 2)
     }
 }
 
