@@ -24,42 +24,6 @@ public extension CartesianPoint {
     var minimumAxis: Float {
         return max(abs(x), abs(y))
     }
-    
-    /// The `Quadrant` that contains the point.
-    ///
-    /// Special conditions are used when a point rests on an axis:
-    /// * {0, 0}: .I
-    /// * {>=0, 0}: .I
-    /// * {0, >=0}: .II
-    /// * {<0, 0}: .III
-    /// * {0, <0}: .IV
-    var quadrant: Quadrant {
-        if x == 0.0 {
-            if y == 0.0 {
-                return .I
-            } else if y >= 0.0 {
-                return .II
-            } else {
-                return .IV
-            }
-        } else if x > 0.0 {
-            if y == 0.0 {
-                return .I
-            } else if y > 0.0 {
-                return .I
-            } else {
-                return .IV
-            }
-        } else {
-            if y == 0.0 {
-                return .III
-            } else if y > 0.0 {
-                return .II
-            } else {
-                return .III
-            }
-        }
-    }
 }
 
 public extension CartesianPoint {

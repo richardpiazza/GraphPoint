@@ -6,54 +6,34 @@ import Foundation
 /// bounded by two half-axes. When the axes are drawn according to the mathematical custom, the numbering goes
 /// counter-clockwise starting from the upper right ("northeast") quadrant.
 public enum Quadrant: Int, CaseIterable {
-    /// North-East / Top-Right
+    /// Quadrant 1
+    /// * x: + (positive)
+    /// * y: + (positive)
     case I = 1
-    /// North-West / Top-Left
+    /// Quadrant 2
+    /// * x: - (negative)
+    /// * y: + (positive)
     case II = 2
-    /// South-West / Bottom-Left
+    /// Quadrant 3
+    /// * x: - (negative)
+    /// * y: - (negative)
     case III = 3
-    /// South-East / Bottom-Right
+    /// Quadrant 4
+    /// * x: + (positive)
+    /// * y: - (negative)
     case IV = 4
-    
-    
-    public var clockwiseStartDegree: Degree {
-        switch self {
-        case .I: return 270.0
-        case .II: return 180.0
-        case .III: return 90.0
-        case .IV: return 0.0
+}
+
+public extension Quadrant {
+    /// Determines a `Quadrant` based on an angular degree and rotational direction.
+    ///
+    /// - note: The 'clockwise' parameter here defaults to **true** to match the implementations throughout the rest of
+    ///         the library. But, `Quadrant`s are inherently counter-clockwise.
+    init(degree: Degree, clockwise: Bool = true) throws {
+        guard degree >= 0.0, degree <= 360.0 else {
+            throw GraphPointError.invalidDegree(degree)
         }
-    }
-    
-    public var clockwiseEndDegree: Degree {
-        switch self {
-        case .I: return 360.0
-        case .II: return 270.0
-        case .III: return 180.0
-        case .IV: return 90.0
-        }
-    }
-    
-    public var counterClockwiseStartDegree: Degree {
-        switch self {
-        case .I: return 0.0
-        case .II: return 90.0
-        case .III: return 180.0
-        case .IV: return 270.0
-        }
-    }
-    
-    public var counterClockwiseEndDegree: Degree {
-        switch self {
-        case .I: return 90.0
-        case .II: return 180.0
-        case .III: return 270.0
-        case .IV: return 360.0
-        }
-    }
-    
-    
-    public init(degree: Degree, clockwise: Bool = true) {
+        
         switch clockwise {
         case true:
             if degree >= 0.0 && degree <= 90.0 {
@@ -78,15 +58,35 @@ public enum Quadrant: Int, CaseIterable {
         }
     }
     
-    public init(cartesianPoint: CartesianPoint) {
-        if cartesianPoint.x >= 0 {
-            if cartesianPoint.y >= 0 {
+    /// Initializes a `Quadrant` that contains the point.
+    ///
+    /// Special conditions are used when a point rests on an axis:
+    /// * {0, 0}: .I
+    /// * {>=0, 0}: .I
+    /// * {0, >=0}: .II
+    /// * {<0, 0}: .III
+    /// * {0, <0}: .IV
+    init(cartesianPoint: CartesianPoint) {
+        if cartesianPoint.x == 0.0 {
+            if cartesianPoint.y == 0.0 {
+                self = .I
+            } else if cartesianPoint.y >= 0.0 {
+                self = .II
+            } else {
+                self = .IV
+            }
+        } else if cartesianPoint.x > 0.0 {
+            if cartesianPoint.y == 0.0 {
+                self = .I
+            } else if cartesianPoint.y > 0.0 {
                 self = .I
             } else {
                 self = .IV
             }
         } else {
-            if cartesianPoint.y >= 0 {
+            if cartesianPoint.y == 0.0 {
+                self = .III
+            } else if cartesianPoint.y > 0.0 {
                 self = .II
             } else {
                 self = .III

@@ -5,7 +5,6 @@ class CartesianPointTests: XCTestCase {
     
     static var allTests = [
         ("testMinimumAxis", testMinimumAxis),
-        ("testQuadrant", testQuadrant),
         ("testMakeForDegreeRadius", testMakeForDegreeRadius),
         ("testMakeForDegreeRadiusLimiter", testMakeForDegreeRadiusLimiter),
     ]
@@ -22,32 +21,6 @@ class CartesianPointTests: XCTestCase {
         
         point = .init(x: 100, y: -20)
         XCTAssertEqual(point.minimumAxis, 100)
-    }
-    
-    func testQuadrant() {
-        var point: CartesianPoint = .init(x: 40, y: 40)
-        XCTAssertEqual(point.quadrant, .I)
-        
-        point = .init(x: -50, y: 60)
-        XCTAssertEqual(point.quadrant, .II)
-        
-        point = .init(x: -25, y: -90)
-        XCTAssertEqual(point.quadrant, .III)
-        
-        point = .init(x: 100, y: -20)
-        XCTAssertEqual(point.quadrant, .IV)
-        
-        point = .init(x: 45, y: 0)
-        XCTAssertEqual(point.quadrant, .I)
-        
-        point = .init(x: 0, y: 45)
-        XCTAssertEqual(point.quadrant, .II)
-        
-        point = .init(x: -45, y: 0)
-        XCTAssertEqual(point.quadrant, .III)
-        
-        point = .init(x: 0, y: -45)
-        XCTAssertEqual(point.quadrant, .IV)
     }
     
     func testMakeForDegreeRadius() throws {

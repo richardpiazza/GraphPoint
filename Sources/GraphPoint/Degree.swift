@@ -28,8 +28,9 @@ public extension Degree {
         }
         
         let degree: Degree
+        let quadrant = Quadrant(cartesianPoint: point)
         
-        switch point.quadrant {
+        switch quadrant {
         case .I:
             let midPoint = try CartesianPoint.make(for: point.minimumAxis, degree: 315.0)
             if point.x <= midPoint.x {
