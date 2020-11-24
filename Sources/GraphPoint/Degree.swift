@@ -27,41 +27,43 @@ public extension Degree {
             throw GraphPointError.invalidPoint(point)
         }
         
-        switch clockwise {
-        case true:
-            switch point.quadrant {
-            case .I:
-                let midPoint = try CartesianPoint.make(for: point.minimumAxis, degree: 315.0)
-                if point.x <= midPoint.x {
-                    return 270.0 + atan(point.x / point.y).degrees
-                } else {
-                    return 360.0 - atan(point.y / point.x).degrees
-                }
-            case .II:
-                let midPoint = try CartesianPoint.make(for: point.minimumAxis, degree: 225.0)
-                if point.x <= midPoint.x {
-                    return 180.0 + atan(point.y / abs(point.x)).degrees
-                } else {
-                    return 270.0 - atan(abs(point.x) / point.y).degrees
-                }
-            case .III:
-                let midPoint = try CartesianPoint.make(for: point.minimumAxis, degree: 135.0)
-                if point.x <= midPoint.x {
-                    return 180.0 - atan(abs(point.y) / abs(point.x)).degrees
-                } else {
-                    return 90.0 + atan(abs(point.x) / abs(point.y)).degrees
-                }
-            case .IV:
-                let midPoint = try CartesianPoint.make(for: point.minimumAxis, degree: 45.0)
-                if point.x <= midPoint.x {
-                    return atan(abs(point.y) / point.x).degrees
-                } else {
-                    return 90.0 - atan(point.x / abs(point.y)).degrees
-                }
+        let degree: Degree
+        
+        switch point.quadrant {
+        case .I:
+            let midPoint = try CartesianPoint.make(for: point.minimumAxis, degree: 315.0)
+            if point.x <= midPoint.x {
+                degree = 270.0 + atan(point.x / point.y).degrees
+            } else {
+                degree = 360.0 - atan(point.y / point.x).degrees
             }
-        case false:
-            //TODO: Handle anti-clockwise case
-            return .zero
+        case .II:
+            let midPoint = try CartesianPoint.make(for: point.minimumAxis, degree: 225.0)
+            if point.x <= midPoint.x {
+                degree = 180.0 + atan(point.y / abs(point.x)).degrees
+            } else {
+                degree = 270.0 - atan(abs(point.x) / point.y).degrees
+            }
+        case .III:
+            let midPoint = try CartesianPoint.make(for: point.minimumAxis, degree: 135.0)
+            if point.x <= midPoint.x {
+                degree = 180.0 - atan(abs(point.y) / abs(point.x)).degrees
+            } else {
+                degree = 90.0 + atan(abs(point.x) / abs(point.y)).degrees
+            }
+        case .IV:
+            let midPoint = try CartesianPoint.make(for: point.minimumAxis, degree: 45.0)
+            if point.x <= midPoint.x {
+                degree = atan(abs(point.y) / point.x).degrees
+            } else {
+                degree = 90.0 - atan(point.x / abs(point.y)).degrees
+            }
         }
+        
+        if !clockwise {
+            return 360.0 - degree
+        }
+        
+        return degree
     }
 }
