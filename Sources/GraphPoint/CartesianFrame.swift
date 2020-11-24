@@ -41,56 +41,85 @@ public extension CartesianFrame {
             }
         }
         
-        return CartesianFrame(origin: minXMaxY, size: Size(width: abs(maxXMinY.x - minXMaxY.x), height: abs(maxXMinY.y - minXMaxY.y)))
+        return CartesianFrame(
+            origin: minXMaxY,
+            size: Size(
+                width: abs(maxXMinY.x - minXMaxY.x),
+                height: abs(maxXMinY.y - minXMaxY.y)
+            )
+        )
     }
     
-    /// Identifies the minimum `CartesianFrame` that contains all of the provided points, accounting for any expansion
-    /// needed when crossing an axis (start/end) at a given distance (radius) from the origin.
+    /// Identifies the minimum `CartesianFrame` that contains the provided points, accounting for any expansion needed
+    /// when crossing an axis at a given distance (radius) from the origin.
     ///
-    /// - parameter points: The `CartesianPoint`s with which to map into a frame.
-    /// - parameter radius:
-    /// - parameter startDegree:
-    /// - parameter endDegree:
-    /// - parameter clockwise:
+    /// This is especially useful when determining the frame needed for a specific **chord** of a circle.
+    ///
+    /// ## Example
+    ///
+    /// Given the points (A, B) and the radius (R), a cartesian frame can be determined that encompasses all of the
+    /// points.
+    ///
+    /// ```
+    ///               ▲
+    ///               │
+    ///               │
+    ///           .───┼───.
+    ///         ,'    │    ┌─────┐
+    ///       ,'      │    │ A   │
+    ///      ;        │    │   : │
+    ///      │        │    │   │ │
+    /// ◀────┼────────┼────┼───R─┼───▶
+    ///      :        │    │   ; │
+    ///       ╲       │    │  ╱  │
+    ///        `.     │    │,B   │
+    ///          `.   │   ,└─────┘
+    ///            `──┼──'
+    ///               │
+    ///               │
+    ///               ▼
+    /// ```
+    ///
+    /// - parameter point1: The first `CartesianPoint` of the chord.
+    /// - parameter point2: The second `CartesianPoint` of the chord.
+    /// - parameter radius: The radius of the circle on which the chord is present.
     /// - returns: A `CartesianFrame` containing all of the points.
-    static func make(for points: [CartesianPoint], radius: Radius, startDegree: Degree, endDegree: Degree, clockwise: Bool = true) -> CartesianFrame {
-        var frame = make(for: points)
+    /// - throws: GraphPointError.unhandledQuadrantTransition(_:_:)
+    static func make(for point1: CartesianPoint, point2: CartesianPoint, radius: Radius) throws -> CartesianFrame {
+        var frame = make(for: [point1, point2])
         
-        let startQuadrant = Quadrant(degree: startDegree, clockwise: clockwise)
-        let endQuadrant = Quadrant(degree: endDegree, clockwise: clockwise)
+        let startQuadrant = Quadrant(cartesianPoint: point1)
+        let endQuadrant = Quadrant(cartesianPoint: point2)
         
-        switch clockwise {
-        case true:
-            switch (startQuadrant, endQuadrant) {
-            case (.I, .IV):
-                let maxAxis = frame.origin.x + frame.width
-                if maxAxis < radius {
-                    frame.size.width += (radius - maxAxis)
-                }
-            case (.II, .I):
-                let maxAxis = frame.origin.y
-                if maxAxis < radius {
-                    frame.origin.y += (radius - maxAxis)
-                    frame.size.height += (radius - maxAxis)
-                }
-            case (.III, .II):
-                let maxAxis = abs(frame.origin.x)
-                if maxAxis < radius {
-                    frame.origin.x -= (radius - maxAxis)
-                    frame.size.width += (radius - maxAxis)
-                }
-            case (.IV, .III):
-                let maxAxis = abs(frame.origin.y) + frame.size.height
-                if maxAxis < radius {
-                    frame.size.height += (radius - maxAxis)
-                }
-            default:
-                //TODO: Unhandled Multi-Quadrant Crossing.
-                break
+        guard startQuadrant != endQuadrant else {
+            return frame
+        }
+        
+        switch (startQuadrant, endQuadrant) {
+        case (.I, .IV), (.IV, .I):
+            let maxAxis = frame.origin.x + frame.width
+            if maxAxis < radius {
+                frame.size.width += (radius - maxAxis)
             }
-        case false:
-            //TODO: Handle anti-clockwise calculations
-            break
+        case (.II, .I), (.I, .II):
+            let maxAxis = frame.origin.y
+            if maxAxis < radius {
+                frame.origin.y += (radius - maxAxis)
+                frame.size.height += (radius - maxAxis)
+            }
+        case (.III, .II), (.II, .III):
+            let maxAxis = abs(frame.origin.x)
+            if maxAxis < radius {
+                frame.origin.x -= (radius - maxAxis)
+                frame.size.width += (radius - maxAxis)
+            }
+        case (.IV, .III), (.III, .IV):
+            let maxAxis = abs(frame.origin.y) + frame.size.height
+            if maxAxis < radius {
+                frame.size.height += (radius - maxAxis)
+            }
+        default:
+            throw GraphPointError.unhandledQuadrantTransition(startQuadrant, endQuadrant)
         }
         
         return frame

@@ -77,4 +77,20 @@ public enum Quadrant: Int, CaseIterable {
             }
         }
     }
+    
+    public init(cartesianPoint: CartesianPoint) {
+        if cartesianPoint.x >= 0 {
+            if cartesianPoint.y >= 0 {
+                self = .I
+            } else {
+                self = .IV
+            }
+        } else {
+            if cartesianPoint.y >= 0 {
+                self = .II
+            } else {
+                self = .III
+            }
+        }
+    }
 }

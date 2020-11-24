@@ -9,6 +9,7 @@ class QuadrantTests: XCTestCase {
         ("testCounterClockwiseStartDegree", testCounterClockwiseStartDegree),
         ("testCounterClockwiseEndDegree", testCounterClockwiseEndDegree),
         ("testInitDegreeClockwise", testInitDegreeClockwise),
+        ("testInitCartesianPoint", testInitCartesianPoint),
     ]
     
     func testClockwiseStartDegree() {
@@ -28,6 +29,10 @@ class QuadrantTests: XCTestCase {
     }
     
     func testInitDegreeClockwise() {
+        XCTFail("Not Implemented")
+    }
+    
+    func testInitCartesianPoint() {
         XCTFail("Not Implemented")
     }
 }
