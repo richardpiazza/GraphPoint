@@ -4,18 +4,20 @@ import CoreGraphics
 
 /// Arc of a circle (a continuous length around the circumference)
 public struct Arc {
-    public var startingDegree: CGFloat = 0.0
-    public var endingDegree: CGFloat = 0.0
-    public var radius: CGFloat = 0.0
+    public var radius: Radius
+    public var startingDegree: Degree
+    public var endingDegree: Degree
+    public var clockwise: Bool
     
-    public init(startingDegree: CGFloat, endingDegree: CGFloat, radius: CGFloat) {
+    public init(radius: Radius, startingDegree: Degree, endingDegree: Degree, clockwise: Bool = true) {
+        self.radius = radius
         self.startingDegree = startingDegree
         self.endingDegree = endingDegree
-        self.radius = radius
+        self.clockwise = clockwise
     }
     
     public var startingPoint: CartesianPoint {
-        guard let point = try? CartesianPoint.make(for: Radius(radius), degree: Degree(startingDegree)) else {
+        guard let point = try? CartesianPoint.make(for: radius, degree: startingDegree) else {
             return .zero
         }
         
@@ -23,7 +25,7 @@ public struct Arc {
     }
     
     public var endingPoint: CartesianPoint {
-        guard let point = try? CartesianPoint.make(for: Radius(radius), degree: Degree(endingDegree)) else {
+        guard let point = try? CartesianPoint.make(for: radius, degree: endingDegree) else {
             return .zero
         }
         
@@ -55,12 +57,12 @@ public struct Arc {
 public extension Arc {
     @available(*, deprecated, renamed: "startingPoint")
     var startingGraphPoint: GraphPoint {
-        return GraphPoint.graphPoint(degree: startingDegree, radius: radius)
+        return GraphPoint.graphPoint(degree: CGFloat(startingDegree), radius: CGFloat(radius))
     }
     
     @available(*, deprecated, renamed: "endingPoint")
     var endingGraphPoint: GraphPoint {
-        return GraphPoint.graphPoint(degree: endingDegree, radius: radius)
+        return GraphPoint.graphPoint(degree: CGFloat(endingDegree), radius: CGFloat(radius))
     }
     
     /// Calculates the point of the right angle that joins the start and end points.

@@ -17,7 +17,7 @@ let package = Package(
             targets: ["GraphPoint", "GraphPointUI"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/richardpiazza/Swift2D", .upToNextMinor(from: "1.0.0")),
+        .package(url: "https://github.com/richardpiazza/Swift2D", .upToNextMinor(from: "1.1.0")),
     ],
     targets: [
         .target(

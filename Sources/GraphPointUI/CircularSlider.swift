@@ -74,7 +74,7 @@ import UIKit
     }
     
     private var plane: CartesianPlane {
-        return Rect(origin: .zero, size: Size(width: Float(bounds.width), height: Float(bounds.height)))
+        return Rect(origin: .zero, size: Size(bounds.size))
     }
     
     private var radius: CGFloat {
@@ -118,14 +118,14 @@ import UIKit
         
         for i in 0...numberOfTicks {
             let degree = CGFloat(Float(i) * tickDegrees)
-            let outerArc = Arc(startingDegree: degree, endingDegree: degree, radius: radius)
-            let innerArc = Arc(startingDegree: degree, endingDegree: degree, radius: innerRadius)
-            let outerPoint = outerArc.endingPoint
-            let innerPoint = innerArc.endingPoint
+            let outerArc = Arc(radius: Radius(radius), startingDegree: Degree(degree), endingDegree: Degree(degree))
+            let innerArc = Arc(radius: Radius(innerRadius), startingDegree: Degree(degree), endingDegree: Degree(degree))
+            let outerPoint = CGPoint(outerArc.endingPoint)
+            let innerPoint = CGPoint(innerArc.endingPoint)
             let origin = self.origin
             
-            path.move(to: CGPoint(x: origin.x + CGFloat(outerPoint.x), y: origin.y + CGFloat(outerPoint.y)))
-            path.addLine(to: CGPoint(x: origin.x + CGFloat(innerPoint.x), y: origin.y + CGFloat(innerPoint.y)))
+            path.move(to: CGPoint(x: origin.x + outerPoint.x, y: origin.y + outerPoint.y))
+            path.addLine(to: CGPoint(x: origin.x + innerPoint.x, y: origin.y + innerPoint.y))
             path.closeSubpath()
         }
         
@@ -175,7 +175,7 @@ import UIKit
     
     open override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         let point = touch.location(in: self)
-        let cartesianPoint = plane.cartesianPoint(for: Point(x: Float(point.x), y: Float(point.y)))
+        let cartesianPoint = plane.cartesianPoint(for: Point(point))
         let degree: Degree = (try? Degree.make(for: cartesianPoint)) ?? 0.0
         value = self.value(forDegree: CGFloat(degree))
         
@@ -184,7 +184,7 @@ import UIKit
     
     open override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         let point = touch.location(in: self)
-        let cartesianPoint = plane.cartesianPoint(for: Point(x: Float(point.x), y: Float(point.y)))
+        let cartesianPoint = plane.cartesianPoint(for: Point(point))
         let degree: Degree = (try? Degree.make(for: cartesianPoint)) ?? 0.0
         value = self.value(forDegree: CGFloat(degree))
         

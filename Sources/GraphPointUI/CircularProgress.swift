@@ -95,7 +95,7 @@ open class CircularProgress: UIView {
     }()
     
     private var radius: CGFloat {
-        return CGFloat(Rect(origin: .zero, size: Size(width: Float(bounds.width), height: Float(bounds.height))).minimumAxis)
+        return CGFloat(Rect(origin: .zero, size: Size(bounds.size)).minimumAxis)
     }
     
     fileprivate var trackInnerRadius: CGFloat {
