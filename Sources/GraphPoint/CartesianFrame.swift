@@ -13,6 +13,48 @@ import Swift2D
 public typealias CartesianFrame = Rect
 
 public extension CartesianFrame {
+    typealias Offset = Point
+    
+    /// The _x_ & _y_ offset required to reach the cartesian origin of the plane that contains this frame.
+    ///
+    /// The size of the plane is irrelevant. The assumption being made is that the plane is equal to or larger than the
+    /// size of the frame.
+    ///
+    /// TODO: Verify this behavior, as it seems like this should be a strict inversion of the frame origin.
+    ///
+    /// ```
+    /// ┌────────────────────────▲───────────────────────┐
+    /// │                        │                       │
+    /// │                        │                       │
+    /// │            P───────────┼───────────┐           │
+    /// │            │           │           │           │
+    /// │            │  (x, y)   │           │           │
+    /// │            │           │           │           │
+    /// ◀────────────┼───────────O───────────┼───────────▶
+    /// │            │           │           │           │
+    /// │            │           │           │           │
+    /// │            │           │     Frame │           │
+    /// │            └───────────┼───────────┘           │
+    /// │                        │                       │
+    /// │                        │                 Plane │
+    /// └────────────────────────▼───────────────────────┘
+    /// ```
+    var offsetToCartesianOrigin: Offset {
+        return (x <= 0) ? Offset(x: abs(x), y: y) : Offset(x: -(x), y: y)
+    }
+    
+    /// Calculates the _point_ if the origin were modified by the point.
+    ///
+    /// TODO: Clarify & Define
+    func originModifiedBy(_ cartesianPoint: CartesianPoint) -> CartesianPoint {
+        return CartesianPoint(
+            x: abs(origin.x - cartesianPoint.x),
+            y: abs(origin.y - cartesianPoint.y)
+        )
+    }
+}
+
+public extension CartesianFrame {
     /// Identifies the minimum `CartesianFrame` that contains all of the provided points.
     ///
     /// - parameter points: The `CartesianPoint`s with which to map into a frame.

@@ -16,7 +16,7 @@ public typealias GraphFrame = CGRect
 @available(*, deprecated, renamed: "CartesianFrame")
 public extension GraphFrame {
     /// The offset to the `GraphOrigin`
-    @available(*, deprecated, message: "This should be implied as the CartesianFrame.origin?")
+    @available(*, deprecated, renamed: "CartesianFrame.offsetToCartesianOrigin")
     var graphOriginOffset: GraphPoint {
         if origin.x <= 0 {
             return GraphPoint(x: abs(origin.x), y: origin.y)
@@ -32,7 +32,7 @@ public extension GraphFrame {
     ///
     /// Given: CGRect(0, 0, 500, 500) & GraphFrame(47.7022, 250.0, 197.7045, 202.2977),
     /// The GraphPoint(47.7022, 47.7022) would be translated to CGPoint(0.0, 202.2977)
-    @available(*, deprecated, message: "Determine the purpose of this function and translate if required.")
+    @available(*, deprecated, renamed: "CartesianFrame.originModifiedBy(_:)")
     func boundedPoint(graphPoint: GraphPoint) -> CGPoint {
         let x = abs(origin.x - graphPoint.x)
         let y = abs(origin.y - graphPoint.y)
