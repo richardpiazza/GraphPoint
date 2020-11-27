@@ -66,7 +66,7 @@ public extension GraphFrame {
     
     /// Determines the smallest `GraphFrame` that encompasses all points, with
     /// expansion for crossing an axis.
-    @available(*, deprecated, renamed: "CartesianFrame.make(for:point2:radius:)")
+    @available(*, deprecated, renamed: "CartesianFrame.make(for:points:)")
     static func graphFrame(graphPoints: [GraphPoint], radius: CGFloat, startDegree: CGFloat, endDegree: CGFloat) -> GraphFrame {
         var graphFrame = self.graphFrame(graphPoints: graphPoints)
         
