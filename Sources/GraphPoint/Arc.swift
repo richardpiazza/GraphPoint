@@ -5,7 +5,7 @@ public struct Arc {
     public var endingDegree: Degree
     public var clockwise: Bool
     
-    public init(radius: Radius, startingDegree: Degree, endingDegree: Degree, clockwise: Bool = true) {
+    public init(radius: Radius = 0.0, startingDegree: Degree = 0.0, endingDegree: Degree = 0.0, clockwise: Bool = true) {
         self.radius = radius
         self.startingDegree = startingDegree
         self.endingDegree = endingDegree
