@@ -1,6 +1,6 @@
 import GraphPoint
 import Swift2D
-#if canImport(UIKit)
+#if canImport(UIKit) && !os(watchOS)
 import UIKit
 
 /// An iOS Style circular progress indicator.
