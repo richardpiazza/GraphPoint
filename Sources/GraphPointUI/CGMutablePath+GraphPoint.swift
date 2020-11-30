@@ -3,6 +3,7 @@ import Swift2D
 #if canImport(CoreGraphics)
 import CoreGraphics
 
+@available(*, deprecated, message: "GraphPointUI will be removed in the next version.")
 public extension CGMutablePath {
     static func arcPath(inRect rect: CGRect, startingDegree: CGFloat, endingDegree: CGFloat, innerRadius: CGFloat, outerRadius: CGFloat) -> CGMutablePath {
         let startAngle = Degree(startingDegree)

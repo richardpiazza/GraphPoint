@@ -32,7 +32,7 @@ public extension GraphFrame {
     ///
     /// Given: CGRect(0, 0, 500, 500) & GraphFrame(47.7022, 250.0, 197.7045, 202.2977),
     /// The GraphPoint(47.7022, 47.7022) would be translated to CGPoint(0.0, 202.2977)
-    @available(*, deprecated, renamed: "CartesianFrame.originModifiedBy(_:)")
+    @available(*, deprecated)
     func boundedPoint(graphPoint: GraphPoint) -> CGPoint {
         let x = abs(origin.x - graphPoint.x)
         let y = abs(origin.y - graphPoint.y)

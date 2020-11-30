@@ -42,16 +42,6 @@ public extension CartesianFrame {
     var offsetToCartesianOrigin: Offset {
         return (x <= 0) ? Offset(x: abs(x), y: y) : Offset(x: -(x), y: y)
     }
-    
-    /// Calculates the _point_ if the origin were modified by the point.
-    ///
-    /// TODO: Clarify & Define
-    func originModifiedBy(_ cartesianPoint: CartesianPoint) -> CartesianPoint {
-        return CartesianPoint(
-            x: abs(origin.x - cartesianPoint.x),
-            y: abs(origin.y - cartesianPoint.y)
-        )
-    }
 }
 
 public extension CartesianFrame {

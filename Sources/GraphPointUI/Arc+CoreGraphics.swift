@@ -2,6 +2,7 @@ import GraphPoint
 #if canImport(CoreGraphics)
 import CoreGraphics
 
+@available(*, deprecated, message: "GraphPointUI will be removed in the next version.")
 public extension Arc {
     @available(*, deprecated, renamed: "startingPoint")
     var startingGraphPoint: GraphPoint {

@@ -6,6 +6,7 @@ import UIKit
 /// An iOS Style circular progress indicator.
 ///
 /// Includes a `timerDate` variable which can be used to show progress over a timed period.
+@available(*, deprecated, message: "GraphPointUI will be removed in the next version.")
 @IBDesignable
 open class CircularProgress: UIView {
     static fileprivate let startingDegree = CGFloat(270.0)

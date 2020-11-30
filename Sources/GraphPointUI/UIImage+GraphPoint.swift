@@ -2,6 +2,7 @@ import GraphPoint
 #if canImport(UIKit)
 import UIKit
 
+@available(*, deprecated, message: "GraphPointUI will be removed in the next version.")
 public extension UIImage {
     static func filledImage(withPath path: CGMutablePath, color: UIColor, context: CGContext?) -> UIImage? {
         guard let context = context else {

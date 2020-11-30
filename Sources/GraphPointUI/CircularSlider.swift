@@ -4,6 +4,7 @@ import Swift2D
 import UIKit
 
 /// An iOS Style circular slider
+@available(*, deprecated, message: "GraphPointUI will be removed in the next version.")
 @IBDesignable open class CircularSlider: UIControl {
     static fileprivate let startingDegree = CGFloat(270.0)
     static fileprivate let endingDegree = CGFloat(630.0)
