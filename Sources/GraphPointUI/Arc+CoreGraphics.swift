@@ -2,28 +2,21 @@ import GraphPoint
 #if canImport(CoreGraphics)
 import CoreGraphics
 
-/// Arc of a circle (a continuous length around the circumference)
-public struct Arc {
-    public var startingDegree: CGFloat = 0.0
-    public var endingDegree: CGFloat = 0.0
-    public var radius: CGFloat = 0.0
-    
-    public init(startingDegree: CGFloat, endingDegree: CGFloat, radius: CGFloat) {
-        self.startingDegree = startingDegree
-        self.endingDegree = endingDegree
-        self.radius = radius
+@available(*, deprecated, message: "GraphPointUI will be removed in the next version.")
+public extension Arc {
+    @available(*, deprecated, renamed: "startingPoint")
+    var startingGraphPoint: GraphPoint {
+        return GraphPoint.graphPoint(degree: CGFloat(startingDegree), radius: CGFloat(radius))
     }
     
-    public var startingGraphPoint: GraphPoint {
-        return GraphPoint.graphPoint(degree: startingDegree, radius: radius)
-    }
-    
-    public var endingGraphPoint: GraphPoint {
-        return GraphPoint.graphPoint(degree: endingDegree, radius: radius)
+    @available(*, deprecated, renamed: "endingPoint")
+    var endingGraphPoint: GraphPoint {
+        return GraphPoint.graphPoint(degree: CGFloat(endingDegree), radius: CGFloat(radius))
     }
     
     /// Calculates the point of the right angle that joins the start and end points.
-    public var pivot: GraphPoint {
+    @available(*, deprecated, renamed: "pivotPoint")
+    var pivot: GraphPoint {
         var pivot = GraphPoint(x: 0, y: 0)
         
         if startingDegree < 90 {
@@ -43,5 +36,4 @@ public struct Arc {
         return pivot
     }
 }
-
 #endif

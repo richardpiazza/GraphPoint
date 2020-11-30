@@ -10,16 +10,18 @@ import CoreGraphics
 /// *  with: **GraphOrigin(50, 50)**
 /// *   the: **CGRect(10, 10, 10, 10)**
 /// *   has: **GraphFrame(-40, 40, 10, 10)**
+@available(*, deprecated, renamed: "CartesianFrame")
 public typealias GraphFrame = CGRect
-public typealias CartesianFrame = GraphFrame
 
+@available(*, deprecated, renamed: "CartesianFrame")
 public extension GraphFrame {
     /// The offset to the `GraphOrigin`
-    var graphOriginOffset: GraphOriginOffset {
+    @available(*, deprecated, renamed: "CartesianFrame.offsetToCartesianOrigin")
+    var graphOriginOffset: GraphPoint {
         if origin.x <= 0 {
-            return GraphOriginOffset(x: abs(origin.x), y: origin.y)
+            return GraphPoint(x: abs(origin.x), y: origin.y)
         } else {
-            return GraphOriginOffset(x: -(origin.x), y: origin.y)
+            return GraphPoint(x: -(origin.x), y: origin.y)
         }
     }
     
@@ -30,6 +32,7 @@ public extension GraphFrame {
     ///
     /// Given: CGRect(0, 0, 500, 500) & GraphFrame(47.7022, 250.0, 197.7045, 202.2977),
     /// The GraphPoint(47.7022, 47.7022) would be translated to CGPoint(0.0, 202.2977)
+    @available(*, deprecated)
     func boundedPoint(graphPoint: GraphPoint) -> CGPoint {
         let x = abs(origin.x - graphPoint.x)
         let y = abs(origin.y - graphPoint.y)
@@ -38,6 +41,7 @@ public extension GraphFrame {
     }
     
     /// Determines that smallest `GraphFrame` that encompasses all graph points.
+    @available(*, deprecated, renamed: "CartesianFrame.make(for:)")
     static func graphFrame(graphPoints: [GraphPoint]) -> GraphFrame {
         var minXMaxY = CGPoint.zero
         var maxXMinY = CGPoint.zero
@@ -62,6 +66,7 @@ public extension GraphFrame {
     
     /// Determines the smallest `GraphFrame` that encompasses all points, with
     /// expansion for crossing an axis.
+    @available(*, deprecated, renamed: "CartesianFrame.make(for:points:)")
     static func graphFrame(graphPoints: [GraphPoint], radius: CGFloat, startDegree: CGFloat, endDegree: CGFloat) -> GraphFrame {
         var graphFrame = self.graphFrame(graphPoints: graphPoints)
         

@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Swift2D",
+        "repositoryURL": "https://github.com/richardpiazza/Swift2D",
+        "state": {
+          "branch": null,
+          "revision": "d3aa067d4c9bfa97fb09b67b2b638bc134fae8d7",
+          "version": "1.1.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
