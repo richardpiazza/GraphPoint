@@ -14,18 +14,15 @@ let package = Package(
     products: [
         .library(
             name: "GraphPoint",
-            targets: ["GraphPoint", "GraphPointUI"]),
+            targets: ["GraphPoint"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/richardpiazza/Swift2D", .upToNextMinor(from: "1.1.0")),
+        .package(url: "https://github.com/richardpiazza/Swift2D", .upToNextMajor(from: "2.0.0")),
     ],
     targets: [
         .target(
             name: "GraphPoint",
             dependencies: ["Swift2D"]),
-        .target(
-            name: "GraphPointUI",
-            dependencies: ["GraphPoint"]),
         .testTarget(
             name: "GraphPointTests",
             dependencies: ["GraphPoint"]),

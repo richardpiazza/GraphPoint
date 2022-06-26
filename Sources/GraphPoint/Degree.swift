@@ -5,7 +5,7 @@ import Swift2D
 ///
 /// Degree 0 (zero) is the positive x axis and increments clockwise.
 /// TODO: Rotating clockwise to match CoreGraphics, but should this match the Quadrant flow?
-public typealias Degree = Float
+public typealias Degree = Double
 
 public extension Degree {
     /// Converts an angular degree to radians
@@ -17,7 +17,8 @@ public extension Degree {
     ///
     /// Uses the mathematical **Law of Cotangents**.
     ///
-    /// - parameter point: A `CartesianPoint` with offsets from the _origin_.
+    /// - parameters:
+    ///   - point: A `CartesianPoint` with offsets from the _origin_.
     /// - returns:The angular degree (0-360), clockwise from the x-axis.
     static func make(for cartesianPoint: CartesianPoint, clockwise: Bool = true) throws -> Degree {
         guard cartesianPoint != .nan else {

@@ -39,12 +39,12 @@ public extension CartesianPlane {
     }
     
     /// The length of the shortest axis found in this plane.
-    var minimumAxis: Float {
+    var minimumAxis: Double {
         return min(midX, midY)
     }
     
     /// The length of the shortest axis found in this plane.
-    var maximumAxis: Float {
+    var maximumAxis: Double {
         return max(midX, midY)
     }
     
@@ -62,7 +62,8 @@ public extension CartesianPlane {
     /// // cartesianPoint == CartesianPoint(x: -25, y: 25)
     /// ```
     ///
-    /// - parameter point: A standard `Point` (which uses top-left as {0, 0}).
+    /// - parameters:
+    ///   - point: A standard `Point` (which uses top-left as {0, 0}).
     /// - returns A `CartesianPoint` which has been translated onto the _plane_.
     func cartesianPoint(for point: Point) -> CartesianPoint {
         let origin = cartesianOrigin
@@ -106,5 +107,10 @@ public extension CartesianPlane {
     func rect(for cartesianFrame: CartesianFrame) -> Rect {
         let origin = cartesianOrigin
         return Rect(origin: Point(x: origin.x + cartesianFrame.origin.x, y: origin.y - cartesianFrame.origin.y), size: cartesianFrame.size)
+    }
+    
+    /// A `CartesianPoint` within the bounds of the plane for the given `Degree` and `maximumAxis`.
+    func cartesianPoint(for degree: Degree, clockwise: Bool = true) throws -> CartesianPoint {
+        try CartesianPoint.make(for: maximumAxis, degree: degree, clockwise: clockwise)
     }
 }

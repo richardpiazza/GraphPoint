@@ -3,11 +3,6 @@ import XCTest
 
 class QuadrantTests: XCTestCase {
     
-    static var allTests = [
-        ("testInitDegreeClockwise", testInitDegreeClockwise),
-        ("testInitCartesianPoint", testInitCartesianPoint),
-    ]
-    
     func testInitDegreeClockwise() throws {
         var degree: Degree
         var quadrant: Quadrant

@@ -3,11 +3,6 @@ import XCTest
 
 class CartesianFrameTests: XCTestCase {
     
-    static var allTests = [
-        ("testMakeForPoints", testMakeForPoints),
-        ("testMakeForPointsArc", testMakeForPointsArc),
-    ]
-    
     func testMakeForPoints() {
         var point1 = CartesianPoint(x: -10, y: 10)
         var point2 = CartesianPoint(x: 10, y: 10)

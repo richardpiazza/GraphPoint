@@ -47,7 +47,8 @@ public extension CartesianFrame {
 public extension CartesianFrame {
     /// Identifies the minimum `CartesianFrame` that contains all of the provided points.
     ///
-    /// - parameter points: The `CartesianPoint`s with which to map into a frame.
+    /// - parameters:
+    ///   - points: The `CartesianPoint`s with which to map into a frame.
     /// - returns: A `CartesianFrame` containing all of the points.
     static func make(for points: [CartesianPoint]) -> CartesianFrame {
         var minXMaxY = Point()
@@ -112,8 +113,9 @@ public extension CartesianFrame {
     ///               ▼
     /// ```
     ///
-    /// - parameter arc: The points and radius of the circle on which the chord is present.
-    /// - parameter points: Additional points that extend the resulting frame.
+    /// - parameters:
+    ///   - arc: The points and radius of the circle on which the chord is present.
+    ///   - points: Additional points that extend the resulting frame.
     /// - returns: A `CartesianFrame` containing all of the points.
     /// - throws: GraphPointError.unhandledQuadrantTransition(_:_:)
     static func make(for arc: Arc, points: [CartesianPoint]) throws -> CartesianFrame {

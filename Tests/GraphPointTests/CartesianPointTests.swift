@@ -3,12 +3,6 @@ import XCTest
 
 class CartesianPointTests: XCTestCase {
     
-    static var allTests = [
-        ("testMinimumAxis", testMinimumAxis),
-        ("testMakeForDegreeRadius", testMakeForDegreeRadius),
-        ("testMakeForDegreeRadiusLimiter", testMakeForDegreeRadiusLimiter),
-    ]
-    
     func testMinimumAxis() {
         var point: CartesianPoint = .init(x: 40, y: 40)
         XCTAssertEqual(point.minimumAxis, 40)
@@ -55,64 +49,64 @@ class CartesianPointTests: XCTestCase {
         XCTAssertEqual(point.y, 0.0)
         
         point = try .make(for: 10, degree: 10.0)
-        XCTAssertEqual(point.x, 9.848078)
-        XCTAssertEqual(point.y, -1.7364818)
+        XCTAssertEqual(point.x, 9.848078, accuracy: 0.00001)
+        XCTAssertEqual(point.y, -1.7364818, accuracy: 0.00001)
         
         point = try .make(for: 10, degree: 45.0)
-        XCTAssertEqual(point.x, 7.071068)
-        XCTAssertEqual(point.y, -7.071068)
+        XCTAssertEqual(point.x, 7.071068, accuracy: 0.00001)
+        XCTAssertEqual(point.y, -7.071068, accuracy: 0.00001)
         
         point = try .make(for: 10, degree: 80.0)
-        XCTAssertEqual(point.x, 1.7364818)
-        XCTAssertEqual(point.y, -9.848078)
+        XCTAssertEqual(point.x, 1.7364818, accuracy: 0.00001)
+        XCTAssertEqual(point.y, -9.848078, accuracy: 0.00001)
         
         point = try .make(for: 10, degree: 90.0)
         XCTAssertEqual(point.x, 0.0)
         XCTAssertEqual(point.y, -10.0)
         
         point = try .make(for: 10, degree: 100.0)
-        XCTAssertEqual(point.x, -1.7364818)
-        XCTAssertEqual(point.y, -9.848078)
+        XCTAssertEqual(point.x, -1.7364818, accuracy: 0.00001)
+        XCTAssertEqual(point.y, -9.848078, accuracy: 0.00001)
         
         point = try .make(for: 10, degree: 135.0)
-        XCTAssertEqual(point.x, -7.071068)
-        XCTAssertEqual(point.y, -7.071068)
+        XCTAssertEqual(point.x, -7.071068, accuracy: 0.00001)
+        XCTAssertEqual(point.y, -7.071068, accuracy: 0.00001)
         
         point = try .make(for: 10, degree: 170.0)
-        XCTAssertEqual(point.x, -9.848078)
-        XCTAssertEqual(point.y, -1.7364818)
+        XCTAssertEqual(point.x, -9.848078, accuracy: 0.00001)
+        XCTAssertEqual(point.y, -1.7364818, accuracy: 0.00001)
         
         point = try .make(for: 10, degree: 180.0)
         XCTAssertEqual(point.x, -10.0)
         XCTAssertEqual(point.y, 0.0)
         
         point = try .make(for: 10, degree: 190.0)
-        XCTAssertEqual(point.x, -9.848078)
-        XCTAssertEqual(point.y, 1.7364818)
+        XCTAssertEqual(point.x, -9.848078, accuracy: 0.00001)
+        XCTAssertEqual(point.y, 1.7364818, accuracy: 0.00001)
         
         point = try .make(for: 10, degree: 225.0)
-        XCTAssertEqual(point.x, -7.071068)
-        XCTAssertEqual(point.y, 7.071068)
+        XCTAssertEqual(point.x, -7.071068, accuracy: 0.00001)
+        XCTAssertEqual(point.y, 7.071068, accuracy: 0.00001)
         
         point = try .make(for: 10, degree: 260.0)
-        XCTAssertEqual(point.x, -1.7364818)
-        XCTAssertEqual(point.y, 9.848078)
+        XCTAssertEqual(point.x, -1.7364818, accuracy: 0.00001)
+        XCTAssertEqual(point.y, 9.848078, accuracy: 0.00001)
         
         point = try .make(for: 10, degree: 270.0)
         XCTAssertEqual(point.x, 0.0)
         XCTAssertEqual(point.y, 10.0)
         
         point = try .make(for: 10, degree: 280.0)
-        XCTAssertEqual(point.x, 1.7364818)
-        XCTAssertEqual(point.y, 9.848078)
+        XCTAssertEqual(point.x, 1.7364818, accuracy: 0.00001)
+        XCTAssertEqual(point.y, 9.848078, accuracy: 0.00001)
         
         point = try .make(for: 10, degree: 315.0)
-        XCTAssertEqual(point.x, 7.071068)
-        XCTAssertEqual(point.y, 7.071068)
+        XCTAssertEqual(point.x, 7.071068, accuracy: 0.00001)
+        XCTAssertEqual(point.y, 7.071068, accuracy: 0.00001)
         
         point = try .make(for: 10, degree: 350.0)
-        XCTAssertEqual(point.x, 9.848078)
-        XCTAssertEqual(point.y, 1.7364818)
+        XCTAssertEqual(point.x, 9.848078, accuracy: 0.00001)
+        XCTAssertEqual(point.y, 1.7364818, accuracy: 0.00001)
         
         point = try .make(for: 10, degree: 360.0)
         XCTAssertEqual(point.x, 10.0)
@@ -153,82 +147,82 @@ class CartesianPointTests: XCTestCase {
         
         modifier = .init(x: 0.0, y: 5.0)
         point = try .make(for: 10, degree: 10.0, modifier: modifier)
-        XCTAssertEqual(point.x, 8.6602545)
+        XCTAssertEqual(point.x, 8.6602545, accuracy: 0.00001)
         XCTAssertEqual(point.y, 5.0)
         
         modifier = .init(x: 5.0, y: 0.0)
         point = try .make(for: 10, degree: 45.0, modifier: modifier)
         XCTAssertEqual(point.x, 5.0)
-        XCTAssertEqual(point.y, -8.6602545)
+        XCTAssertEqual(point.y, -8.6602545, accuracy: 0.00001)
         
         modifier = .init(x: 5.0, y: 0.0)
         point = try .make(for: 10, degree: 80.0, modifier: modifier)
         XCTAssertEqual(point.x, 5.0)
-        XCTAssertEqual(point.y, -8.6602545)
+        XCTAssertEqual(point.y, -8.6602545, accuracy: 0.00001)
         
         modifier = .init(x: 5.0, y: 0.0)
         point = try .make(for: 10, degree: 90.0, modifier: modifier)
         XCTAssertEqual(point.x, 5.0)
-        XCTAssertEqual(point.y, -8.6602545)
+        XCTAssertEqual(point.y, -8.6602545, accuracy: 0.00001)
         
         modifier = .init(x: -5.0, y: 0.0)
         point = try .make(for: 10, degree: 100.0, modifier: modifier)
         XCTAssertEqual(point.x, -5.0)
-        XCTAssertEqual(point.y, -8.6602545)
+        XCTAssertEqual(point.y, -8.6602545, accuracy: 0.00001)
         
         modifier = .init(x: 0.0, y: -5.0)
         point = try .make(for: 10, degree: 135.0, modifier: modifier)
-        XCTAssertEqual(point.x, -8.6602545)
+        XCTAssertEqual(point.x, -8.6602545, accuracy: 0.00001)
         XCTAssertEqual(point.y, -5.0)
         
         modifier = .init(x: 0.0, y: -5.0)
         point = try .make(for: 10, degree: 170.0, modifier: modifier)
-        XCTAssertEqual(point.x, -8.6602545)
+        XCTAssertEqual(point.x, -8.6602545, accuracy: 0.00001)
         XCTAssertEqual(point.y, -5.0)
         
         modifier = .init(x: 0.0, y: 5.0)
         point = try .make(for: 10, degree: 180.0, modifier: modifier)
-        XCTAssertEqual(point.x, -8.6602545)
+        XCTAssertEqual(point.x, -8.6602545, accuracy: 0.00001)
         XCTAssertEqual(point.y, 5.0)
         
         modifier = .init(x: 0.0, y: 5.0)
         point = try .make(for: 10, degree: 190.0, modifier: modifier)
-        XCTAssertEqual(point.x, -8.6602545)
+        XCTAssertEqual(point.x, -8.6602545, accuracy: 0.00001)
         XCTAssertEqual(point.y, 5.0)
         
         modifier = .init(x: -5.0, y: 0.0)
         point = try .make(for: 10, degree: 225.0, modifier: modifier)
         XCTAssertEqual(point.x, -5.0)
-        XCTAssertEqual(point.y, 8.6602545)
+        XCTAssertEqual(point.y, 8.6602545, accuracy: 0.00001)
         
         modifier = .init(x: -5.0, y: 0.0)
         point = try .make(for: 10, degree: 260.0, modifier: modifier)
         XCTAssertEqual(point.x, -5.0)
-        XCTAssertEqual(point.y, 8.6602545)
+        XCTAssertEqual(point.y, 8.6602545, accuracy: 0.00001)
         
         modifier = .init(x: 5.0, y: 0.0)
         point = try .make(for: 10, degree: 270.0, modifier: modifier)
         XCTAssertEqual(point.x, 5.0)
-        XCTAssertEqual(point.y, 8.6602545)
+        XCTAssertEqual(point.y, 8.6602545, accuracy: 0.00001)
         
         modifier = .init(x: 5.0, y: 0.0)
         point = try .make(for: 10, degree: 280.0, modifier: modifier)
         XCTAssertEqual(point.x, 5.0)
-        XCTAssertEqual(point.y, 8.6602545)
+        XCTAssertEqual(point.y, 8.6602545, accuracy: 0.00001)
         
         modifier = .init(x: 0.0, y: 5.0)
         point = try .make(for: 10, degree: 315.0, modifier: modifier)
-        XCTAssertEqual(point.x, 8.6602545)
+        XCTAssertEqual(point.x, 8.6602545, accuracy: 0.00001)
         XCTAssertEqual(point.y, 5.0)
         
         modifier = .init(x: 0.0, y: 5.0)
         point = try .make(for: 10, degree: 350.0, modifier: modifier)
-        XCTAssertEqual(point.x, 8.6602545)
+        XCTAssertEqual(point.x, 8.6602545, accuracy: 0.00001)
         XCTAssertEqual(point.y, 5.0)
         
         modifier = .init(x: 0.0, y: 5.0)
         point = try .make(for: 10, degree: 360.0, modifier: modifier)
-        XCTAssertEqual(point.x, 8.6602545)
+        XCTAssertEqual(point.x, 8.6602545, accuracy: 0.00001)
         XCTAssertEqual(point.y, 5.0)
     }
 }
