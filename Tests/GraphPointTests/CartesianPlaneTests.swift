@@ -4,15 +4,6 @@ import Swift2D
 
 class CartesianPlaneTests: XCTestCase {
     
-    static var allTests = [
-        ("testCartesianOrigin", testCartesianOrigin),
-        ("testMinimumAxis", testMinimumAxis),
-        ("testMaximumAxis", testMaximumAxis),
-        ("testCartesianPointForPoint", testCartesianPointForPoint),
-        ("testPointForCartesianPoint", testPointForCartesianPoint),
-        ("testRectForCartesianFrame", testRectForCartesianFrame),
-    ]
-    
     func testCartesianOrigin() {
         var plane = CartesianPlane(size: Size(width: 40, height: 20))
         XCTAssertEqual(plane.cartesianOrigin.x, 20)
