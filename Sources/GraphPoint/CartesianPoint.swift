@@ -22,7 +22,7 @@ public typealias CartesianPoint = Point
 public extension CartesianPoint {
     /// The minimum axis for a `CartesianPlane` that would contain this point.
     var minimumAxis: Double {
-        return max(abs(x), abs(y))
+        max(abs(x), abs(y))
     }
 }
 
@@ -39,72 +39,88 @@ public extension CartesianPoint {
         guard degree >= 0.0, degree <= 360.0 else {
             throw GraphPointError.invalidDegree(degree)
         }
-        
+
         guard radius >= 0.0 else {
             throw GraphPointError.invalidRadius(radius)
         }
-        
+
         guard radius > 0.0 else {
             return .zero
         }
-        
+
         let rightAngle: Double = 90.0
         let sinRight = sin(rightAngle.radians)
         var rise: Double = 0.0
         var run: Double = 0.0
         var point: CartesianPoint = .zero
-        
+
         switch clockwise {
         case true:
             if degree > 315 {
                 rise = 360.0 - degree
                 run = 180.0 - rightAngle - rise
-                point.x = (radius / sinRight) * sin(run.radians)
-                point.y = (radius / sinRight) * sin(rise.radians)
+                point = CartesianPoint(
+                    x: (radius / sinRight) * sin(run.radians),
+                    y: (radius / sinRight) * sin(rise.radians)
+                )
             } else if degree > 270 {
                 run = degree - 270.0
                 rise = 180.0 - rightAngle - run
-                point.x = (radius / sinRight) * sin(run.radians)
-                point.y = (radius / sinRight) * sin(rise.radians)
+                point = CartesianPoint(
+                    x: (radius / sinRight) * sin(run.radians),
+                    y: (radius / sinRight) * sin(rise.radians)
+                )
             } else if degree > 225 {
                 run = 270.0 - degree
                 rise = 180.0 - rightAngle - run
-                point.x = -1.0 * (radius / sinRight) * sin(run.radians)
-                point.y = (radius / sinRight) * sin(rise.radians)
+                point = CartesianPoint(
+                    x: -1.0 * (radius / sinRight) * sin(run.radians),
+                    y: (radius / sinRight) * sin(rise.radians)
+                )
             } else if degree > 180 {
                 rise = degree - 180.0
                 run = 180.0 - rightAngle - rise
-                point.x = -1.0 * (radius / sinRight) * sin(run.radians)
-                point.y = (radius / sinRight) * sin(rise.radians)
+                point = CartesianPoint(
+                    x: -1.0 * (radius / sinRight) * sin(run.radians),
+                    y: (radius / sinRight) * sin(rise.radians)
+                )
             } else if degree > 135 {
                 rise = 180.0 - degree
                 run = 180.0 - rightAngle - rise
-                point.x = -1.0 * (radius / sinRight) * sin(run.radians)
-                point.y = -1.0 * (radius / sinRight) * sin(rise.radians)
+                point = CartesianPoint(
+                    x: -1.0 * (radius / sinRight) * sin(run.radians),
+                    y: -1.0 * (radius / sinRight) * sin(rise.radians)
+                )
             } else if degree > 90 {
                 run = degree - 90.0
                 rise = 180.0 - rightAngle - run
-                point.x = -1.0 * (radius / sinRight) * sin(run.radians)
-                point.y = -1.0 * (radius / sinRight) * sin(rise.radians)
+                point = CartesianPoint(
+                    x: -1.0 * (radius / sinRight) * sin(run.radians),
+                    y: -1.0 * (radius / sinRight) * sin(rise.radians)
+                )
             } else if degree > 45 {
                 run = 90.0 - degree
                 rise = 180.0 - rightAngle - run
-                point.x = (radius / sinRight) * sin(run.radians)
-                point.y = -1.0 * (radius / sinRight) * sin(rise.radians)
+                point = CartesianPoint(
+                    x: (radius / sinRight) * sin(run.radians),
+                    y: -1.0 * (radius / sinRight) * sin(rise.radians)
+                )
             } else if degree >= 0 {
                 rise = degree
                 run = 180.0 - rightAngle - rise
-                point.x = (radius / sinRight) * sin(run.radians)
-                point.y = -1.0 * (radius / sinRight) * sin(rise.radians)
+                point = CartesianPoint(
+                    x: (radius / sinRight) * sin(run.radians),
+                    y: -1.0 * (radius / sinRight) * sin(rise.radians)
+                )
             }
         case false:
             // TODO: Handled anti-clockwise
             break
         }
-        
+
         return point
     }
-    
+
     /// Calculates the `CartesianPoint` for a given degree and radius from the _origin_ limited by another point.
     ///
     /// Uses the **Pythagorean Theorem** to solve for the intercept:
@@ -119,49 +135,65 @@ public extension CartesianPoint {
         guard degree >= 0.0, degree <= 360.0 else {
             throw GraphPointError.invalidDegree(degree)
         }
-        
+
         guard radius >= 0.0 else {
             throw GraphPointError.invalidRadius(radius)
         }
-        
+
         guard radius > 0.0 else {
             return .zero
         }
-        
+
         var point = CartesianPoint()
-        
+
         switch clockwise {
         case true:
-            if (degree >= 315) {
-                point.x = sqrt(pow(radius, 2) - pow(modifier.y, 2))
-                point.y = modifier.y
-            } else if (degree >= 270) {
-                point.x = modifier.x
-                point.y = sqrt(pow(radius, 2) - pow(modifier.x, 2))
-            } else if (degree >= 225) {
-                point.x = modifier.x
-                point.y = sqrt(pow(radius, 2) - pow(modifier.x, 2))
-            } else if (degree >= 180) {
-                point.x = -(sqrt(pow(radius, 2) - pow(modifier.y, 2)))
-                point.y = modifier.y
-            } else if (degree >= 135) {
-                point.x = -(sqrt(pow(radius, 2) - pow(modifier.y, 2)))
-                point.y = modifier.y
-            } else if (degree >= 90) {
-                point.x = modifier.x
-                point.y = -(sqrt(pow(radius, 2) - pow(modifier.x, 2)))
-            } else if (degree >= 45) {
-                point.x = modifier.x
-                point.y = -(sqrt(pow(radius, 2) - pow(modifier.x, 2)))
-            } else if (degree >= 0) {
-                point.x = sqrt(pow(radius, 2) - pow(modifier.y, 2))
-                point.y = modifier.y
+            if degree >= 315 {
+                point = CartesianPoint(
+                    x: sqrt(pow(radius, 2) - pow(modifier.y, 2)),
+                    y: modifier.y
+                )
+            } else if degree >= 270 {
+                point = CartesianPoint(
+                    x: modifier.x,
+                    y: sqrt(pow(radius, 2) - pow(modifier.x, 2))
+                )
+            } else if degree >= 225 {
+                point = CartesianPoint(
+                    x: modifier.x,
+                    y: sqrt(pow(radius, 2) - pow(modifier.x, 2))
+                )
+            } else if degree >= 180 {
+                point = CartesianPoint(
+                    x: -sqrt(pow(radius, 2) - pow(modifier.y, 2)),
+                    y: modifier.y
+                )
+            } else if degree >= 135 {
+                point = CartesianPoint(
+                    x: -sqrt(pow(radius, 2) - pow(modifier.y, 2)),
+                    y: modifier.y
+                )
+            } else if degree >= 90 {
+                point = CartesianPoint(
+                    x: modifier.x,
+                    y: -sqrt(pow(radius, 2) - pow(modifier.x, 2))
+                )
+            } else if degree >= 45 {
+                point = CartesianPoint(
+                    x: modifier.x,
+                    y: -sqrt(pow(radius, 2) - pow(modifier.x, 2))
+                )
+            } else if degree >= 0 {
+                point = CartesianPoint(
+                    x: sqrt(pow(radius, 2) - pow(modifier.y, 2)),
+                    y: modifier.y
+                )
             }
         case false:
-            //TODO: Determine if calculations should be modified.
+            // TODO: Determine if calculations should be modified.
             break
         }
-        
+
         return point
     }
 }

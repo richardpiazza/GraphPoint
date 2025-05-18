@@ -5,26 +5,28 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
-  macos-build:
+  SwiftActions:
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest]
 
-    runs-on: macos-latest
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Build (macOS)
-      run: swift build -v
-    - name: Run tests
-      run: swift test -v
-  
-  ubuntu-build:
-
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build (Ubuntu)
-      run: swift build -v
-    - name: Run tests
-      run: swift test -v
+    - name: Checkout Source
+      uses: actions/checkout@v4
+
+    - name: Lint
+      if: ${{ runner.os == 'macOS' }}
+      shell: bash
+      run: swiftformat --lint . --reporter github-actions-log
+
+    - name: Swift Build
+      uses: SwiftActions/SwiftBuild@main
+
+    - name: Swift Test
+      uses: SwiftActions/SwiftTest@main
+      

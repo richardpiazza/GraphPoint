@@ -1,6 +1,6 @@
 import Foundation
 
-public enum GraphPointError: Swift.Error {
+public enum GraphPointError: Error {
     case invalidPoint(_ point: CartesianPoint)
     case invalidDegree(_ degree: Degree)
     case invalidRadius(_ radius: Radius)

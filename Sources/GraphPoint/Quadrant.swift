@@ -5,7 +5,7 @@ import Foundation
 /// The axes of a two-dimensional Cartesian system divide the plane into four infinite regions, called quadrants, each
 /// bounded by two half-axes. When the axes are drawn according to the mathematical custom, the numbering goes
 /// counter-clockwise starting from the upper right ("northeast") quadrant.
-public enum Quadrant: Int, CaseIterable {
+public enum Quadrant: Int, CaseIterable, Hashable, Codable, Sendable {
     /// Quadrant 1
     /// * x: + (positive)
     /// * y: + (positive)
@@ -33,31 +33,31 @@ public extension Quadrant {
         guard degree >= 0.0, degree <= 360.0 else {
             throw GraphPointError.invalidDegree(degree)
         }
-        
+
         switch clockwise {
         case true:
-            if degree >= 0.0 && degree <= 90.0 {
+            if degree >= 0.0, degree <= 90.0 {
                 self = .IV
-            } else if degree >= 90.0 && degree <= 180.0 {
+            } else if degree >= 90.0, degree <= 180.0 {
                 self = .III
-            } else if degree >= 180.0 && degree <= 270.0 {
+            } else if degree >= 180.0, degree <= 270.0 {
                 self = .II
             } else {
                 self = .I
             }
         case false:
-            if degree >= 0.0 && degree <= 90.0 {
+            if degree >= 0.0, degree <= 90.0 {
                 self = .I
-            } else if degree >= 90.0 && degree <= 180.0 {
+            } else if degree >= 90.0, degree <= 180.0 {
                 self = .II
-            } else if degree >= 180.0 && degree <= 270.0 {
+            } else if degree >= 180.0, degree <= 270.0 {
                 self = .III
             } else {
                 self = .IV
             }
         }
     }
-    
+
     /// Initializes a `Quadrant` that contains the point.
     ///
     /// Special conditions are used when a point rests on an axis:
