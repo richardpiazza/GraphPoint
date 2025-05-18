@@ -1,35 +1,35 @@
-import XCTest
 @testable import GraphPoint
+import XCTest
 
 class CartesianFrameTests: XCTestCase {
-    
+
     func testMakeForPoints() {
         var point1 = CartesianPoint(x: -10, y: 10)
         var point2 = CartesianPoint(x: 10, y: 10)
         var point3 = CartesianPoint(x: -10, y: -10)
         var point4 = CartesianPoint(x: 10, y: -10)
-        
+
         var frame = CartesianFrame.make(for: [point1, point2, point3, point4])
         XCTAssertEqual(frame.origin.x, -10)
         XCTAssertEqual(frame.origin.y, 10)
         XCTAssertEqual(frame.size.width, 20)
         XCTAssertEqual(frame.size.height, 20)
-        
+
         point1 = CartesianPoint(x: -10, y: 10)
         point2 = CartesianPoint(x: 50, y: 40)
         point3 = CartesianPoint(x: -1, y: -1)
         point4 = CartesianPoint(x: 12, y: -75)
-        
+
         frame = CartesianFrame.make(for: [point1, point2, point3, point4])
         XCTAssertEqual(frame.origin.x, -10)
         XCTAssertEqual(frame.origin.y, 40)
         XCTAssertEqual(frame.size.width, 60)
         XCTAssertEqual(frame.size.height, 115)
     }
-    
+
     func testMakeForPointsArc() throws {
         let radius = Radius(15)
-        
+
         // .I > .IV
         var point1 = CartesianPoint(x: 10, y: 10)
         var point2 = CartesianPoint(x: 10, y: -10)
@@ -39,7 +39,7 @@ class CartesianFrameTests: XCTestCase {
         XCTAssertEqual(frame.origin.y, 10)
         XCTAssertEqual(frame.size.width, 5)
         XCTAssertEqual(frame.size.height, 20)
-        
+
         // .IV > .I
         point1 = CartesianPoint(x: 5, y: -10)
         point2 = CartesianPoint(x: 7, y: 4)

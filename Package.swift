@@ -1,4 +1,4 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.9
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -6,10 +6,11 @@ import PackageDescription
 let package = Package(
     name: "GraphPoint",
     platforms: [
-        .macOS(.v10_13),
-        .iOS(.v11),
-        .tvOS(.v11),
-        .watchOS(.v4),
+        .macOS(.v13),
+        .macCatalyst(.v16),
+        .iOS(.v16),
+        .tvOS(.v16),
+        .watchOS(.v9),
     ],
     products: [
         .library(
@@ -17,7 +18,8 @@ let package = Package(
             targets: ["GraphPoint"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/richardpiazza/Swift2D", .upToNextMajor(from: "2.0.0")),
+        .package(url: "https://github.com/richardpiazza/Swift2D", .upToNextMajor(from: "2.2.0")),
+        .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.55.0"),
     ],
     targets: [
         .target(

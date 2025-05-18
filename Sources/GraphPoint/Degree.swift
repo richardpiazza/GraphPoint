@@ -10,9 +10,9 @@ public typealias Degree = Double
 public extension Degree {
     /// Converts an angular degree to radians
     var radians: Radian {
-        return self * (.pi / 180.0)
+        self * (.pi / 180.0)
     }
-    
+
     /// Calculates the angular degree for a given point.
     ///
     /// Uses the mathematical **Law of Cotangents**.
@@ -24,14 +24,14 @@ public extension Degree {
         guard cartesianPoint != .nan else {
             throw GraphPointError.invalidPoint(cartesianPoint)
         }
-        
+
         guard cartesianPoint != .zero else {
             throw GraphPointError.invalidPoint(cartesianPoint)
         }
-        
+
         let degree: Degree
         let quadrant = Quadrant(cartesianPoint: cartesianPoint)
-        
+
         switch quadrant {
         case .I:
             let midPoint = try CartesianPoint.make(for: cartesianPoint.minimumAxis, degree: 315.0)
@@ -62,11 +62,11 @@ public extension Degree {
                 degree = 90.0 - atan(cartesianPoint.x / abs(cartesianPoint.y)).degrees
             }
         }
-        
+
         if !clockwise {
             return 360.0 - degree
         }
-        
+
         return degree
     }
 }

@@ -2,48 +2,15 @@
     <img src="Resources/GraphPoint.png" width="1000" max-width="90%" alt="GraphPoint" />
 </p>
 
-<p align="center">
-    <img src="https://github.com/richardpiazza/GraphPoint/workflows/Swift/badge.svg?branch=main" />
-    <img src="https://img.shields.io/badge/Swift-5.0-orange.svg" />
-    <a href="https://twitter.com/richardpiazza">
-        <img src="https://img.shields.io/badge/twitter-@richardpiazza-blue.svg?style=flat" alt="Twitter: @richardpiazza" />
-    </a>
-</p>
+A Swift implementation of the <a href="https://en.wikipedia.org/wiki/Cartesian_coordinate_system">Cartesian Coordinate System</a>.
 
-<p align="center">
-    A Swift implementation of the <a href="https://en.wikipedia.org/wiki/Cartesian_coordinate_system">Cartesian Coordinate System</a>.
-</p>
-
-## Installation
-
-**GraphPoint** is distributed using the [Swift Package Manager](https://swift.org/package-manager). To install it into a project, add it as a 
-dependency within your `Package.swift` manifest:
-
-```swift
-let package = Package(
-    ...
-    dependencies: [
-        .package(url: "https://github.com/richardpiazza/GraphPoint.git", from: "4.0.0")
-    ],
-    ...
-)
-```
-
-Then import **GraphPoint** wherever you'd like to use it:
-
-```swift
-import GraphPoint
-```
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Frichardpiazza%2FGraphPoint%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/richardpiazza/GraphPoint)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Frichardpiazza%2FGraphPoint%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/richardpiazza/GraphPoint)
 
 ## Dependencies
 
 **GraphPoint** relies heavily on the **[Swift2D](https://github.com/richardpiazza/Swift2D)** library, which reimplements `Rect`, `Size`, and 
 `Point` in a cross-platform, non-Foundation reliant way.
-
-## Deprecations
-
-The `CoreGraphics` aliases have been deprecated and replaced by their _Cartesian_ counterparts. These type-aliases and 
-**GraphPointUI** will be removed in a future version.
 
 ## Usage
 
@@ -73,3 +40,29 @@ cartesianFrame == Rect(origin: Point(x: -10, y: 10), size: Size(width: 10, heigh
 ### `CartesianPoint`
 
 A point within a `CartesianPlane`. The x & y coordinates of a `CartesianPoint` represent the offset from the planes 'origin' (0, 0).
+
+## Deprecations
+
+The `CoreGraphics` aliases have been deprecated and replaced by their _Cartesian_ counterparts. These type-aliases and 
+**GraphPointUI** will be removed in a future version.
+
+## Installation
+
+**GraphPoint** is distributed using the [Swift Package Manager](https://swift.org/package-manager). To install it into a project, add it as a 
+dependency within your `Package.swift` manifest:
+
+```swift
+let package = Package(
+    ...
+    dependencies: [
+        .package(url: "https://github.com/richardpiazza/GraphPoint.git", from: "4.0.0")
+    ],
+    ...
+)
+```
+
+Then import **GraphPoint** wherever you'd like to use it:
+
+```swift
+import GraphPoint
+```

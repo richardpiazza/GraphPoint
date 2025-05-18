@@ -8,22 +8,16 @@ import Swift2D
 public typealias CartesianPlane = Rect
 
 public extension CartesianPlane {
-    init(size: Size) {
-        self.init()
-        origin = .zero
-        self.size = size
-    }
-    
     init(axis: Int) {
-        self.init()
-        origin = .zero
-        size = Size(width: axis * 2, height: axis * 2)
+        self.init(
+            size: Size(width: axis * 2, height: axis * 2)
+        )
     }
-    
+
     init(radius: Radius) {
-        self.init()
-        origin = .zero
-        size = Size(width: radius * 2, height: radius * 2)
+        self.init(
+            size: Size(width: radius * 2, height: radius * 2)
+        )
     }
 }
 
@@ -35,19 +29,19 @@ public extension CartesianPlane {
     /// projections along each axis, either in the positive or negative direction. The coordinates of the origin are always
     /// all zero. For example: {0,0}.
     var cartesianOrigin: Point {
-        return center
+        center
     }
-    
+
     /// The length of the shortest axis found in this plane.
     var minimumAxis: Double {
-        return min(midX, midY)
+        min(midX, midY)
     }
-    
+
     /// The length of the shortest axis found in this plane.
     var maximumAxis: Double {
-        return max(midX, midY)
+        max(midX, midY)
     }
-    
+
     /// Converts a non-cartesian `Point` to a `CartesianPoint`.
     ///
     /// The assumption being made is that the `Point` being provided uses the standard top-left origin indexing for
@@ -68,47 +62,47 @@ public extension CartesianPlane {
     func cartesianPoint(for point: Point) -> CartesianPoint {
         let origin = cartesianOrigin
         var cartesianPoint: CartesianPoint = .zero
-        
+
         if point.x < origin.x {
-            cartesianPoint.x = -(origin.x - point.x)
+            cartesianPoint = cartesianPoint.with(x: -(origin.x - point.x))
         } else if point.x > origin.x {
-            cartesianPoint.x = point.x - origin.x
+            cartesianPoint = cartesianPoint.with(x: point.x - origin.x)
         }
-        
+
         if point.y > origin.y {
-            cartesianPoint.y = -(point.y - origin.y)
+            cartesianPoint = cartesianPoint.with(y: -(point.y - origin.y))
         } else if point.y < origin.y {
-            cartesianPoint.y = origin.y - point.y
+            cartesianPoint = cartesianPoint.with(y: origin.y - point.y)
         }
-        
+
         return cartesianPoint
     }
-    
+
     /// Converts a `CartesianPoint` to a non-cartesian `Point`.
     func point(for cartesianPoint: CartesianPoint) -> Point {
         var point: Point = .zero
-        
+
         if cartesianPoint.x >= 0.0 {
-            point.x = cartesianOrigin.x + cartesianPoint.x
+            point = point.with(x: cartesianOrigin.x + cartesianPoint.x)
         } else {
-            point.x = cartesianOrigin.x - abs(cartesianPoint.x)
+            point = point.with(x: cartesianOrigin.x - abs(cartesianPoint.x))
         }
-        
+
         if cartesianPoint.y <= 0.0 {
-            point.y = cartesianOrigin.y + abs(cartesianPoint.y)
+            point = point.with(y: cartesianOrigin.y + abs(cartesianPoint.y))
         } else {
-            point.y = cartesianOrigin.y - cartesianPoint.y
+            point = point.with(y: cartesianOrigin.y - cartesianPoint.y)
         }
-        
+
         return point
     }
-    
+
     /// Converts a `CartesianFrame` to a non-cartesian `Rect`.
     func rect(for cartesianFrame: CartesianFrame) -> Rect {
         let origin = cartesianOrigin
         return Rect(origin: Point(x: origin.x + cartesianFrame.origin.x, y: origin.y - cartesianFrame.origin.y), size: cartesianFrame.size)
     }
-    
+
     /// A `CartesianPoint` within the bounds of the plane for the given `Degree` and `maximumAxis`.
     func cartesianPoint(for degree: Degree, clockwise: Bool = true) throws -> CartesianPoint {
         try CartesianPoint.make(for: maximumAxis, degree: degree, clockwise: clockwise)

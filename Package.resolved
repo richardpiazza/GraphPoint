@@ -1,16 +1,23 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "Swift2D",
-        "repositoryURL": "https://github.com/richardpiazza/Swift2D",
-        "state": {
-          "branch": null,
-          "revision": "4df6f74d3e3ad11075ea53fbb13fceda7c60b7b6",
-          "version": "2.0.0"
-        }
+  "pins" : [
+    {
+      "identity" : "swift2d",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/richardpiazza/Swift2D",
+      "state" : {
+        "revision" : "b18c58dbcc4aa8091df51be0512ee5b0d16559e5",
+        "version" : "2.2.0"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "swiftformat",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/nicklockwood/SwiftFormat",
+      "state" : {
+        "revision" : "d35227722eb590b34a3ccaf8b40759e8910bc870",
+        "version" : "0.56.1"
+      }
+    }
+  ],
+  "version" : 2
 }
