@@ -75,7 +75,8 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-spm-
     - name: Package Resolution
-      run: set -o pipefail && xcodebuild -resolvePackageDependencies | xcbeautify
+      shell: bash
+      run: xcodebuild -resolvePackageDependencies | xcbeautify
     - name: Build
       shell: bash
       env:

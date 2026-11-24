@@ -19,7 +19,7 @@ let package = Package(
             targets: ["GraphPoint"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/richardpiazza/Swift2D", branch: "feature/swift-6.2"),
+        .package(url: "https://github.com/richardpiazza/Swift2D", from: "2.3.0"),
     ],
     targets: [
         .target(
