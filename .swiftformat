@@ -1,6 +1,6 @@
 # Compiler
 --languagemode 5
---swiftversion 5.9
+--swiftversion 6.2
 
 # Options
 --exclude derivedData
@@ -10,6 +10,10 @@
 # Rules
 --disable blankLinesAtStartOfScope
 --disable hoistPatternLet
+--disable nestedIf
 --disable redundantType
+--disable repeatedGuard
+--disable swiftTestingTestCaseNames
 --disable unusedArguments
 --disable wrapArguments
+--disable wrapPropertyBodies

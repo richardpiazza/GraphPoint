@@ -1,23 +1,15 @@
 {
+  "originHash" : "c6fcf9cff99427ad7b09eeaf2298278434070baae2cc6f65c3f5a9dfa1b06384",
   "pins" : [
     {
       "identity" : "swift2d",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/richardpiazza/Swift2D",
       "state" : {
-        "revision" : "b18c58dbcc4aa8091df51be0512ee5b0d16559e5",
-        "version" : "2.2.0"
-      }
-    },
-    {
-      "identity" : "swiftformat",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/nicklockwood/SwiftFormat",
-      "state" : {
-        "revision" : "d35227722eb590b34a3ccaf8b40759e8910bc870",
-        "version" : "0.56.1"
+        "revision" : "79f6a0907c5032d291d79b14d53d844256d2c366",
+        "version" : "2.3.0"
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

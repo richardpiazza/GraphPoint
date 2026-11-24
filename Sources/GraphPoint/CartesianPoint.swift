@@ -61,56 +61,56 @@ public extension CartesianPoint {
                 run = 180.0 - rightAngle - rise
                 point = CartesianPoint(
                     x: (radius / sinRight) * sin(run.radians),
-                    y: (radius / sinRight) * sin(rise.radians)
+                    y: (radius / sinRight) * sin(rise.radians),
                 )
             } else if degree > 270 {
                 run = degree - 270.0
                 rise = 180.0 - rightAngle - run
                 point = CartesianPoint(
                     x: (radius / sinRight) * sin(run.radians),
-                    y: (radius / sinRight) * sin(rise.radians)
+                    y: (radius / sinRight) * sin(rise.radians),
                 )
             } else if degree > 225 {
                 run = 270.0 - degree
                 rise = 180.0 - rightAngle - run
                 point = CartesianPoint(
                     x: -1.0 * (radius / sinRight) * sin(run.radians),
-                    y: (radius / sinRight) * sin(rise.radians)
+                    y: (radius / sinRight) * sin(rise.radians),
                 )
             } else if degree > 180 {
                 rise = degree - 180.0
                 run = 180.0 - rightAngle - rise
                 point = CartesianPoint(
                     x: -1.0 * (radius / sinRight) * sin(run.radians),
-                    y: (radius / sinRight) * sin(rise.radians)
+                    y: (radius / sinRight) * sin(rise.radians),
                 )
             } else if degree > 135 {
                 rise = 180.0 - degree
                 run = 180.0 - rightAngle - rise
                 point = CartesianPoint(
                     x: -1.0 * (radius / sinRight) * sin(run.radians),
-                    y: -1.0 * (radius / sinRight) * sin(rise.radians)
+                    y: -1.0 * (radius / sinRight) * sin(rise.radians),
                 )
             } else if degree > 90 {
                 run = degree - 90.0
                 rise = 180.0 - rightAngle - run
                 point = CartesianPoint(
                     x: -1.0 * (radius / sinRight) * sin(run.radians),
-                    y: -1.0 * (radius / sinRight) * sin(rise.radians)
+                    y: -1.0 * (radius / sinRight) * sin(rise.radians),
                 )
             } else if degree > 45 {
                 run = 90.0 - degree
                 rise = 180.0 - rightAngle - run
                 point = CartesianPoint(
                     x: (radius / sinRight) * sin(run.radians),
-                    y: -1.0 * (radius / sinRight) * sin(rise.radians)
+                    y: -1.0 * (radius / sinRight) * sin(rise.radians),
                 )
             } else if degree >= 0 {
                 rise = degree
                 run = 180.0 - rightAngle - rise
                 point = CartesianPoint(
                     x: (radius / sinRight) * sin(run.radians),
-                    y: -1.0 * (radius / sinRight) * sin(rise.radians)
+                    y: -1.0 * (radius / sinRight) * sin(rise.radians),
                 )
             }
         case false:
@@ -151,42 +151,42 @@ public extension CartesianPoint {
             if degree >= 315 {
                 point = CartesianPoint(
                     x: sqrt(pow(radius, 2) - pow(modifier.y, 2)),
-                    y: modifier.y
+                    y: modifier.y,
                 )
             } else if degree >= 270 {
                 point = CartesianPoint(
                     x: modifier.x,
-                    y: sqrt(pow(radius, 2) - pow(modifier.x, 2))
+                    y: sqrt(pow(radius, 2) - pow(modifier.x, 2)),
                 )
             } else if degree >= 225 {
                 point = CartesianPoint(
                     x: modifier.x,
-                    y: sqrt(pow(radius, 2) - pow(modifier.x, 2))
+                    y: sqrt(pow(radius, 2) - pow(modifier.x, 2)),
                 )
             } else if degree >= 180 {
                 point = CartesianPoint(
                     x: -sqrt(pow(radius, 2) - pow(modifier.y, 2)),
-                    y: modifier.y
+                    y: modifier.y,
                 )
             } else if degree >= 135 {
                 point = CartesianPoint(
                     x: -sqrt(pow(radius, 2) - pow(modifier.y, 2)),
-                    y: modifier.y
+                    y: modifier.y,
                 )
             } else if degree >= 90 {
                 point = CartesianPoint(
                     x: modifier.x,
-                    y: -sqrt(pow(radius, 2) - pow(modifier.x, 2))
+                    y: -sqrt(pow(radius, 2) - pow(modifier.x, 2)),
                 )
             } else if degree >= 45 {
                 point = CartesianPoint(
                     x: modifier.x,
-                    y: -sqrt(pow(radius, 2) - pow(modifier.x, 2))
+                    y: -sqrt(pow(radius, 2) - pow(modifier.x, 2)),
                 )
             } else if degree >= 0 {
                 point = CartesianPoint(
                     x: sqrt(pow(radius, 2) - pow(modifier.y, 2)),
-                    y: modifier.y
+                    y: modifier.y,
                 )
             }
         case false:

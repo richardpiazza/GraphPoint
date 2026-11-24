@@ -58,19 +58,19 @@ public extension CartesianFrame {
 
         for point in points {
             if point.x < minXMaxY.x || minXMaxY.x == 0 {
-                minXMaxY = minXMaxY.with(x: point.x)
+                minXMaxY = minXMaxY.x(point.x)
             }
 
             if point.y > minXMaxY.y || minXMaxY.y == 0 {
-                minXMaxY = minXMaxY.with(y: point.y)
+                minXMaxY = minXMaxY.y(point.y)
             }
 
             if point.x > maxXMinY.x || maxXMinY.x == 0 {
-                maxXMinY = maxXMinY.with(x: point.x)
+                maxXMinY = maxXMinY.x(point.x)
             }
 
             if point.y < maxXMinY.y || maxXMinY.y == 0 {
-                maxXMinY = maxXMinY.with(y: point.y)
+                maxXMinY = maxXMinY.y(point.y)
             }
         }
 
@@ -78,8 +78,8 @@ public extension CartesianFrame {
             origin: minXMaxY,
             size: Size(
                 width: abs(maxXMinY.x - minXMaxY.x),
-                height: abs(maxXMinY.y - minXMaxY.y)
-            )
+                height: abs(maxXMinY.y - minXMaxY.y),
+            ),
         )
     }
 
@@ -132,33 +132,33 @@ public extension CartesianFrame {
             let maxAxis = frame.origin.x + frame.width
             if maxAxis < arc.radius {
                 let width = frame.size.width + (arc.radius - maxAxis)
-                let size = frame.size.with(width: width)
-                frame = frame.with(size: size)
+                let size = frame.size.width(width)
+                frame = frame.size(size)
             }
         case (.II, .I), (.I, .II):
             let maxAxis = frame.origin.y
             if maxAxis < arc.radius {
                 let y = frame.origin.y + (arc.radius - maxAxis)
-                let origin = frame.origin.with(y: y)
+                let origin = frame.origin.y(y)
                 let height = frame.size.height + (arc.radius - maxAxis)
-                let size = frame.size.with(height: height)
-                frame = frame.with(origin: origin).with(size: size)
+                let size = frame.size.height(height)
+                frame = frame.origin(origin).size(size)
             }
         case (.III, .II), (.II, .III):
             let maxAxis = abs(frame.origin.x)
             if maxAxis < arc.radius {
                 let x = frame.origin.x - (arc.radius - maxAxis)
-                let origin = frame.origin.with(x: x)
+                let origin = frame.origin.x(x)
                 let width = frame.size.width + (arc.radius - maxAxis)
-                let size = frame.size.with(width: width)
-                frame = frame.with(origin: origin).with(size: size)
+                let size = frame.size.width(width)
+                frame = frame.origin(origin).size(size)
             }
         case (.IV, .III), (.III, .IV):
             let maxAxis = abs(frame.origin.y) + frame.size.height
             if maxAxis < arc.radius {
                 let height = frame.size.height + (arc.radius - maxAxis)
-                let size = frame.size.with(height: height)
-                frame = frame.with(size: size)
+                let size = frame.size.height(height)
+                frame = frame.size(size)
             }
         default:
             throw GraphPointError.unhandledQuadrantTransition(startQuadrant, endQuadrant)

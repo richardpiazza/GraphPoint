@@ -1,0 +1,84 @@
+name: Pull Request
+
+on:
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  SCHEME: "GraphPoint"
+
+jobs:
+  Lint:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Lint
+        run: swiftformat --lint . --reporter github-actions-log
+
+  Swift:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [
+          macos-latest, 
+          ubuntu-latest,
+        ]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v6
+    - name: Cache
+      uses: actions/cache@v5
+      with:
+        path: |
+          .build
+          ~/Library/Developer/Xcode/DerivedData/ModuleCache.noindex
+          ~/Library/Caches/org.swift.swiftpm
+          ~/Library/org.swift.swiftpm
+        key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.swift', '**/Package.resolved') }}
+        restore-keys: |
+          ${{ runner.os }}-spm-
+    - name: Package Resolution
+      run: swift package resolve
+    - name: Build
+      run: swift build
+    - name: Test
+      run: swift test
+
+  Xcode:
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [
+          "macOS",
+          "iOS",
+          "tvOS",
+          "watchOS",
+          "visionOS",
+          "macOS,variant=Mac Catalyst",
+        ]
+    runs-on: macos-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v6
+    - name: Cache
+      uses: actions/cache@v5
+      with:
+        path: |
+          .build
+          ~/Library/Developer/Xcode/DerivedData/ModuleCache.noindex
+          ~/Library/Caches/org.swift.swiftpm
+          ~/Library/org.swift.swiftpm
+        key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.swift', '**/Package.resolved') }}
+        restore-keys: |
+          ${{ runner.os }}-spm-
+    - name: Package Resolution
+      shell: bash
+      run: xcodebuild -resolvePackageDependencies | xcbeautify
+    - name: Build
+      shell: bash
+      env:
+        DESTINATION: "generic/platform=${{ matrix.platform }}"
+      run: xcodebuild build -scheme "$SCHEME" -destination "$DESTINATION" | xcbeautify

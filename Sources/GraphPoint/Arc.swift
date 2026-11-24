@@ -9,7 +9,7 @@ public struct Arc: Hashable, Codable, Sendable {
         radius: Radius = 0.0,
         startingDegree: Degree = 0.0,
         endingDegree: Degree = 0.0,
-        clockwise: Bool = true
+        clockwise: Bool = true,
     ) {
         self.radius = radius
         self.startingDegree = startingDegree
@@ -43,20 +43,20 @@ public extension Arc {
 
         if startingDegree < 90 {
             pivot = pivot
-                .with(x: endingPoint.x)
-                .with(y: startingPoint.y)
+                .x(endingPoint.x)
+                .y(startingPoint.y)
         } else if startingDegree < 180 {
             pivot = pivot
-                .with(x: startingPoint.x)
-                .with(y: endingPoint.y)
+                .x(startingPoint.x)
+                .y(endingPoint.y)
         } else if startingDegree < 270 {
             pivot = pivot
-                .with(x: endingPoint.x)
-                .with(y: startingPoint.y)
+                .x(endingPoint.x)
+                .y(startingPoint.y)
         } else {
             pivot = pivot
-                .with(x: startingPoint.x)
-                .with(y: endingPoint.y)
+                .x(startingPoint.x)
+                .y(endingPoint.y)
         }
 
         return pivot
