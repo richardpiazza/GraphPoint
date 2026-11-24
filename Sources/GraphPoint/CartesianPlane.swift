@@ -10,13 +10,13 @@ public typealias CartesianPlane = Rect
 public extension CartesianPlane {
     init(axis: Int) {
         self.init(
-            size: Size(width: axis * 2, height: axis * 2)
+            size: Size(width: axis * 2, height: axis * 2),
         )
     }
 
     init(radius: Radius) {
         self.init(
-            size: Size(width: radius * 2, height: radius * 2)
+            size: Size(width: radius * 2, height: radius * 2),
         )
     }
 }
@@ -64,15 +64,15 @@ public extension CartesianPlane {
         var cartesianPoint: CartesianPoint = .zero
 
         if point.x < origin.x {
-            cartesianPoint = cartesianPoint.with(x: -(origin.x - point.x))
+            cartesianPoint = cartesianPoint.x(-(origin.x - point.x))
         } else if point.x > origin.x {
-            cartesianPoint = cartesianPoint.with(x: point.x - origin.x)
+            cartesianPoint = cartesianPoint.x(point.x - origin.x)
         }
 
         if point.y > origin.y {
-            cartesianPoint = cartesianPoint.with(y: -(point.y - origin.y))
+            cartesianPoint = cartesianPoint.y(-(point.y - origin.y))
         } else if point.y < origin.y {
-            cartesianPoint = cartesianPoint.with(y: origin.y - point.y)
+            cartesianPoint = cartesianPoint.y(origin.y - point.y)
         }
 
         return cartesianPoint
@@ -83,15 +83,15 @@ public extension CartesianPlane {
         var point: Point = .zero
 
         if cartesianPoint.x >= 0.0 {
-            point = point.with(x: cartesianOrigin.x + cartesianPoint.x)
+            point = point.x(cartesianOrigin.x + cartesianPoint.x)
         } else {
-            point = point.with(x: cartesianOrigin.x - abs(cartesianPoint.x))
+            point = point.x(cartesianOrigin.x - abs(cartesianPoint.x))
         }
 
         if cartesianPoint.y <= 0.0 {
-            point = point.with(y: cartesianOrigin.y + abs(cartesianPoint.y))
+            point = point.y(cartesianOrigin.y + abs(cartesianPoint.y))
         } else {
-            point = point.with(y: cartesianOrigin.y - cartesianPoint.y)
+            point = point.y(cartesianOrigin.y - cartesianPoint.y)
         }
 
         return point
